@@ -65,3 +65,13 @@ if ! type "$thefuck" > /dev/null; then
 fi
 
 
+### MATLAB with OpenJDK
+if ! type "$matlab" > /dev/null; then
+  export MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre
+fi
+
+
+### ccat colorized cat
+if ! type "$ccat" > /dev/null; then
+  alias cat=ccat
+fi
