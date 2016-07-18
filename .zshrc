@@ -52,3 +52,11 @@ fi
 if ! type "$ccat" > /dev/null; then
   alias cat=ccat
 fi
+
+
+### git-checkout-before DATETIME BRANCH
+# Checkout specified git branch at the latest commit before DATETIME
+git-checkout-before() {
+  echo 'git checkout `git rev-list -n 1 --before="'$1'" '$2'`\n'
+  git checkout `git rev-list -n 1 --before="$1" $2`
+}
