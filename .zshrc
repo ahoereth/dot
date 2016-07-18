@@ -56,3 +56,12 @@ fi
 if [[ "$SSH_AGENT_PID" == "" ]]; then
   eval $(<~/.ssh-agent-thing)
 fi
+
+
+### The Fuck
+if ! type "$thefuck" > /dev/null; then
+  eval $(thefuck --alias)
+  alias FUCK='fuck'
+fi
+
+
