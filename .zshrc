@@ -68,3 +68,7 @@ bg() {
   echo "$@ > /dev/null 2>&1 &\n"
   $@ > /dev/null 2>&1 &
 }
+
+
+### zsh-syntax-highlighting
+source ./shell/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
