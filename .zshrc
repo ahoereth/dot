@@ -11,7 +11,7 @@ bindkey -e # emacs mode
 ### Autocomplete
 autoload -Uz compinit
 compinit
-setopt correctalls
+setopt correctall
 setopt COMPLETE_ALIASES
 zstyle ':completion:*' menu select
 
