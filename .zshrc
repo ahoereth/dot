@@ -80,5 +80,18 @@ indigo() {
 }
 
 
+### toggleservice SERVICENAME
+# Toggles (starts/stops) the specified systemctl service.
+toggleservice() {
+  if [ "`systemctl is-active $1`" != "active" ]; then
+    echo "systemctl start $1\n"
+    systemctl start $1
+  else
+    echo "systemctl stop $1\n"
+    systemctl stop $1
+  fi
+}
+
+
 ### zsh-syntax-highlighting
 source ./shell/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
