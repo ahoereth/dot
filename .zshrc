@@ -93,5 +93,11 @@ toggleservice() {
 }
 
 
+### connect to UOS VPN
+uosvpn() {
+  sudo python2 ~/shell/juniper-vpn-py/juniper-vpn.py --host vpn-e.serv.uos.de --realm uos --username $1 --stdin DSID=%DSID% openconnect --juniper %HOST% --cookie-on-stdin
+}
+
+
 ### zsh-syntax-highlighting
-source ./shell/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/shell/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
