@@ -63,10 +63,20 @@ git-checkout-before() {
 
 
 ### bg COMMAND
-# run COMMAND in backgrund and suppress its output.
+# Run COMMAND in backgrund and suppress its output.
 bg() {
   echo "$@ > /dev/null 2>&1 &\n"
   $@ > /dev/null 2>&1 &
+}
+
+
+### indigo
+# Initialize ROS indigo.
+indigo() {
+  source /opt/ros/indigo/setup.zsh
+  export PYTHONPATH=/opt/ros/indigo/lib/python2.7/site-packages:$PYTHONPATH
+  export PKG_CONFIG_PATH="/opt/ros/indigo/lib/pkgconfig:$PKG_CONFIG_PATH"
+  alias catkin_make="catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python2 -DPYTHON_INCLUDE_DIR=/usr/include/python2.7 -DPYTHON_LIBRARY=/usr/lib/libpython2.7.so"
 }
 
 
