@@ -26,29 +26,6 @@ SAVEHIST=10000
 setopt HIST_IGNORE_DUPS
 
 
-### Directory navigation
-cdUndoKey() { # back/left
-  popd > /dev/null
-  zle reset-prompt
-  echo
-  ls
-  echo
-}
-
-cdParentKey() { # up
-  pushd .. > /dev/null
-  zle reset-prompt
-  echo
-  ls
-  echo
-}
-
-zle -N cdParentKey
-zle -N cdUndoKey
-bindkey '^[[1;3A' cdParentKey
-bindkey '^[[1;3D' cdUndoKey
-
-
 ### SSH Agent Initialization
 if ! pgrep -u $USER ssh-agent > /dev/null; then
   ssh-agent > ~/.ssh-agent-thing
