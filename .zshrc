@@ -8,12 +8,15 @@ setopt extendedglob
 bindkey -e # emacs mode
 
 
-### Autocomplete
-autoload -Uz compinit
-compinit
-setopt correctall
-setopt COMPLETE_ALIASES
-zstyle ':completion:*' menu select
+### oh-my-zsh
+export ZSH=/home/ahoereth/.oh-my-zsh
+ZSH_THEME="terminalparty"
+HYPHEN_INSENSITIVE="true"
+COMPLETION_WAITING_DOTS="true"
+ENABLE_CORRECTION="true"
+COMPLETION_WAITING_DOTS="true"
+plugins=(gitfast npm sudo wd pip python last-working-dir)
+source $ZSH/oh-my-zsh.sh
 
 
 ### History
