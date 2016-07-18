@@ -60,3 +60,11 @@ git-checkout-before() {
   echo 'git checkout `git rev-list -n 1 --before="'$1'" '$2'`\n'
   git checkout `git rev-list -n 1 --before="$1" $2`
 }
+
+
+### bg COMMAND
+# run COMMAND in backgrund and suppress its output.
+bg() {
+  echo "$@ > /dev/null 2>&1 &\n"
+  $@ > /dev/null 2>&1 &
+}
