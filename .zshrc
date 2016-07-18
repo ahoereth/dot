@@ -76,7 +76,10 @@ indigo() {
   source /opt/ros/indigo/setup.zsh
   export PYTHONPATH=/opt/ros/indigo/lib/python2.7/site-packages:$PYTHONPATH
   export PKG_CONFIG_PATH="/opt/ros/indigo/lib/pkgconfig:$PKG_CONFIG_PATH"
-  alias catkin_make="catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python2 -DPYTHON_INCLUDE_DIR=/usr/include/python2.7 -DPYTHON_LIBRARY=/usr/lib/libpython2.7.so"
+  alias catkin_make="\
+    catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python2 \
+                -DPYTHON_INCLUDE_DIR=/usr/include/python2.7 \
+                -DPYTHON_LIBRARY=/usr/lib/libpython2.7.so"
 }
 
 
@@ -95,7 +98,9 @@ toggleservice() {
 
 ### connect to UOS VPN
 uosvpn() {
-  sudo python2 ~/shell/juniper-vpn-py/juniper-vpn.py --host vpn-e.serv.uos.de --realm uos --username $1 --stdin DSID=%DSID% openconnect --juniper %HOST% --cookie-on-stdin
+  sudo python2 ~/shell/juniper-vpn-py/juniper-vpn.py \
+    --host vpn-e.serv.uos.de --realm uos --username $1 \
+    --stdin DSID=%DSID% openconnect --juniper %HOST% --cookie-on-stdin
 }
 
 
