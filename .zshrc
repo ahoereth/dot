@@ -44,3 +44,12 @@ zle -N cdParentKey
 zle -N cdUndoKey
 bindkey '^[[1;3A' cdParentKey
 bindkey '^[[1;3D' cdUndoKey
+
+
+### SSH Agent Initialization
+if ! pgrep -u $USER ssh-agent > /dev/null; then
+  ssh-agent > ~/.ssh-agent-thing
+fi
+if [[ "$SSH_AGENT_PID" == "" ]]; then
+  eval $(<~/.ssh-agent-thing)
+fi
