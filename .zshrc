@@ -9,7 +9,7 @@ bindkey -e # emacs mode
 
 
 ### oh-my-zsh
-export ZSH=/home/ahoereth/.oh-my-zsh
+export ZSH=~/shell/oh-my-zsh
 ZSH_THEME="terminalparty"
 HYPHEN_INSENSITIVE="true"
 COMPLETION_WAITING_DOTS="true"
