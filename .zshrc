@@ -10,7 +10,8 @@ bindkey -e # emacs mode
 
 ### oh-my-zsh
 export ZSH=~/shell/oh-my-zsh
-ZSH_THEME="terminalparty"
+ZSH_CUSTOM=~/shell
+ZSH_THEME="theme"
 HYPHEN_INSENSITIVE="true"
 COMPLETION_WAITING_DOTS="true"
 ENABLE_CORRECTION="true"
