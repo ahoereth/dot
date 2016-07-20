@@ -1,8 +1,9 @@
-*
+/*
+/*/
 
-!shell/
-!.gitignore
-!.gitmodules
-!.zprofile
-!.zshrc
-!requirements.txt
+!/shell/
+
+!/.gitignore
+!/.gitmodules
+!/.zprofile
+!/.zshrc
