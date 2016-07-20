@@ -1,0 +1,220 @@
+#
+# ~/.config/i3/config
+#
+
+# Reference: http://i3wm.org/docs/userguide.html
+
+# Set Windows key as modifier.
+set $mod Mod4
+
+# Font for window titles.
+#font pango:DejaVu Sans Mono 6
+font pango:Inconsolata 8
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Start a terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+# Kill focused window
+bindsym $mod+Shift+q kill
+
+# Start dmenu
+bindsym $mod+Shift+d exec dmenu_run
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+# Change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Split in horizontal orientation
+bindsym $mod+h split h
+
+# Split in vertical orientation
+bindsym $mod+v split v
+
+# Enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# Change container layout
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# Change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# Focus the parent/child container
+bindsym $mod+a focus parent
+#bindsym $mod+d focus child
+
+# Switch to specific workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# Move focused container to specific workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# Reload the configuration file
+bindsym $mod+Shift+c reload
+
+# Restart i3 inplace
+bindsym $mod+Shift+r restart
+
+# Exit i3
+bindsym $mod+Shift+e exec "\
+  i3-nagbar \
+    -t warning \
+    -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' \
+    -b 'Yes, exit i3' 'i3-msg exit' \
+"
+
+# Resize window
+mode "resize" {
+  bindsym j resize shrink width 10 px or 10 ppt
+  bindsym k resize grow height 10 px or 10 ppt
+  bindsym l resize shrink height 10 px or 10 ppt
+  bindsym semicolon resize grow width 10 px or 10 ppt
+  bindsym Left resize shrink width 10 px or 10 ppt
+  bindsym Down resize grow height 10 px or 10 ppt
+  bindsym Up resize shrink height 10 px or 10 ppt
+  bindsym Right resize grow width 10 px or 10 ppt
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+# Enter resize mode.
+bindsym $mod+r mode "resize"
+
+# Start i3bar
+bar {
+  output LVDS1
+  status_command i3status
+  mode dock #hide
+  hidden_state hide
+  modifier $mod
+  position bottom
+  colors {
+    background #000000
+    statusline #ffffff
+  }
+  tray_padding 1
+}
+
+# Narrow window borders
+new_window pixel 3
+hide_edge_borders both
+
+# Switch back and forth between workspaces
+workspace_auto_back_and_forth yes
+
+# Lock screen
+set $Locker i3lock -c 111111 && sleep 1
+
+# System Modes
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+  bindsym l exec --no-startup-id $Locker, mode "default"
+  bindsym e exec --no-startup-id i3-msg exit, mode "default"
+  bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+  bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+  bindsym r exec --no-startup-id systemctl reboot, mode "default"
+  bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+# Enter system mode
+bindsym $mod+Pause mode "$mode_system"
+
+# Take a screen snapshot
+bindsym Print exec gnome-screenshot
+
+## Display Management Mode
+set $mode_display Ext Screen (v) VGA ON, (h) HDMI ON, (x) VGA OFF, (y) HDMI OFF
+mode "$mode_display" {
+  bindsym v exec --no-startup-id xrandr --output VGA1 --auto --left-of LVDS1, mode "default"
+  bindsym h exec --no-startup-id xrandr --output HDMI1 --auto --left-of LVDS1, mode "default"
+  bindsym x exec --no-startup-id xrandr --output VGA1 --auto --off, mode "default"
+  bindsym y exec --no-startup-id xrandr --output HDMI1 --auto --off, mode "default"
+
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+
+### Start x220 specific settings
+
+# Brightness. FN+Pos1, FN+End
+bindcode 232 exec xbacklight -10
+bindcode 233 exec xbacklight +10
+
+# Volume
+bindcode 122 exec pulseaudio-ctl down
+bindcode 123 exec pulseaudio-ctl up
+bindcode 121 exec pulseaudio-ctl mute
+bindcode 198 exec pulseaudio-ctl mute-input
+
+# Audio. FN+Arrows
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioStop exec playerctl stop
+
+# Enter display management mode. FN+F7
+bindsym XF86Display mode "$mode_display"
+
+# Suspend. Power button
+#bindsym XF86Battery xec --no-startup-id $Locker && systemctl suspend, mode "default"
+
+### End x220 specific settings
+
+
+# Programm to Workspace mappings
+assign [class="^Firefox$" instance="^Navigator$"] 2
+assign [class="^google-chrome$" instance="^web.telegram.org$"] 9
+assign [class="^google-chrome$" instance="^web.whatsapp.com$"] 9
+assign [class="^google-chrome$" instance="^messenger.com$"] 9
+assign [class="^google-chrome$" instance="^play.spotify.com$"] 10
+#assign [instance="^spotify$"] 10

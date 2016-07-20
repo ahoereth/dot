@@ -3,6 +3,10 @@
 
 !/shell/
 
+!/.config/
+/.config/*
+!/.config/i3/
+
 !/.gitignore
 !/.gitmodules
 !/.zprofile
