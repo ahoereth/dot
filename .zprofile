@@ -9,7 +9,7 @@
 typeset -U path
 path=(
   ~/bin
-  ~/shell/bin
+  $DOT_PATH/bin
   ~/.node_modules/bin
   ~/.gem/ruby/2.3.0/bin
   $path[@]

@@ -2,15 +2,16 @@
 # ~/.zshrc
 #
 
+export DOT_PATH=~/dot
 
-setopt autocd 
+setopt autocd
 setopt extendedglob
 bindkey -e # emacs mode
 
 
 ### oh-my-zsh
-export ZSH=~/shell/oh-my-zsh
-ZSH_CUSTOM=~/shell
+export ZSH=$DOT_PATH/oh-my-zsh
+ZSH_CUSTOM=$DOT_PATH/shell
 ZSH_THEME="theme"
 HYPHEN_INSENSITIVE="true"
 COMPLETION_WAITING_DOTS="true"
@@ -85,4 +86,4 @@ toggleservice() {
 
 
 ### zsh-syntax-highlighting
-source ~/shell/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $DOT_PATH/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
