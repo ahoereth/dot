@@ -14,3 +14,5 @@ pip install -r $DOT/requirements.txt
 yarn global add diff-so-fancy
 
 (cd compleat && ./Setup.lhs configure && ./Setup.lhs build && sudo ./Setup.lhs install)
+
+git config --global commit.gpgsign true
