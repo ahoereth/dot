@@ -17,7 +17,7 @@ HYPHEN_INSENSITIVE="true"
 COMPLETION_WAITING_DOTS="true"
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
-plugins=(gitfast npm sudo wd pip python last-working-dir)
+plugins=(git npm wd pip python last-working-dir compleat)
 source $ZSH/oh-my-zsh.sh
 
 
@@ -35,6 +35,13 @@ fi
 if [[ "$SSH_AGENT_PID" == "" ]]; then
   eval $(<~/.ssh-agent-thing)
 fi
+
+
+### Compleat
+autoload -Uz compinit bashcompinit
+compinit
+bashcompinit
+source $(find /usr/local/share -name compleat_setup)
 
 
 ### The Fuck

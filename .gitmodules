@@ -7,3 +7,6 @@
 [submodule "juniper-vpn-py"]
 	path = juniper-vpn-py
 	url = https://github.com/ahoereth/juniper-vpn-py.git
+[submodule "compleat"]
+	path = compleat
+	url = git://github.com/mbrubeck/compleat.git
