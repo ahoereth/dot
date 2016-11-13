@@ -11,6 +11,7 @@ bindkey -e # emacs mode
 
 ### oh-my-zsh
 export ZSH=$DOT_PATH/oh-my-zsh
+export VIRTUAL_ENV_DISABLE_PROMPT=1
 ZSH_CUSTOM=$DOT_PATH/shell
 ZSH_THEME="theme"
 HYPHEN_INSENSITIVE="true"
