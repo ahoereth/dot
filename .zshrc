@@ -18,7 +18,7 @@ HYPHEN_INSENSITIVE="true"
 COMPLETION_WAITING_DOTS="true"
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
-plugins=(git npm wd pip python last-working-dir compleat)
+plugins=(git npm wd pip python last-working-dir compleat zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 
@@ -91,10 +91,6 @@ toggleservice() {
     systemctl stop $1
   fi
 }
-
-
-### zsh-syntax-highlighting
-source $DOT_PATH/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 
 ### Better man
