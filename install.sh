@@ -3,6 +3,7 @@ DOT=~/dot
 
 ln -s $DOT/.zshrc ~/.zshrc
 ln -s $DOT/.zprofile ~/.zprofile
+ln -s $DOT/.compleat ~/.compleat
 
 cp $DOT/.gitconfig ~/.gitconfig
 
