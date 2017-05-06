@@ -20,3 +20,6 @@ sudo yarn global add diff-so-fancy
 (cd compleat && ./Setup.lhs configure && ./Setup.lhs build && sudo ./Setup.lhs install)
 
 chsh -s /bin/zsh
+
+# Setup juniper-vpn-py virtual environment
+(cd juniper-vpn-py && virtualenv .venv && source .venv/bin/activate && pip2 install -r requirements.txt && deactivate)
