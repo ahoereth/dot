@@ -19,13 +19,13 @@ ln -s $DOT/.config/Code/User/settings.json ~/.config/Code/User/settings.json
 # Install yaourt and arch dependencies.
 (cd package-query && makepkg -si)
 (cd yaourt && makepkg -si)
-yaourt -Sy `cat arch_packages.txt`
+yaourt -Sy `cat dependencies-yaourt.txt`
 
-sudo pip3 install -r $DOT/py3-requirements.txt
+sudo pip3 install -r $DOT/dependencies-pip3.txt
 # sudo pip2 install -r $DOT/py2-requirements.txt  # None currently
 
 # Install visual studio code extensions
-for x in $(cat package_list.txt); do code --install-extension $x; done
+for x in $(cat dependencies-vsc.txt); do code --install-extension $x; done
 
 sudo yarn global add diff-so-fancy
 
