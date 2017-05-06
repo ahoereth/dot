@@ -1,6 +1,12 @@
 #!/bin/bash
 DOT=~/dot
 
+cd $DOT
+
+# Pull all submodules first.
+git submodule update --recursive --remote
+
+# Create symlinks -- watchout for preexisting files!
 ln -s $DOT/.zshrc ~/.zshrc
 ln -s $DOT/.zprofile ~/.zprofile
 ln -s $DOT/.compleat ~/.compleat
