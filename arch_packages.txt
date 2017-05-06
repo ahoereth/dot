@@ -13,6 +13,7 @@ python2
 python2-pip
 python2-virtualenv
 jupyter
+jupyter-notebook
 pydocstyle
 thefuck
 autopep8
