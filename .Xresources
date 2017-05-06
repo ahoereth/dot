@@ -1,0 +1,104 @@
+! do not scroll with output
+URxvt*scrollTtyOutput: false
+
+! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
+URxvt*scrollWithBuffer: true
+
+! scroll back to the bottom on keypress
+URxvt*scrollTtyKeypress: true
+
+URxvt.secondaryScreen: true
+URxvt.secondaryScroll: false
+URxvt.secondaryWheel: true
+
+URxvt*scrollbar: false
+URxvt.modifier: alt
+URxvt.scrollBar_right: true
+!URxvt.thickness: 10
+URxvt.scrollBar_floating: false
+URxvt.cursorBlink: true
+
+!URxvt.font: xft:Inconsolata:size=10:antialias=true
+!URxvt.font: xft:Ubuntu Mono:size=11,xft:Monospace:size=9:antialias=true:hinting=true
+!URxvt*font: xft:Terminus:size=12,xft:Inconsolata\ for\ Powerline:size=12
+!URxvt.font: xft:Inconsolata:size=10
+!:antialias=true
+!, xft:Consolas:size=10::antialias=true
+!URxvt.font: xft:-*-inconsolata-*-*-*-*-*-*-*-*-*-*-iso10646-1
+URxvt.font: xft:Inconsolata-g:pixelsize=13
+
+!URxvt.font:           xft:Terminus (TTF) for Powerline:MediumForPowerline:size=13:antialias=true,xft:Inconsolata\ For\ Powerline:size=13:antialias=true
+!URxvt.imFont:         xft:Terminus (TTF) for Powerline:MediumForPowerline:size=13:antialias=true,xft:Inconsolata\ For\ Powerline:size=13:antialias=true
+!URxvt.boldFont:       xft:Terminus (TTF) for Powerline:MediumForPowerline:size=13:antialias=true,xft:Inconsolata\ For\ Powerline:size=13:antialias=true
+!URxvt.italicFont:     xft:Terminus (TTF) for Powerline:MediumForPowerline:size=13:antialias=true,xft:Inconsolata\ For\ Powerline:size=13:antialias=true
+!URxvt.boldItalicFont: xft:Terminus (TTF) for Powerline:MediumForPowerline:size=13:antialias=true,xft:Inconsolata\ For\ Powerline:size=13:antialias=true
+!URxvt.perl-ext-common: default,matcher,selection-to-clipboard,tabbedex,resize-font
+
+! URLs
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
+URxvt.matcher.rend.0: Uline Bold fg5
+
+! Tabs
+URxvt.tabbed.tabbar-fg: 2
+URxvt.tabbed.tabbar-bg: 0
+URxvt.tabbed.tab-fg: 3
+URxvt.tabbed.tab-bg: 0
+URxvt.tabbed.new-button: false
+URxvt.tabbed.autohide: true
+URxvt.tabbed.reopen-on-close: yes
+URxvt.keysym.Control-t: perl:tabbedex:new_tab
+URxvt.keysym.Control-Tab: perl:tabbedex:next_tab
+URxvt.keysym.Control-Shift-Tab: perl:tabbedex:prev_tab
+URxvt.keysym.Control-w: perl:tabbedex:close_tab
+!URxvt.keysym.Control-Shift-Left: perl:tabbedex:move_tab_left
+!URxvt.keysym.Control-Shift-Right: perl:tabbedex:move_tab_right
+!URxvt.keysym.Control-Shift-R: perl:tabbedex:rename_tab
+URxvt.tabbed.no-tabbedex-keys: true
+
+! Resize Font
+URxvt.resize-font.smaller: C-minus
+URxvt.resize-font.bigger: C-plus
+URxvt.resize-font.reset: C-0
+URxvt.resize-font.show: C-ssharp
+
+urxvt*foreground: #f2f2f2
+urxvt*background: #101010
+
+! Normal
+! color0    black
+! color1    red
+! color2    green
+! color3    yellow
+! color4    blue
+! color5    purple
+! color6    cyan
+! color7    white
+
+urxvt*color0:    #6c6c6c
+urxvt*color1:    #e9897c
+urxvt*color2:    #b6e77d
+urxvt*color3:    #ecebbe
+urxvt*color4:    #a9cdeb
+urxvt*color5:    #ea96eb
+urxvt*color6:    #c9caec
+urxvt*color7:    #f2f2f2
+
+! Light
+! color8    black
+! color9    red
+! color10    green
+! color11    yellow
+! color12    blue
+! color13    purple
+! color14    cyan
+! color15    white
+
+urxvt*color8:    #747474
+urxvt*color9:    #f99286
+urxvt*color10:    #c3f786
+urxvt*color11:    #fcfbcc
+urxvt*color12:    #b6defb
+urxvt*color13:    #fba1fb
+urxvt*color14:    #d7d9fc
+urxvt*color15:    #e2e2e2
