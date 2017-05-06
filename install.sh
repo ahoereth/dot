@@ -18,6 +18,9 @@ yaourt -Sy `cat arch_packages.txt`
 sudo pip3 install -r $DOT/py3-requirements.txt
 # sudo pip2 install -r $DOT/py2-requirements.txt  # None currently
 
+# Install visual studio code extensions
+for x in $(cat package_list.txt); do code --install-extension $x; done
+
 sudo yarn global add diff-so-fancy
 
 (cd compleat && ./Setup.lhs configure && ./Setup.lhs build && sudo ./Setup.lhs install)
