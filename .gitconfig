@@ -1,5 +1,6 @@
 [alias]
 	s = status -sb
+	staged = git diff --cached
 	lg = log --pretty='format:%C(green)%h%Creset %C(green dim)%aI%Creset %C(magenta)%s%Creset%n        %C(yellow)%aN <%ae>%Creset %C(cyan)[%G?% GS]%Creset'
 [core]
 	excludesfile = ~/.gitignore
@@ -29,3 +30,8 @@
 	autocorrect = 1
 [push]
 	default = current # http://stackoverflow.com/a/23918418/89484
+[user]
+	email = ahoereth@gmail.com
+	name = Alexander Höreth
+[commit]
+	gpgsign = True

@@ -1,0 +1,7 @@
+zsh
+zsh-completitions
+base-devel nodejs
+npm
+haskell-parsec
+python
+python2
