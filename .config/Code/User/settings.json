@@ -14,5 +14,7 @@
     "files.insertFinalNewline": true,
     "python.venvPath": "./.venv",
     "python.linting.pep8Enabled": true,
-    "workbench.activityBar.visible": true
+    "workbench.activityBar.visible": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.pydocstyleEnabled": true
 }

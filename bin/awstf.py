@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
-"""Script locating the cheapest AWS GPU compute spot instance region and
-   providing `docker-machine` launch commands.
-"""
+"""Script locating the cheapest AWS GPU compute spot instance for docker."""
 from argparse import ArgumentParser
 from datetime import datetime, timedelta
 from itertools import groupby
+from operator import itemgetter
 
-import numpy as np
 import boto3
+import numpy as np
 
 
 AMIS = {
@@ -17,10 +16,8 @@ AMIS = {
 }
 
 
-def build_command(
-    name, region, zone, ami, instance_type, security_group, price_max,
-    key_id=None, key_secret=None,
-):
+def build_command(ami=None, key_id=None, key_secret=None, **launch_args):
+    """Build docker-machine instance launch command."""
     cmd = '''docker-machine create {name} \\
         --driver amazonec2 \\
         --amazonec2-region {region} \\
@@ -29,20 +26,13 @@ def build_command(
         --amazonec2-security-group {security_group} \\
         --amazonec2-request-spot-instance \\
         --amazonec2-spot-price {price_max:.4f} \\
-        --amazonec2-root-size {size}'''.format(
-            name=name,
-            region=region,
-            zone=zone,
-            instance_type=instance_type,
-            security_group=security_group,
-            price_max=price_max,
-            size=32,
-        )
+        --amazonec2-root-size {size}
+    '''.strip().format(**launch_args, size=32)
 
     if ami is not None:
         cmd += ' \\\n        --amazonec2-ami {}'.format(ami)
 
-    if key_id is not None:
+    if key_id is not None and key_secret is not None:
         cmd += ' \\\n        --amazonec2-access-key {}'.format(key_id)
         cmd += ' \\\n        --amazonec2-secret-key {}'.format(key_secret)
 
@@ -50,6 +40,7 @@ def build_command(
 
 
 def get_avg_price(instance_type, hours=5, key_id=None, key_secret=None):
+    """Get up to date average price for a specific instance type."""
     kwargs = {'aws_access_key_id': key_id, 'aws_secret_access_key': key_secret}
     useast1 = boto3.client('ec2', region_name='us-east-1', **kwargs)
     uswest2 = boto3.client('ec2', region_name='us-west-2', **kwargs)
@@ -68,25 +59,24 @@ def get_avg_price(instance_type, hours=5, key_id=None, key_secret=None):
             Filters=[{'Name': 'availability-zone', 'Values': zones}],
         )
         history = history['SpotPriceHistory']
-        grouper = lambda item: item['AvailabilityZone']
+        grouper = itemgetter('AvailabilityZone')
         for zone, items in groupby(sorted(history, key=grouper), key=grouper):
             price = np.mean([float(i['SpotPrice']) for i in items])
             prices.append((zone, price))
     return sorted(prices, key=lambda t: t[1])
 
 
-def main(
-    machine_name, instance_type, security_group, max_price_overhead, hours,
-    key_id, key_secret,
-):
-    averages = get_avg_price(instance_type, args.hours, key_id, key_secret)
+def main(machine_name, instance_type, security_group, max_price_overhead,
+         hours, key_id, key_secret):
+    """Find cheapest region and provide launch command."""
+    averages = get_avg_price(instance_type, hours, key_id, key_secret)
     zone, price = averages[0]
     ami = (instance_type, zone[:-1])
 
     print('# Instances of type {instance_type} are cheapest in region {zone} '
-          'with an average price of US${price:.4f} over the last {hours} hours.'
-          .format(instance_type=args.instance_type, zone=zone, price=price,
-                  hours=args.hours))
+          'with an average price of ${price:.4f} over the last {hours} hours.'
+          .format(instance_type=instance_type, zone=zone, price=price,
+                  hours=hours))
     print('# Issue the following command to launch a spot instance '
           'or call this script with eval $(SCRIPT). \n')
     print(build_command(
@@ -103,13 +93,12 @@ def main(
 
 
 if __name__ == '__main__':
-    parser = ArgumentParser()
-    parser.add_argument('machine_name')
-    parser.add_argument('-t', '--instance-type', default='p2.xlarge')
-    parser.add_argument('-sg', '--security-group', default='docker-machine')
-    parser.add_argument('--max-price-overhead', default=.1, type=float)
-    parser.add_argument('--hours', default=5, type=float)
-    parser.add_argument('--key-id')
-    parser.add_argument('--key-secret')
-    args = parser.parse_args()
-    main(**vars(args))
+    ARGS = ArgumentParser()
+    ARGS.add_argument('machine_name')
+    ARGS.add_argument('-t', '--instance-type', default='p2.xlarge')
+    ARGS.add_argument('-sg', '--security-group', default='docker-machine')
+    ARGS.add_argument('--max-price-overhead', default=.1, type=float)
+    ARGS.add_argument('--hours', default=5, type=float)
+    ARGS.add_argument('--key-id')
+    ARGS.add_argument('--key-secret')
+    main(**vars(ARGS.parse_args()))
