@@ -5,6 +5,7 @@ ln -s $DOT/.zshrc ~/.zshrc
 ln -s $DOT/.zprofile ~/.zprofile
 ln -s $DOT/.compleat ~/.compleat
 ln -s $DOT/.gitconfig ~/.gitconfig
+ln -s $DOT/.gitignore ~/.gitignore
 
 mkdir -p ~/.config/Code/User
 ln -s $DOT/.config/Code/User/settings.json ~/.config/Code/User/settings.json
