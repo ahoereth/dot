@@ -22,6 +22,17 @@ plugins=(git npm wd pip python last-working-dir compleat zsh-syntax-highlighting
 source $ZSH/oh-my-zsh.sh
 
 
+### Path
+typeset -U path
+path=(
+  ~/bin
+  $DOT_PATH/bin
+  ~/.node_modules/bin
+  ~/.gem/ruby/2.3.0/bin
+  $path[@]
+)
+
+
 ### History
 HISTFILE=~/.histfile
 HISTSIZE=10000
@@ -105,3 +116,12 @@ man() {
     LESS_TERMCAP_us=$(printf "\e[1;32m") \
       man "$@"
 }
+
+
+#export FBFONT=/usr/share/kbd/consolefonts/ter-216n.psf.gz
+
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
+alias psaux='ps aux | sort -n -r -k 3 | cut -c -$(tput cols)'
+alias lx="la | awk '{k=0;for(i=0;i<=8;i++)k+=((substr(\$1,i+2,1)~/[rwx]/) \
+                   *2^(8-i));if(k)printf(\"%0o \",k);print}'"

@@ -5,7 +5,7 @@
 # `user` and `group` variables to your user and the `www` group (owning group
 # of `/opt/lampp/htdocs` and `$sitesDir` -- `user` should be in that group.)
 
-sitesDir="/home/ahoereth/www"
+sitesDir="/home/ahoereth/htdocs"
 hostsFile="/etc/hosts"
 xamppVHosts="/opt/lampp/etc/extra/httpd-vhosts.conf"
 
@@ -20,7 +20,7 @@ hosts="#XAMPP virtual hosts\n127.0.0.1"
 siteNames=`ls $sitesDir`
 
 # Delete xamppVHosts
-rm $xamppVHosts
+#rm $xamppVHosts
 
 # Set xamppVHosts and generate hosts list
 addrarr=($siteNames)
