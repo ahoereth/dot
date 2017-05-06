@@ -9,9 +9,10 @@ cp $DOT/.gitconfig ~/.gitconfig
 
 pacman -S base-devel nodejs npm haskell-parsec
 
-pip install -r $DOT/requirements.txt
+sudo pip3 install -r $DOT/py3-requirements.txt
+sudo pip2 install -r $DOT/py2-requirements.txt
 
-yarn global add diff-so-fancy
+sudo yarn global add diff-so-fancy
 
 (cd compleat && ./Setup.lhs configure && ./Setup.lhs build && sudo ./Setup.lhs install)
 
