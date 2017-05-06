@@ -1,7 +1,18 @@
+base-devel
 zsh
-zsh-completitions
-base-devel nodejs
-npm
+zsh-completions
+visual-studio-code
 haskell-parsec
+nodejs
+npm
 python
+python-pip
+python-numpy
+python-boto3
 python2
+python2-pip
+python2-virtualenv
+jupyter
+pydocstyle
+thefuck
+autopep8

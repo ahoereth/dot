@@ -10,10 +10,13 @@ ln -s $DOT/.gitignore ~/.gitignore
 mkdir -p ~/.config/Code/User
 ln -s $DOT/.config/Code/User/settings.json ~/.config/Code/User/settings.json
 
-sudo pacman -S `cat arch_packages.txt`
+# Install yaourt and arch dependencies.
+(cd package-query && makepkg -si)
+(cd yaourt && makepkg -si)
+yaourt -Sy `cat arch_packages.txt`
 
 sudo pip3 install -r $DOT/py3-requirements.txt
-sudo pip2 install -r $DOT/py2-requirements.txt
+# sudo pip2 install -r $DOT/py2-requirements.txt  # None currently
 
 sudo yarn global add diff-so-fancy
 
@@ -22,4 +25,4 @@ sudo yarn global add diff-so-fancy
 chsh -s /bin/zsh
 
 # Setup juniper-vpn-py virtual environment
-(cd juniper-vpn-py && virtualenv .venv && source .venv/bin/activate && pip2 install -r requirements.txt && deactivate)
+(cd juniper-vpn-py && virtualenv2 .venv && source .venv/bin/activate && pip2 install -r requirements.txt && deactivate)
