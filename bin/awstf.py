@@ -72,14 +72,7 @@ def main(machine_name, instance_type, security_group, max_price_overhead,
     averages = get_avg_price(instance_type, hours, key_id, key_secret)
     zone, price = averages[0]
     ami = (instance_type, zone[:-1])
-
-    print('# Instances of type {instance_type} are cheapest in region {zone} '
-          'with an average price of ${price:.4f} over the last {hours} hours.'
-          .format(instance_type=instance_type, zone=zone, price=price,
-                  hours=hours))
-    print('# Issue the following command to launch a spot instance '
-          'or call this script with eval $(SCRIPT). \n')
-    print(build_command(
+    cmd = build_command(
         name=machine_name,
         region=zone[:-1],
         zone=zone[-1],
@@ -89,7 +82,16 @@ def main(machine_name, instance_type, security_group, max_price_overhead,
         ami=AMIS[ami] if ami in AMIS else None,
         key_id=key_id,
         key_secret=key_secret,
-    ))
+    )
+
+    print('# Instances of type {instance_type} are cheapest in region {zone} '
+          'with an average price of ${price:.4f} over the last {hours} hours.'
+          .format(instance_type=instance_type, zone=zone, price=price,
+                  hours=hours))
+    print('# Issue the following command to launch a spot instance '
+          'or call this script with')
+    print('# eval "`awstf.py`" \n')
+    print(cmd)
 
 
 if __name__ == '__main__':
