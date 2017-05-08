@@ -1,7 +1,7 @@
 [alias]
 	s = status -sb
 	staged = git diff --cached
-	lg = log --pretty='format:%C(green)%h%Creset %C(green dim)%aI%Creset %C(magenta)%s%Creset%n        %C(yellow)%aN <%ae>%Creset %C(cyan)[%G?% GS]%Creset'
+	lg = log --graph --pretty='format:%C(green)%h%Creset %C(green dim)%aI%Creset %C(magenta)%s%Creset%n        %C(yellow)%aN <%ae>%Creset %C(cyan)[%G?% GS]%Creset'
 [core]
 	excludesfile = ~/.gitignore
 	attributesfile = ~/.gitattributes
