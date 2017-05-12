@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
-"""Script locating the cheapest AWS GPU compute spot instance for docker."""
+"""Script locating the cheapest AWS GPU compute spot instance for docker.
+
+Usage:
+
+    awstf.py --help
+    eval "`awstf.py`"
+
+"""
 from argparse import ArgumentParser
 from datetime import datetime, timedelta
 from itertools import groupby

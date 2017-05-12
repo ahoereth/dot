@@ -1,4 +1,15 @@
-# Usage: `source prepmachine DOCKER_MACHINE_NAME`
+#!/usr/bin/env sh
+# Prepare a docker-machine instance from the current directory:
+#     - Load docker-machine environment.
+#     - Set NV_HOST environment variable for nvidia-docker
+#     - Add ssh keys to ssh-agent.
+#     - Sync files from current directory excluding those in `.gitignore`.
+#
+# Usage:
+#
+#     source prepmachine DOCKER_MACHINE_NAME
+#
+
 eval $(docker-machine env $1)
 export NV_HOST="ssh://ubuntu@$(docker-machine ip $1):"
 ssh-add $DOCKER_CERT_PATH/id_rsa
