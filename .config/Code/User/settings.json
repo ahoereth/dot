@@ -17,14 +17,16 @@
     "window.menuBarVisibility": "toggle",
     "files.trimTrailingWhitespace": true,
     "files.insertFinalNewline": true,
-    "python.venvPath": "./.venv",
+    "python.venvPath": ".venv",
     "python.linting.pep8Enabled": true,
     "workbench.activityBar.visible": true,
-    "python.linting.pylintEnabled": false,
+    "python.linting.pylintEnabled": true,
     "python.linting.pydocstyleEnabled": true,
     "search.useIgnoreFilesByDefault": true,
     "prettier.tabWidth": 2,
     "prettier.singleQuote": true,
     "prettier.trailingComma": "all",
-    "prettier.printWidth": 79
+    "prettier.printWidth": 79,
+    "editor.tabSize": 2,
+    "flow.useNPMPackagedFlow": false
 }

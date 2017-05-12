@@ -27,7 +27,7 @@ sudo pip3 install -r $DOT/dependencies-pip3.txt
 # Install visual studio code extensions
 for x in $(cat dependencies-vsc.txt); do code --install-extension $x; done
 
-sudo yarn global add diff-so-fancy
+yarn global add diff-so-fancy flow tldr
 
 (cd compleat && ./Setup.lhs configure && ./Setup.lhs build && sudo ./Setup.lhs install)
 

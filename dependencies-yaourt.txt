@@ -17,3 +17,4 @@ jupyter-notebook
 pydocstyle
 thefuck
 autopep8
+pylint
