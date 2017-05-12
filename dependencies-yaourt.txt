@@ -7,14 +7,6 @@ nodejs
 npm
 python
 python-pip
-python-numpy
-python-boto3
 python2
 python2-pip
 python2-virtualenv
-jupyter
-jupyter-notebook
-pydocstyle
-thefuck
-autopep8
-pylint

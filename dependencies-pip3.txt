@@ -1,1 +1,9 @@
+autopep8
+boto3
+jupyter
+mypy
+numpy
 pep8
+pydocstyle
+pylint
+thefuck
