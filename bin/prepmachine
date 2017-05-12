@@ -1,0 +1,6 @@
+# Usage: `source prepmachine DOCKER_MACHINE_NAME`
+eval $(docker-machine env $1)
+export NV_HOST="ssh://ubuntu@$(docker-machine ip $1):"
+ssh-add $DOCKER_CERT_PATH/id_rsa
+rsync -av --exclude=.git --filter=":- .gitignore" \
+        -e "docker-machine ssh $1" . :
