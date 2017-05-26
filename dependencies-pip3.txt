@@ -1,6 +1,7 @@
 autopep8
 boto3
 jupyter
+jupyter_contrib_nbextensions
 mypy
 numpy
 pep8

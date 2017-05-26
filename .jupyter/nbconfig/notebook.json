@@ -1,0 +1,26 @@
+{
+  "load_extensions": {
+    "jupyter-matplotlib/extension": true,
+    "matplotlib/extension": true,
+    "nbextensions_configurator/config_menu/main": true,
+    "code_prettify/autopep8": true,
+    "ruler/main": true,
+    "spellchecker/main": true,
+    "varInspector/main": true
+  },
+  "CodeCell": {
+    "cm_config": {
+      "lineNumbers": true,
+      "lineWrapping": true
+    }
+  },
+  "Notebook": {
+    "Header": true
+  },
+  "ruler_column": [
+    80
+  ],
+  "ruler_color": [
+    "#CCCCCC"
+  ]
+}
