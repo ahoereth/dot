@@ -1,3 +1,6 @@
-.vscode
-.venv
-node_modules
+.ipynb_checkpoints/
+.mypy_cache/
+.venv/
+.vscode/
+__pycache__/
+node_modules/
