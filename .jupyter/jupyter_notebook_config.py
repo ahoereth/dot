@@ -16,6 +16,11 @@ def pre_save_scrub_output(model, path, contents_manager):
             continue
         cell['outputs'] = []
         cell['execution_count'] = None
+        if 'metadata' in cell:
+            if 'collapsed' in cell['metadata']:
+                del cell['metadata']['collapsed']
+            if 'scrolled' in cell['metadata']:
+                del cell['metadata']['scrolled']
 
 
 def pre_save(model, path, contents_manager):

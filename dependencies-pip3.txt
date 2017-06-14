@@ -1,5 +1,6 @@
 autopep8
 boto3
+docker-compose
 jupyter
 jupyter_contrib_nbextensions
 mypy

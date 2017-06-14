@@ -6,7 +6,7 @@
     "code_prettify/autopep8": true,
     "ruler/main": true,
     "spellchecker/main": true,
-    "varInspector/main": true
+    "varInspector/main": false
   },
   "CodeCell": {
     "cm_config": {
