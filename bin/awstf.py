@@ -15,6 +15,11 @@ from operator import itemgetter
 import boto3
 import numpy as np
 
+REGIONS = {
+    'common': ['ap-south-1', 'eu-west-2', 'eu-west-1', 'ap-northeast-2', 'ap-northeast-1', 'sa-east-1', 'ca-central-1', 'ap-southeast-1', 'ap-southeast-2', 'eu-central-1', 'us-east-1', 'us-east-2', 'us-west-1', 'us-west-2'],
+    'p2.xlarge': ['us-east-1', 'us-west-2', 'eu-west-1'],
+}
+
 
 AMIS = {
     ('p2.xlarge', 'us-east-1'): 'ami-96982080',  # N. Virginia
@@ -23,7 +28,8 @@ AMIS = {
 }
 
 
-def build_command(ami=None, key_id=None, key_secret=None, **launch_args):
+def build_command(ami=None, key_id=None, key_secret=None, userdata=None,
+                  **launch_args):
     """Build docker-machine instance launch command."""
     cmd = '''docker-machine create {name} \\
         --driver amazonec2 \\
@@ -35,6 +41,9 @@ def build_command(ami=None, key_id=None, key_secret=None, **launch_args):
         --amazonec2-spot-price {price_max:.4f} \\
         --amazonec2-root-size {size}
     '''.strip().format(**launch_args, size=32)
+
+    if userdata is not None:
+        cmd += ' \\\n        --amazonec2-userdata {}'.format(userdata)
 
     if ami is not None:
         cmd += ' \\\n        --amazonec2-ami {}'.format(ami)
@@ -48,14 +57,13 @@ def build_command(ami=None, key_id=None, key_secret=None, **launch_args):
 
 def get_avg_price(instance_type, hours=5, key_id=None, key_secret=None):
     """Get up to date average price for a specific instance type."""
+    print('# Searching for cheapest region...')
     kwargs = {'aws_access_key_id': key_id, 'aws_secret_access_key': key_secret}
-    useast1 = boto3.client('ec2', region_name='us-east-1', **kwargs)
-    uswest2 = boto3.client('ec2', region_name='us-west-2', **kwargs)
-    euwest1 = boto3.client('ec2', region_name='eu-west-1', **kwargs)
-    clients = [useast1, uswest2, euwest1]
-
+    regions_key = instance_type if instance_type in REGIONS else 'common'
+    regions = REGIONS[regions_key]
     prices = []
-    for client in clients:
+    for region in regions:
+        client = boto3.client('ec2', region_name=region, **kwargs)
         zones = client.describe_availability_zones()
         zones = [zone['ZoneName'] for zone in zones['AvailabilityZones']]
         history = client.describe_spot_price_history(
@@ -67,14 +75,17 @@ def get_avg_price(instance_type, hours=5, key_id=None, key_secret=None):
         )
         history = history['SpotPriceHistory']
         grouper = itemgetter('AvailabilityZone')
+        region_prices = []
         for zone, items in groupby(sorted(history, key=grouper), key=grouper):
             price = np.mean([float(i['SpotPrice']) for i in items])
-            prices.append((zone, price))
+            region_prices.append((zone, price))
+        prices.append(sorted(region_prices, key=lambda t: t[1])[0])
+        print('# {}: {:.4f}'.format(*prices[-1]))
     return sorted(prices, key=lambda t: t[1])
 
 
 def main(machine_name, instance_type, security_group, max_price_overhead,
-         hours, key_id, key_secret):
+         hours, key_id, key_secret, userdata):
     """Find cheapest region and provide launch command."""
     averages = get_avg_price(instance_type, hours, key_id, key_secret)
     zone, price = averages[0]
@@ -89,6 +100,7 @@ def main(machine_name, instance_type, security_group, max_price_overhead,
         ami=AMIS[ami] if ami in AMIS else None,
         key_id=key_id,
         key_secret=key_secret,
+        userdata=userdata,
     )
 
     print('# Instances of type {instance_type} are cheapest in region {zone} '
@@ -110,4 +122,5 @@ if __name__ == '__main__':
     ARGS.add_argument('--hours', default=5, type=float)
     ARGS.add_argument('--key-id')
     ARGS.add_argument('--key-secret')
+    ARGS.add_argument('--userdata')
     main(**vars(ARGS.parse_args()))
