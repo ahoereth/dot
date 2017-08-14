@@ -18,7 +18,7 @@
     "files.trimTrailingWhitespace": true,
     "files.insertFinalNewline": true,
     "python.venvPath": ".venv",
-    "python.linting.mypyEnabled": true,
+    "python.linting.mypyEnabled": false,
     "python.linting.pep8Enabled": true,
     "workbench.activityBar.visible": true,
     "python.linting.pylintEnabled": true,
@@ -29,5 +29,14 @@
     "prettier.trailingComma": "all",
     "prettier.printWidth": 79,
     "editor.tabSize": 2,
-    "vsicons.dontShowNewVersionMessage": true
+    "vsicons.dontShowNewVersionMessage": true,
+    "workbench.startupEditor": "newUntitledFile",
+    "C_Cpp.intelliSenseEngine": "Default",
+    "C_Cpp.clang_format_path": "clang-format",
+    "C_Cpp.clang_format_style": "Google",
+    "C_Cpp.clang_format_formatOnSave": true,
+    "C_Cpp.intelliSenseEngineFallback": "Enabled",
+    "python.pythonPath": "python3",
+    "python.linting.pep8Path": "/usr/local/bin/pep8",
+    "python.linting.pylintPath": "/usr/local/bin/pylint"
 }
