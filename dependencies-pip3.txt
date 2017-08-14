@@ -1,11 +1,9 @@
 autopep8
 boto3
-docker-compose
+jedi
 jupyter
 jupyter_contrib_nbextensions
-mypy
 numpy
 pep8
 pydocstyle
 pylint
-thefuck

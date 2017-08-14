@@ -2,24 +2,16 @@
 # ~/.zshrc
 #
 
-export DOT_PATH=~/dot
+export DOT_PATH=~/repos/dot
 
 setopt autocd
 setopt extendedglob
 bindkey -e # emacs mode
 
 
-### oh-my-zsh
-export ZSH=$DOT_PATH/oh-my-zsh
-export VIRTUAL_ENV_DISABLE_PROMPT=1
-ZSH_CUSTOM=$DOT_PATH/zsh
-ZSH_THEME="theme"
-HYPHEN_INSENSITIVE="true"
-COMPLETION_WAITING_DOTS="true"
-ENABLE_CORRECTION="true"
-COMPLETION_WAITING_DOTS="true"
-plugins=(git npm wd pip python last-working-dir compleat zsh-syntax-highlighting)
-source $ZSH/oh-my-zsh.sh
+# ANTIGEN
+source /usr/local/opt/antigen/share/antigen/antigen.zsh
+antigen init ${HOME}/.antigenrc
 
 
 ### Path
@@ -50,10 +42,9 @@ fi
 
 
 ### Compleat
-autoload -Uz compinit bashcompinit
-compinit
-bashcompinit
-source $(find /usr/local/share -name compleat_setup)
+autoload -U +X compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
+eval "$(pandoc --bash-completion)"
 
 
 ### The Fuck
@@ -72,6 +63,7 @@ fi
 ### ccat colorized cat
 if ! type "$ccat" > /dev/null; then
   alias cat=ccat
+  alias json='python -m json.tool | ccat'
 fi
 
 
@@ -120,8 +112,10 @@ man() {
 
 #export FBFONT=/usr/share/kbd/consolefonts/ter-216n.psf.gz
 
-alias pbcopy='xclip -selection clipboard'
-alias pbpaste='xclip -selection clipboard -o'
+if ! type pbcopy > /dev/null; then
+  alias pbcopy='xclip -selection clipboard'
+  alias pbpaste='xclip -selection clipboard -o'
+fi
 alias psaux='ps aux | sort -n -r -k 3 | cut -c -$(tput cols)'
 alias lx="la | awk '{k=0;for(i=0;i<=8;i++)k+=((substr(\$1,i+2,1)~/[rwx]/) \
                    *2^(8-i));if(k)printf(\"%0o \",k);print}'"

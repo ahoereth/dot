@@ -1,0 +1,17 @@
+antigen use oh-my-zsh
+
+antigen bundles <<EOBUNDLES
+    git
+    pip
+    python
+    Tarrasch/zsh-autoenv
+    wd
+    zsh-users/zsh-syntax-highlighting
+    zsh-users/zsh-history-substring-search
+    zsh-users/zsh-autosuggestions
+    last-working-dir
+EOBUNDLES
+
+antigen theme shoeffner/dotfiles fae.zsh-theme
+
+antigen apply

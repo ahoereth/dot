@@ -5,7 +5,6 @@
 [core]
 	excludesfile = ~/.gitignore
 	attributesfile = ~/.gitattributes
-	pager = diff-so-fancy | less -r
 	autocrlf = input
 [color "diff"]
 	old = red strike
@@ -31,7 +30,7 @@
 [push]
 	default = current # http://stackoverflow.com/a/23918418/89484
 [user]
-	email = ahoereth@gmail.com
+	email = a.hoereth@gmail.com
 	name = Alexander Höreth
 [commit]
 	gpgsign = True
