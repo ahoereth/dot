@@ -18,6 +18,7 @@ cask 'franz'
 cask 'keepassxc'
 cask 'google-backup-and-sync'
 cask 'rambox'
+cask 'alfred'
 
 # Dev
 brew 'cmake'
