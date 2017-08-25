@@ -32,11 +32,13 @@
     "vsicons.dontShowNewVersionMessage": true,
     "workbench.startupEditor": "newUntitledFile",
     "C_Cpp.intelliSenseEngine": "Default",
-    "C_Cpp.clang_format_path": "clang-format",
+    "C_Cpp.clang_format_path": "/usr/local/bin/clang-format",
     "C_Cpp.clang_format_style": "Google",
     "C_Cpp.clang_format_formatOnSave": true,
     "C_Cpp.intelliSenseEngineFallback": "Enabled",
     "python.pythonPath": "python3",
     "python.linting.pep8Path": "/usr/local/bin/pep8",
-    "python.linting.pylintPath": "/usr/local/bin/pylint"
+    "python.linting.pylintPath": "/usr/local/bin/pylint",
+    "python.formatting.autopep8Path": "/usr/local/bin/autopep8",
+    "python.formatting.formatOnSave": true
 }
