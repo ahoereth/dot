@@ -20,14 +20,50 @@ REGIONS = {
                'ap-northeast-1', 'sa-east-1', 'ca-central-1', 'ap-southeast-1',
                'ap-southeast-2', 'eu-central-1', 'us-east-1', 'us-east-2',
                'us-west-1', 'us-west-2'],
-    'p2.xlarge': ['us-east-1', 'us-west-2', 'eu-west-1'],
+    'p2.xlarge': ['us-east-1', 'us-east-2', 'us-west-2',
+                  'eu-west-1', 'eu-central-1',
+                  'ap-northeast-1', 'ap-southeast-1'],
+    'p2.8xlarge': ['us-east-1', 'us-east-2', 'us-west-2',
+                   'eu-west-1', 'eu-central-1',
+                   'ap-northeast-1'],
+    'p2.16xlarge': ['us-east-1', 'us-east-2', 'us-west-2',
+                    'eu-west-1', 'eu-central-1'],
 }
 
 
 AMIS = {
-    ('p2.xlarge', 'us-east-1'): 'ami-96982080',  # N. Virginia
-    ('p2.xlarge', 'us-west-2'): 'ami-00fd6960',  # Oregon
-    ('p2.xlarge', 'eu-west-1'): 'ami-71e4d817',  # Ireland
+    'us-east-1': {  # N. Virginia
+        'p2.xlarge': 'ami-96982080',
+        'p2.8xlarge': 'ami-96982080',
+        'p2.16xlarge': 'ami-96982080',
+    },
+    'us-east-2': {  # Ohio
+        'p2.xlarge': 'ami-d38facb6',
+        'p2.8xlarge': 'ami-d38facb6',
+        'p2.16xlarge': 'ami-d38facb6',
+    },
+    'us-west-2': {  # Oregon
+        'p2.xlarge': 'ami-00fd6960',
+        'p2.8xlarge': 'ami-00fd6960',
+        'p2.16xlarge': 'ami-00fd6960',
+    },
+    'eu-west-1': {  # Ireland
+        'p2.xlarge': 'ami-71e4d817',
+        'p2.8xlarge': 'ami-71e4d817',
+        'p2.16xlarge': 'ami-71e4d817',
+    },
+    'eu-central-1': {  # Frankfurt
+        'p2.xlarge': 'ami-445fea2b',
+        'p2.8xlarge': 'ami-445fea2b',
+        'p2.16xlarge': 'ami-445fea2b',
+    },
+    'ap-northeast-1': {  # Tokio
+        'p2.xlarge': 'ami-fb2ed49d',
+        'p2.8xlarge': 'ami-fb2ed49d',
+    },
+    'ap-southeast-1': {  # Singapore
+        'p2.xlarge': 'ami-64234f07',
+    },
 }
 
 
@@ -92,7 +128,7 @@ def main(machine_name, instance_type, security_group, max_price_overhead,
     """Find cheapest region and provide launch command."""
     averages = get_avg_price(instance_type, hours, key_id, key_secret)
     zone, price = averages[0]
-    ami = (instance_type, zone[:-1])
+    region = zone[:-1]
     cmd = build_command(
         name=machine_name,
         region=zone[:-1],
@@ -100,7 +136,7 @@ def main(machine_name, instance_type, security_group, max_price_overhead,
         instance_type=instance_type,
         security_group=security_group,
         price_max=price + max_price_overhead,
-        ami=AMIS[ami] if ami in AMIS else None,
+        ami=AMIS[region].get(instance_type, None) if region in AMIS else None,
         key_id=key_id,
         key_secret=key_secret,
         userdata=userdata,
