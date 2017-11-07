@@ -33,36 +33,36 @@ REGIONS = {
 
 AMIS = {
     'us-east-1': {  # N. Virginia
-        'p2.xlarge': 'ami-96982080',
-        'p2.8xlarge': 'ami-96982080',
-        'p2.16xlarge': 'ami-96982080',
+        'p2.xlarge': 'ami-aeae1dd4',
+        'p2.8xlarge': 'ami-aeae1dd4',
+        'p2.16xlarge': 'ami-aeae1dd4',
     },
     'us-east-2': {  # Ohio
-        'p2.xlarge': 'ami-d38facb6',
-        'p2.8xlarge': 'ami-d38facb6',
-        'p2.16xlarge': 'ami-d38facb6',
+        'p2.xlarge': 'ami-fccae599',
+        'p2.8xlarge': 'ami-fccae599',
+        'p2.16xlarge': 'ami-fccae599',
     },
     'us-west-2': {  # Oregon
-        'p2.xlarge': 'ami-00fd6960',
-        'p2.8xlarge': 'ami-00fd6960',
-        'p2.16xlarge': 'ami-00fd6960',
+        'p2.xlarge': 'ami-e36abf9b',
+        'p2.8xlarge': 'ami-e36abf9b',
+        'p2.16xlarge': 'ami-e36abf9b',
     },
     'eu-west-1': {  # Ireland
-        'p2.xlarge': 'ami-71e4d817',
-        'p2.8xlarge': 'ami-71e4d817',
-        'p2.16xlarge': 'ami-71e4d817',
+        'p2.xlarge': 'ami-f8da7781',
+        'p2.8xlarge': 'ami-f8da7781',
+        'p2.16xlarge': 'ami-f8da7781',
     },
     'eu-central-1': {  # Frankfurt
-        'p2.xlarge': 'ami-445fea2b',
-        'p2.8xlarge': 'ami-445fea2b',
-        'p2.16xlarge': 'ami-445fea2b',
+        'p2.xlarge': 'ami-3fa62150',
+        'p2.8xlarge': 'ami-3fa62150',
+        'p2.16xlarge': 'ami-3fa62150',
     },
-    'ap-northeast-1': {  # Tokio
-        'p2.xlarge': 'ami-fb2ed49d',
-        'p2.8xlarge': 'ami-fb2ed49d',
+    'ap-northeast-1': {  # Tokyo
+        'p2.xlarge': 'ami-39a8005f',
+        'p2.8xlarge': 'ami-39a8005f',
     },
     'ap-southeast-1': {  # Singapore
-        'p2.xlarge': 'ami-64234f07',
+        'p2.xlarge': 'ami-db440ab8',
     },
 }
 
@@ -72,6 +72,7 @@ def build_command(ami=None, key_id=None, key_secret=None, userdata=None,
     """Build docker-machine instance launch command."""
     cmd = '''docker-machine create {name} \\
         --driver amazonec2 \\
+        --engine-install-url https://test.docker.com \\
         --amazonec2-region {region} \\
         --amazonec2-zone {zone} \\
         --amazonec2-instance-type {instance_type} \\
