@@ -32,5 +32,6 @@
 [user]
 	email = a.hoereth@gmail.com
 	name = Alexander Höreth
+	signingkey = D7C8BF3ECC868C2A
 [commit]
 	gpgsign = True

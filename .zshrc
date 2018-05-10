@@ -4,9 +4,9 @@
 
 export DOT_PATH=~/repos/dot
 
+
 setopt autocd
 setopt extendedglob
-bindkey -e # emacs mode
 
 
 # ANTIGEN
@@ -21,36 +21,35 @@ path=(
   $DOT_PATH/bin
   ~/.node_modules/bin
   ~/.gem/ruby/2.3.0/bin
+  /usr/local/miniconda3/bin
   $path[@]
 )
+# export JAVA_HOME=$(/usr/libexec/java_home)
 
 
 ### History
 HISTFILE=~/.histfile
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=100000
+SAVEHIST=100000
 setopt HIST_IGNORE_DUPS
 
 
-### SSH Agent Initialization
-if ! pgrep -u $USER ssh-agent > /dev/null; then
-  ssh-agent > ~/.ssh-agent-thing
-fi
+### SSH Agent
+# Start ssh agent if not started already
 if [[ "$SSH_AGENT_PID" == "" ]]; then
-  eval $(<~/.ssh-agent-thing)
+  eval $(ssh-agent) > /dev/null
 fi
 
 
 ### Compleat
 autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
-eval "$(pandoc --bash-completion)"
+# eval "$(pandoc --bash-completion)"
 
 
 ### The Fuck
 if ! type "$thefuck" > /dev/null; then
   eval $(thefuck --alias)
-  alias FUCK='fuck'
 fi
 
 
