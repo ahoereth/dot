@@ -1,11 +1,20 @@
 antigen use oh-my-zsh
 
 antigen bundles <<EOBUNDLES
+    aws
+    compleat
+    docker
+    docker-compose
     git
+    history
     pip
+    pylint
     python
+    terraform
+    thefuck
     Tarrasch/zsh-autoenv
     wd
+    autopep8
     zsh-users/zsh-syntax-highlighting
     zsh-users/zsh-history-substring-search
     zsh-users/zsh-autosuggestions

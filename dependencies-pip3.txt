@@ -1,9 +1,0 @@
-autopep8
-boto3
-jedi
-jupyter
-jupyter_contrib_nbextensions
-numpy
-pep8
-pydocstyle
-pylint

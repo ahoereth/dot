@@ -22,6 +22,7 @@ path=(
   ~/.node_modules/bin
   ~/.gem/ruby/2.3.0/bin
   /usr/local/miniconda3/bin
+  /Library/TeX/texbin
   $path[@]
 )
 # export JAVA_HOME=$(/usr/libexec/java_home)
@@ -41,16 +42,7 @@ if [[ "$SSH_AGENT_PID" == "" ]]; then
 fi
 
 
-### Compleat
-autoload -U +X compinit && compinit
-autoload -U +X bashcompinit && bashcompinit
 # eval "$(pandoc --bash-completion)"
-
-
-### The Fuck
-if ! type "$thefuck" > /dev/null; then
-  eval $(thefuck --alias)
-fi
 
 
 ### MATLAB with OpenJDK
