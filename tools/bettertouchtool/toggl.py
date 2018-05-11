@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
 import sys
 
+from requests.exceptions import ConnectionError
 from toggl24 import TogglUser
 
 def main(token):
-    time_entry = TogglUser(token).get_current_time_entry()
+    try:
+        time_entry = TogglUser(token).get_current_time_entry()
+    except ConnectionError:
+        return
     if time_entry is None:
         print('No active task')
         return
