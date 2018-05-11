@@ -26,6 +26,7 @@ cask 'docker'
 cask 'amethyst'
 cask 'bettertouchtool'
 cask 'dropbox'
+cask 'skim'
 
 # Dev
 brew 'cmake'

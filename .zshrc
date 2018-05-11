@@ -26,7 +26,7 @@ path=(
   $path[@]
 )
 # export JAVA_HOME=$(/usr/libexec/java_home)
-
+alias skim="open -a skim"
 
 ### History
 HISTFILE=~/.histfile
