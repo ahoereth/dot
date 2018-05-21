@@ -42,3 +42,4 @@ brew 'azure-cli'
 brew 'wget'
 cask 'miniconda'
 cask 'visual-studio-code'
+rclone

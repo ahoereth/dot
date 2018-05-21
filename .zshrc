@@ -10,6 +10,7 @@ setopt extendedglob
 
 
 # ANTIGEN
+fpath=($DOT_PATH/compleat $fpath)
 source /usr/local/opt/antigen/share/antigen/antigen.zsh
 antigen init ${HOME}/.antigenrc
 
@@ -22,6 +23,7 @@ path=(
   ~/.node_modules/bin
   ~/.gem/ruby/2.3.0/bin
   /usr/local/miniconda3/bin
+  /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
   /Library/TeX/texbin
   $path[@]
 )

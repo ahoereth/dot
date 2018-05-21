@@ -72,7 +72,7 @@ def build_command(ami=None, key_id=None, key_secret=None, userdata=None,
     """Build docker-machine instance launch command."""
     cmd = '''docker-machine create {name} \\
         --driver amazonec2 \\
-        --engine-install-url https://test.docker.com \\
+        --engine-install-url https://releases.rancher.com/install-docker/18.03.sh \\
         --amazonec2-region {region} \\
         --amazonec2-zone {zone} \\
         --amazonec2-instance-type {instance_type} \\
@@ -81,12 +81,13 @@ def build_command(ami=None, key_id=None, key_secret=None, userdata=None,
         --amazonec2-spot-price {price_max:.4f} \\
         --amazonec2-root-size {size}
     '''.strip().format(**launch_args, size=32)
+    # --engine-install-url https://test.docker.com \
 
     if userdata is not None:
         cmd += ' \\\n        --amazonec2-userdata {}'.format(userdata)
 
-    if ami is not None:
-        cmd += ' \\\n        --amazonec2-ami {}'.format(ami)
+    # if ami is not None:
+    #     cmd += ' \\\n        --amazonec2-ami {}'.format(ami)
 
     if key_id is not None and key_secret is not None:
         cmd += ' \\\n        --amazonec2-access-key {}'.format(key_id)

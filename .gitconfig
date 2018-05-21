@@ -6,14 +6,19 @@
 	excludesfile = ~/.gitignore
 	attributesfile = ~/.gitattributes
 	autocrlf = input
+	pager = diff-so-fancy | less --tabs=4 -RFX
 [color "diff"]
-	old = red strike
-	new = green
+	old = red bold
+	new = green bold
+	meta = yellow
+	frag = magenta bold
+	commit = yellow bold
+	whitespace = red reverse
 [color "diff-highlight"]
 	oldNormal = red bold
-	oldHighlight = "red bold 52"
-	newNormal = "green bold"
-	newHighlight = "green bold 22"
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
 [url "git@github.com:"]
 	insteadOf = "gh:"
 	insteadOf = "git://github.com"
@@ -35,3 +40,5 @@
 	signingkey = D7C8BF3ECC868C2A
 [commit]
 	gpgsign = True
+[color]
+	ui = true
