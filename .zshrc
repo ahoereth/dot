@@ -2,17 +2,44 @@
 # ~/.zshrc
 #
 
+# zmodload zsh/zprof
+
 export DOT_PATH=~/repos/dot
 
+source $DOT_PATH/tools/sandboxd
 
 setopt autocd
 setopt extendedglob
 
+# zsh plugins
+ZGEN_RESET_ON_CHANGE=(${DOT_PATH}/.zshrc)
+source "${DOT_PATH}/tools/zgen/zgen.zsh"
+if ! zgen saved; then
+  zgen oh-my-zsh
+  zgen oh-my-zsh plugins/aws
+  zgen oh-my-zsh plugins/compleat
+  zgen oh-my-zsh plugins/command-not-found
+  zgen oh-my-zsh plugins/docker
+  zgen oh-my-zsh plugins/docker-compose
+  zgen oh-my-zsh plugins/git
+  zgen oh-my-zsh plugins/history
+  zgen oh-my-zsh plugins/pip
+  zgen oh-my-zsh plugins/pylint
+  zgen oh-my-zsh plugins/python
+  zgen oh-my-zsh plugins/terraform
+  zgen oh-my-zsh plugins/thefuck
+  zgen oh-my-zsh plugins/wd
+  zgen oh-my-zsh plugins/autopep8
+  zgen oh-my-zsh plugins/last-working-dir
 
-# ANTIGEN
-fpath=($DOT_PATH/compleat $fpath)
-source /usr/local/opt/antigen/share/antigen/antigen.zsh
-antigen init ${HOME}/.antigenrc
+  zgen load zsh-users/zsh-completions
+  zgen load zsh-users/zsh-history-substring-search
+  zgen load zsh-users/zsh-autosuggestions
+
+  zgen load shoeffner/dotfiles fae.zsh-theme
+
+  zgen save
+fi
 
 
 ### Path
@@ -30,6 +57,7 @@ path=(
   $path[@]
   $HOME/repos/flutter/bin
 )
+
 # export JAVA_HOME=$(/usr/libexec/java_home)
 alias skim="open -a skim"
 
@@ -105,11 +133,6 @@ man() {
       man "$@"
 }
 
-### NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
 #export FBFONT=/usr/share/kbd/consolefonts/ter-216n.psf.gz
 
 if ! type pbcopy > /dev/null; then
@@ -119,3 +142,7 @@ fi
 alias psaux='ps aux | sort -n -r -k 3 | cut -c -$(tput cols)'
 alias lx="la | awk '{k=0;for(i=0;i<=8;i++)k+=((substr(\$1,i+2,1)~/[rwx]/) \
                    *2^(8-i));if(k)printf(\"%0o \",k);print}'"
+
+# zprof
+
+zgen load zsh-users/zsh-syntax-highlighting

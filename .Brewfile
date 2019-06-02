@@ -3,7 +3,9 @@ tap 'caskroom/fonts'
 tap 'caskroom/versions'
 tap 'homebrew/boneyard'
 
+
 # Shell
+brew 'coreutils'
 brew 'zsh'
 brew 'ack'
 brew 'tldr'
@@ -11,6 +13,7 @@ brew 'thefuck'
 brew 'ccat'
 brew 'htop'
 brew 'ncdu'
+#brew 'zsh-syntax-highlighting'
 # cask 'font-fira-code'
 # brew 'antigen'
 

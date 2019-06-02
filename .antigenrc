@@ -12,7 +12,7 @@ antigen bundles <<EOBUNDLES
     python
     terraform
     thefuck
-    Tarrasch/zsh-autoenv
+    #Tarrasch/zsh-autoenv
     wd
     autopep8
     zsh-users/zsh-syntax-highlighting
