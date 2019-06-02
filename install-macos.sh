@@ -46,7 +46,4 @@ mkdir -p ${HOME}/Library/Application\ Support/Code/User
 rm ${HOME}/Library/Application\ Support/Code/User/settings.json
 ln -s $DOT/.config/Code/User/settings.json ${HOME}/Library/Application\ Support/Code/User/settings.json
 
-brew install python3
 brew bundle --global
-
-pip3 install -r $DOT/dependencies-pip3.txt

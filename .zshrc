@@ -17,7 +17,9 @@ antigen init ${HOME}/.antigenrc
 
 ### Path
 typeset -U path
+export GOPATH=$HOME/go
 path=(
+  $GOPATH/bin
   ~/bin
   $DOT_PATH/bin
   ~/.node_modules/bin
@@ -26,6 +28,7 @@ path=(
   /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
   /Library/TeX/texbin
   $path[@]
+  $HOME/repos/flutter/bin
 )
 # export JAVA_HOME=$(/usr/libexec/java_home)
 alias skim="open -a skim"
@@ -39,9 +42,9 @@ setopt HIST_IGNORE_DUPS
 
 ### SSH Agent
 # Start ssh agent if not started already
-if [[ "$SSH_AGENT_PID" == "" ]]; then
-  eval $(ssh-agent) > /dev/null
-fi
+#if [[ "$SSH_AGENT_PID" == "" ]]; then
+#  eval $(ssh-agent) > /dev/null
+#fi
 
 
 # eval "$(pandoc --bash-completion)"
@@ -102,6 +105,10 @@ man() {
       man "$@"
 }
 
+### NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 #export FBFONT=/usr/share/kbd/consolefonts/ter-216n.psf.gz
 
