@@ -174,4 +174,4 @@ fn - q : yabai -m window --swap recent
 
 fn - tab : yabai -m window --warp mouse
 
-alt - space : alacritty
+alt - space : open -a Alacritty --new

@@ -16,32 +16,23 @@ ZGEN_RESET_ON_CHANGE=(${DOT_PATH}/.zshrc)
 source "${DOT_PATH}/tools/zgen/zgen.zsh"
 if ! zgen saved; then
   zgen oh-my-zsh
-  #zgen oh-my-zsh plugins/aws
+
   #zgen oh-my-zsh plugins/compleat
   zgen oh-my-zsh plugins/command-not-found
-  #zgen oh-my-zsh plugins/docker
-  #zgen oh-my-zsh plugins/docker-compose
-  #zgen oh-my-zsh plugins/git
-  #zgen oh-my-zsh plugins/history
-  #zgen oh-my-zsh plugins/pip
-  #zgen oh-my-zsh plugins/pylint
-  #zgen oh-my-zsh plugins/python
-  #zgen oh-my-zsh plugins/terraform
+  zgen oh-my-zsh plugins/docker
   zgen oh-my-zsh plugins/thefuck
   zgen oh-my-zsh plugins/wd
-  #zgen oh-my-zsh plugins/autopep8
   zgen oh-my-zsh plugins/last-working-dir
 
-  zgen load zsh-users/zsh-completions
+  zgen load zsh-users/zsh-syntax-highlighting
   zgen load zsh-users/zsh-history-substring-search
   zgen load zsh-users/zsh-autosuggestions
-  zgen load zsh-users/zsh-syntax-highlighting
-
-  zgen load shoeffner/dotfiles fae.zsh-theme
 
   zgen save
 fi
 
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
 
 ### Path
 typeset -U path
@@ -49,6 +40,7 @@ export GOPATH=$HOME/go
 path=(
   $GOPATH/bin
   ~/bin
+  /usr/local/sbin
   $DOT_PATH/bin
   ~/.node_modules/bin
   /usr/local/miniconda3/bin
@@ -141,7 +133,8 @@ fi
 alias psaux='ps aux | sort -n -r -k 3 | cut -c -$(tput cols)'
 alias lx="la | awk '{k=0;for(i=0;i<=8;i++)k+=((substr(\$1,i+2,1)~/[rwx]/) \
                    *2^(8-i));if(k)printf(\"%0o \",k);print}'"
-
+alias venv='source .venv/bin/activate'
+alias dev='cd $HOME/repos'
 
 # make option - left and option - right skip words
 bindkey "^[[1;3C" forward-word
@@ -149,5 +142,16 @@ bindkey "^[[1;3D" backward-word
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+
+
+PS1='%{$fg_bold[yellow]%}%c%{$reset_color%} $(git_prompt_info)'
+
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[magenta]%}%{$fg[red]%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[magenta]%} %{$fg[yellow]%}✗"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[magenta]%} %{$fg[green]%}✓"
+
+RPS1='%{$fg[magenta]%}%T%{$reset_color%}'
+
 
 # zprof
