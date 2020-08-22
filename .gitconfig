@@ -1,7 +1,7 @@
 [alias]
 	s = status -sb
 	staged = git diff --cached
-	lg = log --graph --pretty='format:%C(green)%h%Creset %C(green dim)%aI%Creset %C(magenta)%s%Creset%n        %C(yellow)%aN <%ae>%Creset %C(cyan)[%G?% GS]%Creset'
+	lg = log --all --graph --pretty=format:"%Cred%h%Creset %C(bold blue)%an%Creset :%C(yellow)%d%Creset %s %Cgreen(%cr) %Creset" --abbrev-commit
 [core]
 	excludesfile = ~/.gitignore
 	attributesfile = ~/.gitattributes
@@ -43,3 +43,8 @@
 	gpgsign = True
 [color]
 	ui = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
