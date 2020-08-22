@@ -1,7 +1,7 @@
 [alias]
 	s = status -sb
 	staged = git diff --cached
-	lg = log --all --graph --pretty=format:"%Cred%h%Creset %C(bold blue)%an%Creset :%C(yellow)%d%Creset %s %Cgreen(%cr) %Creset" --abbrev-commit
+	lg = log --all --graph --pretty=format:'%Cred%h%Creset %C(bold blue)%an%Creset :%C(yellow)%d%Creset %s %Cgreen(%cr) %Creset' --abbrev-commit
 [core]
 	excludesfile = ~/.gitignore
 	attributesfile = ~/.gitattributes
