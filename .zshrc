@@ -23,6 +23,7 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/thefuck
   zgen oh-my-zsh plugins/wd
   zgen oh-my-zsh plugins/last-working-dir
+  zgen oh-my-zsh plugins/zsh-interactive-cd
 
   zgen load zsh-users/zsh-syntax-highlighting
   zgen load zsh-users/zsh-history-substring-search
