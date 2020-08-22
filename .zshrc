@@ -135,11 +135,14 @@ alias lx="la | awk '{k=0;for(i=0;i<=8;i++)k+=((substr(\$1,i+2,1)~/[rwx]/) \
                    *2^(8-i));if(k)printf(\"%0o \",k);print}'"
 alias venv='source .venv/bin/activate'
 alias dev='cd $HOME/repos'
+alias myip="curl -s https://api.ipify.org/"
+alias cpip="myip | pbcopy"
 
 # make option - left and option - right skip words
 bindkey "^[[1;3C" forward-word
 bindkey "^[[1;3D" backward-word
 
+export HOMEBREW_INSTALL_CLEANUP=1
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
