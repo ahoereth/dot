@@ -124,7 +124,26 @@ man() {
       man "$@"
 }
 
-#export FBFONT=/usr/share/kbd/consolefonts/ter-216n.psf.gz
+
+function venv() {
+  local py="python3"
+  local vd=${1:-.venv}
+  if [ ! -d ./$vd ]; then
+    echo "creating virtual environment in ./$vd ..."
+    if ! $py -m venv $vd --prompt=$(basename $PWD) --without-pip; then
+      echo "ERROR: Failed creating venv" >&2
+      return 1
+    else
+      local whl=$($py -c "import pathlib, ensurepip; [whl] = pathlib.Path(ensurepip.__path__[0]).glob('_bundled/pip*.whl'); print(whl)")
+      echo "boostrapping pip using $whl"
+      $vd/bin/python $whl/pip install --upgrade pip setuptools wheel
+      source $vd/bin/activate
+    fi
+  else
+    source $vd/bin/activate
+  fi
+}
+
 
 if ! type pbcopy > /dev/null; then
   alias pbcopy='xclip -selection clipboard'
@@ -133,10 +152,10 @@ fi
 alias psaux='ps aux | sort -n -r -k 3 | cut -c -$(tput cols)'
 alias lx="la | awk '{k=0;for(i=0;i<=8;i++)k+=((substr(\$1,i+2,1)~/[rwx]/) \
                    *2^(8-i));if(k)printf(\"%0o \",k);print}'"
-alias venv='source .venv/bin/activate'
 alias dev='cd $HOME/repos'
 alias myip="curl -s https://api.ipify.org/"
 alias cpip="myip | pbcopy"
+alias find="find $1 2>/dev/null"
 
 # make option - left and option - right skip words
 bindkey "^[[1;3C" forward-word
@@ -158,3 +177,21 @@ RPS1='%{$fg[magenta]%}%T%{$reset_color%}'
 
 
 # zprof
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/ahoereth/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/ahoereth/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/ahoereth/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/ahoereth/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+
+PS1=$(echo $PS1 | sed 's/(base) //')
