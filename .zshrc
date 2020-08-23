@@ -162,12 +162,20 @@ alias find="find $1 2>/dev/null"
 bindkey "^[[1;3C" forward-word
 bindkey "^[[1;3D" backward-word
 
+# Delete whole string part using alt - del
+backward-kill-dir () {
+    local WORDCHARS=${WORDCHARS/\/}
+    zle backward-kill-word
+}
+zle -N backward-kill-dir
+bindkey '^[^?' backward-kill-dir
+
 export HOMEBREW_INSTALL_CLEANUP=1
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 
-PS1='%{$fg_bold[yellow]%}%c%{$reset_color%} $(git_prompt_info)'
+PS1='%{$fg_bold[yellow]%}%2~%{$reset_color%} $(git_prompt_info)'
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[magenta]%}%{$fg[red]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
