@@ -3,6 +3,26 @@ DOT=~/repos/dot
 
 cd $DOT
 
+
+ln -s $DOT/.yabairc $HOME/.yabairc
+ln -s $DOT/.skhdrc $HOME/.skhdrc
+ln -s $DOT/.alacritty.yml $HOME/.alacritty.yml
+ln -s $DOT/vscode/settings.json "$HOME/Library/Application Support/Code/User/settings.json"
+
+
+# Setup jupyter configuration
+mkdir -p ~/.jupyter/nbconfig
+ln -s $DOT/.jupyter/jupyter_notebook_config.py ~/.jupyter/jupyter_notebook_config.py
+ln -s $DOT/.jupyter/nbconfig/notebook.json ~/.jupyter/nbconfig/notebook.json
+
+# Install visual studio code extensions
+for x in $(cat dependencies-vsc.txt); do code --install-extension $x; done
+
+#yarn global add diff-so-fancy flow tldr
+
+#(cd compleat && ./Setup.lhs configure && ./Setup.lhs build && sudo ./Setup.lhs install)
+
+
 # Runs a command and echos an error if it was not successful.
 function checked() {
     "${@:2}" 2>/dev/null
