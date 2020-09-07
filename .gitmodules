@@ -1,3 +1,6 @@
 [submodule "tools/zgen"]
 	path = tools/zgen
 	url = https://github.com/tarjoilija/zgen.git
+[submodule "tools/pyenv"]
+	path = tools/pyenv
+	url = git@github.com:pyenv/pyenv.git

@@ -20,7 +20,6 @@ if ! zgen saved; then
   #zgen oh-my-zsh plugins/compleat
   zgen oh-my-zsh plugins/command-not-found
   zgen oh-my-zsh plugins/docker
-  zgen oh-my-zsh plugins/thefuck
   zgen oh-my-zsh plugins/wd
   zgen oh-my-zsh plugins/last-working-dir
   zgen oh-my-zsh plugins/zsh-interactive-cd
@@ -39,12 +38,10 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 typeset -U path
 export GOPATH=$HOME/go
 path=(
-  $GOPATH/bin
   ~/bin
   /usr/local/sbin
   $DOT_PATH/bin
   ~/.node_modules/bin
-  /usr/local/miniconda3/bin
   /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
   /Library/TeX/texbin
   $path[@]
@@ -70,18 +67,19 @@ setopt HIST_IGNORE_DUPS
 # eval "$(pandoc --bash-completion)"
 
 
-### MATLAB with OpenJDK
-if ! type "$matlab" > /dev/null; then
-  export MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre
+
+if [ "$(uname)" = "Darwin" ]; then
+  ### MATLAB with OpenJDK
+  if ! type "$matlab" > /dev/null; then
+    export MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre
+  fi
+
+  ### ccat colorized cat
+  if ! type "$ccat" > /dev/null; then
+    alias cat=ccat
+    alias json='python -m json.tool | ccat'
+  fi
 fi
-
-
-### ccat colorized cat
-if ! type "$ccat" > /dev/null; then
-  alias cat=ccat
-  alias json='python -m json.tool | ccat'
-fi
-
 
 ### git-checkout-before DATETIME BRANCH
 # Checkout specified git branch at the latest commit before DATETIME
@@ -158,6 +156,9 @@ alias myip="curl -s https://api.ipify.org/"
 alias cpip="myip | pbcopy"
 alias find="find $1 2>/dev/null"
 
+# . .venv/bin/activate
+# eval $(thefuck --alias)
+
 # make option - left and option - right skip words
 bindkey "^[[1;3C" forward-word
 bindkey "^[[1;3D" backward-word
@@ -174,15 +175,33 @@ export HOMEBREW_INSTALL_CLEANUP=1
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
+# Below needs to be migrated to macos
+if [ "$(uname)" = "Linux" ]; then
+  # pyenv
+  export PYENV_ROOT="$DOT_PATH/tools/pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+  fi
+fi
 
-PS1='%{$fg_bold[yellow]%}%2~%{$reset_color%} $(git_prompt_info)'
+# Show only remote hostnames.
+if [ "$(hostname)" = "padua.local" ]; then
+  name=
+  icon=
+else
+  name="$(hostname) "
+  icon="⛵ "
+fi
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[magenta]%}%{$fg[red]%}"
+PS1='$icon%{$fg_bold[yellow]%}%2~ %{$reset_color%}$(git_prompt_info) '
+
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[red]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[magenta]%} %{$fg[yellow]%}✗"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[magenta]%} %{$fg[green]%}✓"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[yellow]%} ✗"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%} ✓"
 
-RPS1='%{$fg[magenta]%}%T%{$reset_color%}'
+RPS1='%{$fg[red]%}$name%{$fg[magenta]%}%T%{$reset_color%}'
 
 
 # zprof
