@@ -165,8 +165,8 @@ bindkey "^[[1;3D" backward-word
 
 # Delete whole string part using alt - del
 backward-kill-dir () {
-    local WORDCHARS=${WORDCHARS/\/}
-    zle backward-kill-word
+  local WORDCHARS=${WORDCHARS/\/}
+  zle backward-kill-word
 }
 zle -N backward-kill-dir
 bindkey '^[^?' backward-kill-dir
@@ -183,6 +183,12 @@ if [ "$(uname)" = "Linux" ]; then
   if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
   fi
+
+  if [ -d "/usr/local/cuda-10.1" ]; then
+    export LD_LIBRARY_PATH=/usr/local/cuda-10.1/extras/CUPTI/lib64:$LD_LIBRARY_PATH
+    export PATH=/usr/local/cuda-10.1/bin:$PATH
+    export CUDA_INC_DIR=/usr/local/cuda/include
+  fi
 fi
 
 # Show only remote hostnames.
@@ -194,13 +200,12 @@ else
   icon="⛵ "
 fi
 
-PS1='$icon%{$fg_bold[yellow]%}%2~ %{$reset_color%}$(git_prompt_info) '
-
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[red]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[yellow]%} ✗"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%} ✓"
 
+PS1='$icon%{$fg_bold[yellow]%}%2~ %{$reset_color%}$(git_prompt_info) '
 RPS1='%{$fg[red]%}$name%{$fg[magenta]%}%T%{$reset_color%}'
 
 
