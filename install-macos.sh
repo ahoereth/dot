@@ -50,7 +50,6 @@ function lnifnotexists() {
 
 for link in \
     '.antigenrc' \
-    '.Brewfile' \
     '.jupyter/nbconfig/notebook.json' \
     '.jupyter/jupyter_notebook_config.py' \
     '.zshrc' \
@@ -64,6 +63,6 @@ done
 
 mkdir -p ${HOME}/Library/Application\ Support/Code/User
 rm ${HOME}/Library/Application\ Support/Code/User/settings.json
-ln -s $DOT/.config/Code/User/settings.json ${HOME}/Library/Application\ Support/Code/User/settings.json
+ln -s $DOT/tools/vscode/settings.json "$HOME/Library/Application Support/Code/User/settings.json"
 
-brew bundle --global
+#brew bundle --global
