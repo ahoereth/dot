@@ -102,5 +102,7 @@
   "javascript.format.insertSpaceAfterSemicolonInForStatements": false,
   "typescript.validate.enable": false,
   "python.linting.flake8Enabled": true,
-  "python.linting.mypyEnabled": true
+  "python.linting.mypyEnabled": true,
+  "telemetry.enableTelemetry": false,
+  "telemetry.enableCrashReporter": false
 }
