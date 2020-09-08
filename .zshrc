@@ -39,33 +39,26 @@ typeset -U path
 export GOPATH=$HOME/go
 path=(
   ~/bin
+  /usr/local/lib/ruby/gems/2.6.0/bin
+  /usr/local/opt/ruby@2.6/bin
   /usr/local/sbin
   $DOT_PATH/bin
   ~/.node_modules/bin
-  /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
   /Library/TeX/texbin
   $path[@]
   $HOME/repos/flutter/bin
-  /usr/local/opt/ruby@2.6/bin
 )
 
 
-### History
+## History
 HISTFILE=~/.histfile
 HISTSIZE=100000
 SAVEHIST=100000
 setopt HIST_IGNORE_DUPS
 
 
-### SSH Agent
-# Start ssh agent if not started already
-#if [[ "$SSH_AGENT_PID" == "" ]]; then
-#  eval $(ssh-agent) > /dev/null
-#fi
-
 
 # eval "$(pandoc --bash-completion)"
-
 
 
 if [ "$(uname)" = "Darwin" ]; then
@@ -89,7 +82,7 @@ git-checkout-before() {
 }
 
 
-### bg COMMAND
+## bg COMMAND
 # Run COMMAND in backgrund and suppress its output.
 bg() {
   echo "$@ > /dev/null 2>&1 &\n"
@@ -97,7 +90,7 @@ bg() {
 }
 
 
-### toggleservice SERVICENAME
+## toggleservice SERVICENAME
 # Toggles (starts/stops) the specified systemctl service.
 toggleservice() {
   if [ "`systemctl is-active $1`" != "active" ]; then
@@ -107,20 +100,6 @@ toggleservice() {
     echo "systemctl stop $1\n"
     systemctl stop $1
   fi
-}
-
-
-### Better man
-man() {
-  env \
-    LESS_TERMCAP_mb=$(printf "\e[1;31m") \
-    LESS_TERMCAP_md=$(printf "\e[1;31m") \
-    LESS_TERMCAP_me=$(printf "\e[0m") \
-    LESS_TERMCAP_se=$(printf "\e[0m") \
-    LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
-    LESS_TERMCAP_ue=$(printf "\e[0m") \
-    LESS_TERMCAP_us=$(printf "\e[1;32m") \
-      man "$@"
 }
 
 
@@ -144,10 +123,49 @@ function venv() {
 }
 
 
-if ! type pbcopy > /dev/null; then
-  alias pbcopy='xclip -selection clipboard'
-  alias pbpaste='xclip -selection clipboard -o'
-fi
+extract () {
+ if [ -f "$1" ] ; then
+   case "$1" in
+     *.tar.bz2)   tar xvjf $1    ;;
+     *.tar.gz)    tar xvzf $1    ;;
+     *.bz2)       bunzip2 $1     ;;
+     *.rar)       unrar x $1     ;;
+     *.gz)        gunzip $1      ;;
+     *.tar)       tar xvf $1     ;;
+     *.tbz2)      tar xvjf $1    ;;
+     *.tgz)       tar xvzf $1    ;;
+     *.zip)       unzip $1       ;;
+     *.Z)         uncompress $1  ;;
+     *.7z)        7z x $1        ;;
+     *.tar.xz)    tar xvfJ $1    ;;
+     *)           echo "don't know how to extract '$1'..." ;;
+   esac
+ else
+   echo "'$1' is not a valid file!"
+ fi
+}
+
+
+case "$OSTYPE" in
+  darwin*)
+    # source ~/.macrc
+    ssh-add -K
+    alias folders='du -hd1 | sort -hr'
+    if ! type pbcopy > /dev/null; then
+      alias pbcopy='xclip -selection clipboard'
+      alias pbpaste='xclip -selection clipboard -o'
+    fi
+    ;;
+  linux*)
+    # source ~/.ubunturc
+    ;;
+  bsd*)     echo "BSD" ;;
+  msys*)    echo "WINDOWS" ;;
+  *)        echo "unknown: $OSTYPE" ;;
+esac
+
+
+
 alias psaux='ps aux | sort -n -r -k 3 | cut -c -$(tput cols)'
 alias lx="la | awk '{k=0;for(i=0;i<=8;i++)k+=((substr(\$1,i+2,1)~/[rwx]/) \
                    *2^(8-i));if(k)printf(\"%0o \",k);print}'"
@@ -210,21 +228,27 @@ RPS1='%{$fg[red]%}$name%{$fg[magenta]%}%T%{$reset_color%}'
 
 
 # zprof
+goconda () {
+  export PATH=/usr/local/miniconda3/bin:$PATH
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/ahoereth/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/ahoereth/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/ahoereth/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/ahoereth/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
+  # >>> conda initialize >>>
+  # !! Contents within this block are managed by 'conda init' !!
+  __conda_setup="$('/Users/ahoereth/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+  if [ $? -eq 0 ]; then
+      eval "$__conda_setup"
+  else
+      if [ -f "/Users/ahoereth/miniconda3/etc/profile.d/conda.sh" ]; then
+          . "/Users/ahoereth/miniconda3/etc/profile.d/conda.sh"
+      else
+          export PATH="/Users/ahoereth/miniconda3/bin:$PATH"
+      fi
+  fi
+  unset __conda_setup
+  # <<< conda initialize <<<
+}
 
 
 PS1=$(echo $PS1 | sed 's/(base) //')
+# export PATH="/usr/local/opt/ncurses/bin:$PATH"
+# export LDFLAGS="-L/usr/local/opt/ncurses/lib"
+# export CPPFLAGS="-I/usr/local/opt/ncurses/include"
