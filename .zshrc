@@ -207,6 +207,11 @@ if [ "$(uname)" = "Linux" ]; then
     export PATH=/usr/local/cuda-10.1/bin:$PATH
     export CUDA_INC_DIR=/usr/local/cuda/include
   fi
+
+  if [ -d "/usr/local/cuda-11.0" ]; then
+    export LD_LIBRARY_PATH=/usr/local/cuda-11.0/lib64:$LD_LIBRARY_PATH
+    export PATH=/usr/local/cuda-11.0/bin:$PATH
+  fi
 fi
 
 # Show only remote hostnames.
