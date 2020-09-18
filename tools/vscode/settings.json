@@ -87,7 +87,7 @@
     "--show-column-numbers"
   ],
   "[azure-pipelines]": {},
-  "python.dataScience.useNotebookEditor": true,
+  "python.dataScience.useNotebookEditor": false,
   "vsicons.dontShowNewVersionMessage": true,
   "python.linting.pylintUseMinimalCheckers": false,
   "clang-format.language.javascript.enable": false,
@@ -104,5 +104,6 @@
   "python.linting.flake8Enabled": true,
   "python.linting.mypyEnabled": true,
   "telemetry.enableTelemetry": false,
-  "telemetry.enableCrashReporter": false
+  "telemetry.enableCrashReporter": false,
+  "javascript.updateImportsOnFileMove.enabled": "never"
 }

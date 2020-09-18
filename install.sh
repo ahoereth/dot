@@ -20,7 +20,7 @@ esac
 ### SYMLINKS
 # Link dotfiles to their proper locations.
 function lnifnotexists() {
-    [ -L "${HOME}/$1" ] || (mkdir -p "${HOME}/$(dirname $1)" && ln -s "${DOT_PATH}/$1" "${HOME}/$1")
+    [ -L "${HOME}/$1" ] || (mkdir -p "${HOME}/$(dirname $1)" && ln -s "${DOT}/$1" "${HOME}/$1")
 }
 
 for link in \
@@ -35,7 +35,7 @@ for link in \
 ; do
   lnifnotexists $link
 done
-ln -s "${DOTFILES_DIR}/.gitignore" "${HOME}/.gitignore_global"
+ln -s "${DOT}/.gitignore" "${HOME}/.gitignore_global"
 
 
 # Install yaourt and arch dependencies.
@@ -47,4 +47,5 @@ ln -s "${DOTFILES_DIR}/.gitignore" "${HOME}/.gitignore_global"
 # sudo pip2 install -r $DOT/py2-requirements.txt  # None currently
 
 
-chsh -s /bin/zsh
+# sudo chsh -s /bin/zsh
+sudo usermod -s /bin/zsh ahoereth

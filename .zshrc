@@ -231,7 +231,6 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%} ✓"
 PS1='$icon%{$fg_bold[yellow]%}%2~ %{$reset_color%}$(git_prompt_info) '
 RPS1='%{$fg[red]%}$name%{$fg[magenta]%}%T%{$reset_color%}'
 
-
 # zprof
 goconda () {
   export PATH=/usr/local/miniconda3/bin:$PATH
@@ -257,3 +256,4 @@ PS1=$(echo $PS1 | sed 's/(base) //')
 # export PATH="/usr/local/opt/ncurses/bin:$PATH"
 # export LDFLAGS="-L/usr/local/opt/ncurses/lib"
 # export CPPFLAGS="-I/usr/local/opt/ncurses/include"
+export PATH="/usr/local/opt/vtk@8.2/bin:$PATH"
