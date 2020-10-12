@@ -105,5 +105,18 @@
   "python.linting.mypyEnabled": true,
   "telemetry.enableTelemetry": false,
   "telemetry.enableCrashReporter": false,
-  "javascript.updateImportsOnFileMove.enabled": "never"
+  "javascript.updateImportsOnFileMove.enabled": "never",
+  "clang-tidy.buildPath": "build",
+  "C_Cpp.default.systemIncludePath": ["/usr/local/include"],
+  "python.sortImports.path": "/Users/ahoereth/miniconda3/bin/isort",
+  "[yaml]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": true
+    },
+    "editor.autoIndent": false
+  }
 }

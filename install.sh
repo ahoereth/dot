@@ -1,6 +1,15 @@
 #!/bin/bash
 DOT=$HOME/repos/dot
 
+error() {
+  printf '\E[31m'; echo "$@"; printf '\E[0m'
+}
+
+if [[ $EUID -eq 0 ]]; then
+  error "Do not run this as the root user"
+  exit 1
+fi
+
 cd $DOT
 
 # Pull all submodules first.
