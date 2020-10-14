@@ -175,7 +175,7 @@ alias cpip="myip | pbcopy"
 alias find="find $1 2>/dev/null"
 
 # . .venv/bin/activate
-# eval $(thefuck --alias)
+eval $(thefuck --alias) || echo "Couldn't find thef***"
 
 # make option - left and option - right skip words
 bindkey "^[[1;3C" forward-word
