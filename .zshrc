@@ -214,8 +214,13 @@ if [ "$(uname)" = "Linux" ]; then
   fi
 fi
 
+
 # Show only remote hostnames.
-if [ "$(hostname)" = "padua.local" ]; then
+localhosts=(
+  padua.local
+  Alexanders-MBP.localdomain
+)
+if (($localhosts[(Ie)$(hostname)])); then
   name=
   icon=
 else
