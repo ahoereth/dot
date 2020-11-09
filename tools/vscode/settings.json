@@ -118,5 +118,12 @@
       "strings": true
     },
     "editor.autoIndent": false
-  }
+  },
+  "cmake.configureArgs": [
+    "-DCIBUILD=1",
+    "-DUSEOPENMP=OFF"
+  ],
+  "cmake.buildArgs": [
+    "-j6"
+  ]
 }

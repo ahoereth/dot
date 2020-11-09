@@ -122,7 +122,6 @@ function venv() {
   fi
 }
 
-
 extract () {
  if [ -f "$1" ] ; then
    case "$1" in
@@ -145,6 +144,17 @@ extract () {
  fi
 }
 
+max7z () {
+  7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on $1
+}
+
+reason () {
+  ffmpeg -i "$1" -vcodec libx264 -r 24 -crf 28 "${1%.*}-reasonable.mp4"
+}
+
+mfind () {
+  find -L $@ 2>/dev/null
+}
 
 case "$OSTYPE" in
   darwin*)
@@ -172,7 +182,6 @@ alias lx="la | awk '{k=0;for(i=0;i<=8;i++)k+=((substr(\$1,i+2,1)~/[rwx]/) \
 alias dev='cd $HOME/repos'
 alias myip="curl -s https://api.ipify.org/"
 alias cpip="myip | pbcopy"
-alias find="find $1 2>/dev/null"
 
 # . .venv/bin/activate
 eval $(thefuck --alias) || echo "Couldn't find thef***"
@@ -193,21 +202,20 @@ export HOMEBREW_INSTALL_CLEANUP=1
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-# Below needs to be migrated to macos
-if [ "$(uname)" = "Linux" ]; then
-  # pyenv
-  export PYENV_ROOT="$DOT_PATH/tools/pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init -)"
-  fi
+# pyenv
+export PYENV_ROOT="$DOT_PATH/tools/pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
 
+# Cuda exports.
+if [ "$(uname)" = "Linux" ]; then
   if [ -d "/usr/local/cuda-10.1" ]; then
     export LD_LIBRARY_PATH=/usr/local/cuda-10.1/extras/CUPTI/lib64:$LD_LIBRARY_PATH
     export PATH=/usr/local/cuda-10.1/bin:$PATH
     export CUDA_INC_DIR=/usr/local/cuda/include
   fi
-
   if [ -d "/usr/local/cuda-11.0" ]; then
     export LD_LIBRARY_PATH=/usr/local/cuda-11.0/lib64:$LD_LIBRARY_PATH
     export PATH=/usr/local/cuda-11.0/bin:$PATH
@@ -262,3 +270,8 @@ PS1=$(echo $PS1 | sed 's/(base) //')
 # export LDFLAGS="-L/usr/local/opt/ncurses/lib"
 # export CPPFLAGS="-I/usr/local/opt/ncurses/include"
 export PATH="/usr/local/opt/vtk@8.2/bin:$PATH"
+
+# Automatically source venv if .venv exists.
+# if [[ -d .venv ]]; then
+#   venv .venv
+# fi
