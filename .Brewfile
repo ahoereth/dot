@@ -18,6 +18,7 @@ brew 'skhd'
 cask 'alacritty'
 
 # software
+brew 'gh'
 cask 'visual-studio-code'
 cask 'macpass'
 cask 'tunnelblick'
