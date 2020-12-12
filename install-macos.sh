@@ -47,12 +47,21 @@ for link in \
 done
 
 
-# vscode user configs
+# vscode
 mkdir -p "${HOME}/Library/Application Support/Code/User"
 rm -f "${HOME}/Library/Application Support/Code/User/settings.json"
 ln -s $DOT/tools/vscode/settings.json "$HOME/Library/Application Support/Code/User/settings.json"
 rm -f "${HOME}/Library/Application Support/Code/User/keybindings.json"
 ln -s $DOT/tools/vscode/keybindings.json "$HOME/Library/Application Support/Code/User/keybindings.json"
+for ext in \
+  'waderyan.gitblame' \
+  'xaver.clang-format' \
+  'ms-vscode.cpptools' \
+  'esbenp.prettier-vscode' \
+  'ms-python.python' \
+; do
+  code --install-extension $ext
+done
 
 
 # window management
