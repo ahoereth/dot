@@ -47,6 +47,7 @@ path=(
   /Library/TeX/texbin
   $path[@]
   $HOME/repos/flutter/bin
+  /usr/local/opt/vtk@8.2/bin
 )
 
 
@@ -269,7 +270,7 @@ PS1=$(echo $PS1 | sed 's/(base) //')
 # export PATH="/usr/local/opt/ncurses/bin:$PATH"
 # export LDFLAGS="-L/usr/local/opt/ncurses/lib"
 # export CPPFLAGS="-I/usr/local/opt/ncurses/include"
-export PATH="/usr/local/opt/vtk@8.2/bin:$PATH"
+export GPG_TTY=$(tty)
 
 # Automatically source venv if .venv exists.
 # if [[ -d .venv ]]; then

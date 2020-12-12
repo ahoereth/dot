@@ -18,7 +18,8 @@
     "Header": true
   },
   "ruler_column": [
-    80
+    80,
+    88
   ],
   "ruler_color": [
     "#CCCCCC"

@@ -8,7 +8,7 @@
 	excludesfile = ~/.gitignore
 	attributesfile = ~/.gitattributes
 	autocrlf = input
-	#pager = diff-so-fancy | less --tabs=4 -RFX
+	pager = diff-so-fancy | less --tabs=4 -RFX
 [color "diff"]
 	old = red bold
 	new = green bold
@@ -40,9 +40,9 @@
 [user]
 	email = a.hoereth@gmail.com
 	name = Alexander Höreth
-	#signingkey = D7C8BF3ECC868C2A
+	signingkey = 5CA66170
 [commit]
-	gpgsign = False
+	gpgsign = True
 [color]
 	ui = true
 [filter "lfs"]

@@ -176,5 +176,5 @@ fn - tab : yabai -m window --warp mouse
 
 alt - space : open -a Alacritty --new
 
-
+# reload yabai config
 fn - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
