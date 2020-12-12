@@ -2,7 +2,7 @@
 	s = status -sb
 	staged = diff --cached
 	lg = log --all --graph --pretty=format:'%Cred%h%Creset %C(bold blue)%an%Creset :%C(yellow)%d%Creset %s %Cgreen(%cr) %Creset' --abbrev-commit
-	sha = rev-parse --short HEAD
+	sha = rev-parse HEAD
 	ssha = rev-parse --short HEAD
 [core]
 	excludesfile = ~/.gitignore
@@ -52,3 +52,8 @@
 	required = true
 [pull]
 	rebase = false
+	ff = only
+[stash]
+	showPatch = true
+[log]
+	decorate = full

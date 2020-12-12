@@ -73,7 +73,7 @@
   "python.linting.flake8Path": "/Users/ahoereth/miniconda3/bin/flake8",
   "latex-workshop.docker.image.latex": "chktex",
   "editor.wordWrap": "on",
-  "workbench.colorTheme": "Visual Studio Light",
+  "workbench.colorTheme": "Monokai Dimmed",
   "[cpp]": {
     "editor.defaultFormatter": "xaver.clang-format"
   },
