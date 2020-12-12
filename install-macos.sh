@@ -1,7 +1,11 @@
 #!/bin/bash
-DOT=~/repos/dot
 
+read -p "Running macOS install. Continue? (Y/N) " confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 1
+
+
+DOT=~/repos/dot
 cd $DOT
+
 
 # Runs a command and echos an error if it was not successful.
 function checked() {
@@ -17,7 +21,8 @@ function lnifnotexists() {
   [ -L ${HOME}/$1 ] || (mkdir -p ${HOME}/$(dirname $1) && ln -s $DOT/$1 ${HOME}/$1)
 }
 
-# Install brew if not installed.
+
+# brew software
 checked 'Brew not installed. Installing...' brew --version
 if [ $? -ne 0 ]; then
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" || exit 1
@@ -28,6 +33,8 @@ brew upgrade
 brew doctor
 brew bundle --global
 
+
+# symlinks
 for link in \
   '.alacritty.yml' \
   '.config/Code/User/settings' \
@@ -39,11 +46,17 @@ for link in \
   lnifnotexists $link
 done
 
+
+# vscode user configs
 mkdir -p "${HOME}/Library/Application Support/Code/User"
 rm -f "${HOME}/Library/Application Support/Code/User/settings.json"
 ln -s $DOT/tools/vscode/settings.json "$HOME/Library/Application Support/Code/User/settings.json"
+rm -f "${HOME}/Library/Application Support/Code/User/keybindings.json"
+ln -s $DOT/tools/vscode/keybindings.json "$HOME/Library/Application Support/Code/User/keybindings.json"
 
+
+# window management
 brew services start koekeishiya/formulae/skhd
 brew services start koekeishiya/formulae/yabai
-skhd
-yabai
+#skhd
+#yabai

@@ -4,3 +4,6 @@
 [submodule "tools/pyenv"]
 	path = tools/pyenv
 	url = git@github.com:pyenv/pyenv.git
+[submodule "dot-extras"]
+	path = dot-extras
+	url = git@github.com:ahoereth/dot-extras.git

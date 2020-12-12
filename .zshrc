@@ -48,6 +48,7 @@ path=(
   $path[@]
   $HOME/repos/flutter/bin
   /usr/local/opt/vtk@8.2/bin
+  /usr/local/opt/qt/bin
 )
 
 
@@ -270,6 +271,7 @@ PS1=$(echo $PS1 | sed 's/(base) //')
 # export PATH="/usr/local/opt/ncurses/bin:$PATH"
 # export LDFLAGS="-L/usr/local/opt/ncurses/lib"
 # export CPPFLAGS="-I/usr/local/opt/ncurses/include"
+
 export GPG_TTY=$(tty)
 
 # Automatically source venv if .venv exists.
