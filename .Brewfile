@@ -1,5 +1,6 @@
 # essentials
 brew 'git'
+brew 'git-lfs'
 
 # utils
 brew 'ccat'
@@ -11,6 +12,7 @@ brew 'wget'
 brew 'zsh'
 brew 'coreutils'
 brew 'diff-so-fancy'
+brew 'fzf'
 
 tap 'koekeishiya/formulae'
 brew 'yabai'

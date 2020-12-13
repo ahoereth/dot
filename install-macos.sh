@@ -21,6 +21,9 @@ function lnifnotexists() {
   [ -L ${HOME}/$1 ] || (mkdir -p ${HOME}/$(dirname $1) && ln -s $DOT/$1 ${HOME}/$1)
 }
 
+# Setup git-lfs -- maybe also do this on ubuntu?
+echo "Need sudo to install git lfs on system level."
+sudo git lfs install --system
 
 # brew software
 checked 'Brew not installed. Installing...' brew --version
