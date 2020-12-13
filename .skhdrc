@@ -137,17 +137,13 @@
 #           yabai -m window --toggle pip
 
 
-###
-
-## horizontal
+## Resize windows
 # left
 fn - h :          yabai -m window --resize left:-20:0; \
                   yabai -m window --resize right:-20:0
 # right
 fn - l :          yabai -m window --resize left:20:0; \
                   yabai -m window --resize right:20:0
-
-## vertical
 # up
 fn - k :          yabai -m window --resize top:0:-20; \
                   yabai -m window --resize bottom:0:-20
@@ -155,11 +151,15 @@ fn - k :          yabai -m window --resize top:0:-20; \
 fn - j :          yabai -m window --resize top:0:20; \
                   yabai -m window --resize bottom:0:20
 
-# toggle window split type
+# Toggle window split type
 fn - space :      yabai -m window --toggle split
 
 # Balance splits
 fn - 0: yabai -m space --balance
+
+# Focus windows
+fn - 0x2F : yabai -m window --focus east  # period .
+fn - 0x2B : yabai -m window --focus west  # comma ,
 
 # Flip the tree horizontally
 #yabai -m space --mirror x-axis
@@ -172,9 +172,16 @@ fn - e : yabai -m window --swap east
 fn - w : yabai -m window --swap west
 fn - q : yabai -m window --swap recent
 
+# Move focussed window to window under mouse
 fn - tab : yabai -m window --warp mouse
 
-alt - space : open -a Alacritty --new
+# reload yabai and skhd config
+fn - r :    launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"; \
+            skhd --reload
 
-# reload yabai config
-fn - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
+# Float/unfload focussed window
+fn - f : yabai -m window --toggle float;\
+         yabai -m window --grid 4:4:1:1:2:2
+
+# Open programms
+alt - space : open -a Alacritty --new

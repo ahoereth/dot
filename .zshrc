@@ -47,6 +47,7 @@ path=(
   /Library/TeX/texbin
   $path[@]
   $HOME/repos/flutter/bin
+  /usr/local/bin
   /usr/local/opt/vtk@8.2/bin
   /usr/local/opt/qt/bin
 )
