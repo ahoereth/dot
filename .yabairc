@@ -30,4 +30,14 @@ yabai -m config left_padding                 0
 yabai -m config right_padding                0
 yabai -m config window_gap                   5
 
+read -r -d '' action <<- 'EOF'
+    yabai -m query --spaces --display | \
+        jq -re 'map(select(."native-fullscreen" == 0)) | length > 1' \
+    && yabai -m query --spaces | \
+        jq -re 'map(select(."windows" == [] and ."focused" == 0).index) | reverse | .[] ' | \
+        xargs -I % sh -c 'yabai -m space % --destroy'
+EOF
+
+yabai -m signal --add event=space_changed action="${action}"
+
 echo "yabai configuration loaded.."

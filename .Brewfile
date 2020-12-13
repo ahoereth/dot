@@ -13,6 +13,7 @@ brew 'zsh'
 brew 'coreutils'
 brew 'diff-so-fancy'
 brew 'fzf'
+brew 'jq'
 
 tap 'koekeishiya/formulae'
 brew 'yabai'

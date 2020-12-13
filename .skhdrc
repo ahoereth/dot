@@ -183,5 +183,46 @@ fn - r :    launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"; \
 fn - f : yabai -m window --toggle float;\
          yabai -m window --grid 4:4:1:1:2:2
 
+## Manage spaces
+# Move focus to new empty space
+fn - n :        yabai -m space --create && \
+                index="$(yabai -m query --spaces --display \
+                  | jq 'map(select(."native-fullscreen" == 0))[-1].index')" && \
+                yabai -m space --focus "${index}"
+
+# Move focussed window to new space
+fn + cmd - n :  yabai -m space --create && \
+                index="$(yabai -m query --spaces --display \
+                  | jq 'map(select(."native-fullscreen" == 0))[-1].index')" && \
+                yabai -m window --space "${index}" && \
+                yabai -m space --focus "${index}"
+
+# Move to the space on the left, maybe creating a new one
+ctrl - left :   yabai -m space --create && \
+                let index=$(yabai -m query --spaces --display | jq length) && \
+                yabai -m space $index --move 1 && \
+                yabai -m space --focus prev
+
+# Move to the space on the right, maybe creating a new one
+ctrl - right : yabai -m space --create && yabai -m space --focus next
+
+# Move focussed window to left space, maybe creating a new one
+ctrl + cmd - left :  yabai -m space --create && \
+                     let index=$(yabai -m query --spaces --display | jq length) && \
+                     yabai -m space $index --move 1 && \
+                     let index=$(yabai -m query --spaces --display \
+                       | jq 'map(select(.focused == 1))[-1].index') && \
+                     let index-- && \
+                     yabai -m window --space "${index}" && \
+                     yabai -m space --focus "${index}"
+
+# Move focussed window to right space, maybe creating a new one
+ctrl + cmd - right :  yabai -m space --create && \
+                      let index=$(yabai -m query --spaces --display \
+                        | jq 'map(select(.focused == 1))[-1].index') && \
+                      let index++ && \
+                      yabai -m window --space $index && \
+                      yabai -m space --focus $index
+
 # Open programms
 alt - space : open -a Alacritty --new
