@@ -3,10 +3,9 @@
   "editor.rulers": [80, 88, 100],
   "editor.wordWrapColumn": 80,
   "files.trimTrailingWhitespace": true,
-  "python.pythonPath": "/Users/ahoereth/miniconda3/bin/python",
   "python.linting.pylintPath": "/Users/ahoereth/miniconda3/bin/pylint",
   "python.linting.pycodestylePath": "/Users/ahoereth/miniconda3/bin/pycodestyle",
-  "python.linting.mypyPath": "/Users/ahoereth/miniconda3/bin/mypy",
+  "python.linting.mypyPath": ".venv/bin/mypy",
   "python.linting.pycodestyleEnabled": false,
   "python.linting.pylintEnabled": false,
   "terminal.integrated.shell.linux": "/bin/zsh",
@@ -37,7 +36,8 @@
     "azure-pipelines.yml": "azure-pipelines",
     "*.tpl": "azure-pipelines",
     "*.yml": "azure-pipelines",
-    "*.spec": "python"
+    "*.spec": "python",
+    "*.pcrd": "xml"
   },
   "files.exclude": {
     "**/.git": true,
@@ -62,7 +62,7 @@
   "extensions.ignoreRecommendations": true,
   "editor.renderWhitespace": "all",
   "editor.useTabStops": false,
-  "python.formatting.blackPath": "/Users/ahoereth/miniconda3/bin/black",
+  "python.formatting.blackPath": ".venv/bin/black",
   "python.formatting.autopep8Path": "/Users/ahoereth/miniconda3/bin/autopep8",
   "python.formatting.yapfPath": "/Users/ahoereth/miniconda3/bin/yapf",
   "python.formatting.provider": "black",
@@ -70,7 +70,7 @@
   "editor.suggestSelection": "first",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "python.jediPath": "/Users/ahoereth/miniconda3/lib/python3.6/site-packages/jedi",
-  "python.linting.flake8Path": "/Users/ahoereth/miniconda3/bin/flake8",
+  "python.linting.flake8Path": ".venv/bin/flake8",
   "latex-workshop.docker.image.latex": "chktex",
   "editor.wordWrap": "on",
   "workbench.colorTheme": "Monokai Dimmed",
@@ -86,8 +86,7 @@
     "--follow-imports=normal",
     "--show-column-numbers"
   ],
-  "[azure-pipelines]": {},
-  "python.dataScience.useNotebookEditor": false,
+"[azure-pipelines]": {},
   "vsicons.dontShowNewVersionMessage": true,
   "python.linting.pylintUseMinimalCheckers": false,
   "clang-format.language.javascript.enable": false,
@@ -108,7 +107,7 @@
   "javascript.updateImportsOnFileMove.enabled": "never",
   "clang-tidy.buildPath": "build",
   "C_Cpp.default.systemIncludePath": ["/usr/local/include"],
-  "python.sortImports.path": "/Users/ahoereth/miniconda3/bin/isort",
+  "python.sortImports.path": ".venv/bin/isort",
   "[yaml]": {
     "editor.insertSpaces": true,
     "editor.tabSize": 2,
@@ -125,5 +124,13 @@
   ],
   "cmake.buildArgs": [
     "-j6"
-  ]
+],
+"jupyter.useNotebookEditor": false,
+"xml.java.home": "/usr/local/opt/openjdk",
+"xml.symbols.maxItemsComputed": 50000,
+"xml.format.emptyElements": "expand",
+"xml.format.splitAttributes": true,
+"jupyter.alwaysTrustNotebooks": true,
+"jupyter.askForKernelRestart": false,
+"jupyter.disableJupyterAutoStart": true
 }

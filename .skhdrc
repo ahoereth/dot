@@ -224,5 +224,15 @@ ctrl + cmd - right :  yabai -m space --create && \
                       yabai -m window --space $index && \
                       yabai -m space --focus $index
 
+ctrl + alt - left :   let index=$(yabai -m query --spaces --display \
+                        | jq 'map(select(.focused == 1))[-1].index') && \
+                      let index-- && \
+                      yabai -m space --move $index
+
+ctrl + alt - right :  let index=$(yabai -m query --spaces --display \
+                        | jq 'map(select(.focused == 1))[-1].index') && \
+                      let index++ && \
+                      yabai -m space --move $index
+
 # Open programms
 alt - space : open -a Alacritty --new

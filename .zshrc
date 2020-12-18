@@ -39,8 +39,9 @@ typeset -U path
 export GOPATH=$HOME/go
 path=(
   ~/bin
-  /usr/local/lib/ruby/gems/2.6.0/bin
   /usr/local/opt/ruby@2.6/bin
+  /usr/local/lib/ruby/gems/2.6.0/bin
+  /Users/ahoereth/.gem/ruby/2.6.0/bin
   /usr/local/sbin
   $DOT_PATH/bin
   ~/.node_modules/bin
@@ -50,8 +51,11 @@ path=(
   /usr/local/bin
   /usr/local/opt/vtk@8.2/bin
   /usr/local/opt/qt/bin
+  /usr/local/opt/openjdk/bin
+  /usr/local/opt/tcl-tk/bin
 )
 
+JAVA_HOME="/usr/local/opt/openjdk"
 
 ## History
 HISTFILE=~/.histfile

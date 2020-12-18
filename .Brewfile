@@ -14,6 +14,7 @@ brew 'coreutils'
 brew 'diff-so-fancy'
 brew 'fzf'
 brew 'jq'
+brew 'tcl-tk'
 
 tap 'koekeishiya/formulae'
 brew 'yabai'
