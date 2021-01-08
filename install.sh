@@ -51,7 +51,7 @@ pyenv init
 LDFLAGS="-L/usr/local/opt/tcl-tk/lib" \
   CPPFLAGS="-I/usr/local/opt/tcl-tk/include" \
   PKG_CONFIG_PATH="/usr/local/opt/tcl-tk/lib/pkgconfig" \
-  PYTHON_CONFIGURE_OPTS="--with-tcltk-includes='-I/usr/local/opt/tcl-tk/include' --with-tcltk-libs='-L/usr/local/opt/tcl-tk/lib -ltcl8.6 -ltk8.6'" \
+  PYTHON_CONFIGURE_OPTS="--with-tcltk-includes='-I/usr/local/opt/tcl-tk/include' --with-tcltk-libs='-L/usr/local/opt/tcl-tk/lib -ltcl8.6 -ltk8.6' --enable-shared" \
   pyenv install 3.8.6
 pyenv global 3.8.6
 
