@@ -233,6 +233,7 @@ fi
 # Show only remote hostnames.
 localhosts=(
   padua.local
+  pamir.local
   Alexanders-MBP.localdomain
 )
 if (($localhosts[(Ie)$(hostname)])); then
