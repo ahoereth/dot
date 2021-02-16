@@ -7,3 +7,6 @@
 [submodule "dot-extras"]
 	path = dot-extras
 	url = git@github.com:ahoereth/dot-extras.git
+[submodule "tools/diff-so-fancy"]
+	path = tools/diff-so-fancy
+	url = git@github.com:so-fancy/diff-so-fancy.git

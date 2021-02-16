@@ -1,7 +1,8 @@
+__pycache__/
+.compleat/.compleat
 .ipynb_checkpoints/
 .mypy_cache/
 .venv/
 .vscode/
-__pycache__/
+/bin/diff-so-fancy
 node_modules/
-.compleat/.compleat

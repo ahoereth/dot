@@ -4,7 +4,7 @@
 
 # zmodload zsh/zprof
 
-export DOT_PATH=~/repos/dot
+export DOT_PATH=$HOME/repos/dot
 
 source $DOT_PATH/tools/sandboxd
 
@@ -38,7 +38,6 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 typeset -U path
 export GOPATH=$HOME/go
 path=(
-  ~/bin
   /usr/local/opt/ruby@2.6/bin
   /usr/local/lib/ruby/gems/2.6.0/bin
   /Users/ahoereth/.gem/ruby/2.6.0/bin

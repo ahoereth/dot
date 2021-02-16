@@ -16,6 +16,7 @@ cd $DOT
 # Update all submodules first.
 git submodule update --init --recursive --remote
 
+export PYTHON_VERSION=3.8.7
 
 # Maybe run OS specific installations.
 os=$(uname)
@@ -45,15 +46,9 @@ done
 rm -f "${HOME}/.gitignore_global"
 ln -s "${DOT}/.gitignore" "${HOME}/.gitignore_global"
 
-
-# Install default python
-pyenv init
-LDFLAGS="-L/usr/local/opt/tcl-tk/lib" \
-  CPPFLAGS="-I/usr/local/opt/tcl-tk/include" \
-  PKG_CONFIG_PATH="/usr/local/opt/tcl-tk/lib/pkgconfig" \
-  PYTHON_CONFIGURE_OPTS="--with-tcltk-includes='-I/usr/local/opt/tcl-tk/include' --with-tcltk-libs='-L/usr/local/opt/tcl-tk/lib -ltcl8.6 -ltk8.6' --enable-shared" \
-  pyenv install 3.8.6
-pyenv global 3.8.6
+rm -f "${DOT}/bin/diff-so-fancy"
+chmod +x ${DOT}/tools/diff-so-fancy
+ln -s "${DOT}/tools/diff-so-fancy" "${DOT}/bin/diff-so-fancy"
 
 
 # Make zsh the default shell
