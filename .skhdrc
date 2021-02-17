@@ -224,11 +224,13 @@ ctrl + cmd - right :  yabai -m space --create && \
                       yabai -m window --space $index && \
                       yabai -m space --focus $index
 
+# Move focussed space to left
 ctrl + alt - left :   let index=$(yabai -m query --spaces --display \
                         | jq 'map(select(.focused == 1))[-1].index') && \
                       let index-- && \
                       yabai -m space --move $index
 
+# Move focussed space to right
 ctrl + alt - right :  let index=$(yabai -m query --spaces --display \
                         | jq 'map(select(.focused == 1))[-1].index') && \
                       let index++ && \

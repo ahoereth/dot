@@ -40,7 +40,7 @@
 [user]
 	email = a.hoereth@gmail.com
 	name = Alexander Höreth
-	signingkey = 5CA66170
+	signingkey = 761E70A00788B2B1
 [commit]
 	gpgsign = True
 [color]
@@ -57,3 +57,5 @@
 	showPatch = true
 [log]
 	decorate = full
+[init]
+	defaultBranch = main

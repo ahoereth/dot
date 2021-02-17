@@ -233,7 +233,10 @@ fi
 localhosts=(
   padua.local
   pamir.local
+  passat.local
+  passat
   Alexanders-MBP.localdomain
+  AlexandersMBP2.localdomain
 )
 if (($localhosts[(Ie)$(hostname)])); then
   name=
