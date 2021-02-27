@@ -154,8 +154,19 @@ max7z () {
   7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on $1
 }
 
+# Convert a video to a reasonable mp4.
+#   Argument 1: Filepath
+#   Argument 2: Fraction of 24fps to retain per second (optional)
 reason () {
-  ffmpeg -i "$1" -vcodec libx264 -r 24 -crf 28 "${1%.*}-reasonable.mp4"
+  if [ -f "$1" ] ; then
+    filter=
+    if [ -n "$2" ] ; then
+      filter=`-filter:v "setpts=${2:-1}*PTS"`
+    fi
+    ffmpeg -i "$1" -vcodec libx264 -r 24 -crf 28 $filter "${1%.*}-reasonable.mp4"
+  else
+    echo "'$1' is not a valid file!"
+  fi
 }
 
 mfind () {
@@ -235,6 +246,7 @@ localhosts=(
   pamir.local
   passat.local
   passat
+  passat.fritz.box
   Alexanders-MBP.localdomain
   AlexandersMBP2.localdomain
 )
