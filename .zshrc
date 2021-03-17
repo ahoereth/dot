@@ -49,7 +49,7 @@ path=(
   $HOME/repos/flutter/bin
   /usr/local/bin
   /usr/local/opt/vtk@8.2/bin
-  /usr/local/opt/qt/bin
+  /usr/local/opt/qt@5/bin
   /usr/local/opt/openjdk/bin
   /usr/local/opt/tcl-tk/bin
 )
@@ -159,10 +159,11 @@ max7z () {
 #   Argument 2: Fraction of 24fps to retain per second (optional)
 reason () {
   if [ -f "$1" ] ; then
-    filter=
+    local filter=
     if [ -n "$2" ] ; then
-      filter=`-filter:v "setpts=${2:-1}*PTS"`
+      local filter="-filter:v setpts=$2*PTS"
     fi
+    set -x
     ffmpeg -i "$1" -vcodec libx264 -r 24 -crf 28 $filter "${1%.*}-reasonable.mp4"
   else
     echo "'$1' is not a valid file!"
