@@ -132,5 +132,24 @@
 "jupyter.alwaysTrustNotebooks": true,
 "jupyter.askForKernelRestart": false,
 "jupyter.disableJupyterAutoStart": true,
-"window.zoomLevel": 1
+"window.zoomLevel": 1,
+"workbench.editorAssociations": [
+  {
+    "viewType": "jupyter.notebook.ipynb",
+    "filenamePattern": "*.ipynb"
+  }
+],
+"terraform.languageServer": {
+  "external": true,
+  "pathToBinary": "",
+  "args": [
+    "serve"
+  ],
+  "maxNumberOfProblems": 100,
+  "trace.server": "off"
+},
+"[terraform]": {
+  "editor.defaultFormatter": "hashicorp.terraform"
+},
+"C_Cpp.clang_format_path": "clang-format"
 }

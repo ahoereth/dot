@@ -16,6 +16,9 @@ cd $DOT
 # Update all submodules first.
 git submodule update --init --recursive --remote
 
+export PYENV_ROOT="$DOT/tools/pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+
 export PYTHON_VERSION=3.8.7
 
 # Maybe run OS specific installations.
