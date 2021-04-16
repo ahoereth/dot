@@ -50,8 +50,8 @@ rm -f "${HOME}/.gitignore_global"
 ln -s "${DOT}/.gitignore" "${HOME}/.gitignore_global"
 
 rm -f "${DOT}/bin/diff-so-fancy"
-chmod +x ${DOT}/tools/diff-so-fancy
-ln -s "${DOT}/tools/diff-so-fancy" "${DOT}/bin/diff-so-fancy"
+chmod +x ${DOT}/tools/diff-so-fancy/diff-so-fancy
+ln -s "${DOT}/tools/diff-so-fancy/diff-so-fancy" "${DOT}/bin/diff-so-fancy"
 
 
 # Make zsh the default shell
