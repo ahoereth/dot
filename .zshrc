@@ -303,3 +303,5 @@ export GPG_TTY=$(tty)
 # if [[ -d .venv ]]; then
 #   venv .venv
 # fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
