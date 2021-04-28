@@ -66,6 +66,7 @@ sudo usermod -s /bin/zsh $(whoami) || true
 # Install .ssh/config
 read -p "Install the shared .ssh/config? (Y/N) " confirm &&
 if [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]]; then
+  mkdir -p $HOME/.ssh
   mv "${HOME}/.ssh/config" "${HOME}/.ssh/config.bak" || true
   ln -s "${DOT}/dot-extras/.ssh/config" "${HOME}/.ssh/config"
 fi

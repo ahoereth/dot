@@ -225,6 +225,9 @@ if command -v fnm 1>/dev/null 2>&1; then
   eval "$(fnm env)"
 fi
 
+# fuzzy matching fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # pyenv
 export PYENV_ROOT="$DOT_PATH/tools/pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
@@ -303,5 +306,3 @@ export GPG_TTY=$(tty)
 # if [[ -d .venv ]]; then
 #   venv .venv
 # fi
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
