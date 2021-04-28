@@ -12,6 +12,6 @@ sudo apt-get install -y --no-install-recommends \
     zsh ncdu htop thefuck
 
 # Install default python
-pyenv init
-pyenv install ${PYTHON_VERSION}
-pyenv global ${PYTHON_VERSION}
+eval "$(pyenv init -)"
+pyenv install $PYTHON_VERSION
+pyenv global $PYTHON_VERSION

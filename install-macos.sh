@@ -75,11 +75,11 @@ brew services start koekeishiya/formulae/yabai
 
 
 # Install default python
-pyenv init
+eval "$(pyenv init -)"
 # https://github.com/pyenv/pyenv/issues/1545
 LDFLAGS="-L/usr/local/opt/tcl-tk/lib" \
   CPPFLAGS="-I/usr/local/opt/tcl-tk/include" \
   PKG_CONFIG_PATH="/usr/local/opt/tcl-tk/lib/pkgconfig" \
   PYTHON_CONFIGURE_OPTS="--with-tcltk-includes='-I/usr/local/opt/tcl-tk/include' --with-tcltk-libs='-L/usr/local/opt/tcl-tk/lib -ltcl8.6 -ltk8.6' --enable-shared" \
-  pyenv install ${PYTHON_VERSION}
-pyenv global ${PYTHON_VERSION}
+  pyenv install $PYTHON_VERSION
+pyenv global $PYTHON_VERSION
