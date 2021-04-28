@@ -24,12 +24,12 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/docker
   zgen oh-my-zsh plugins/wd
   zgen oh-my-zsh plugins/last-working-dir
-  zgen oh-my-zsh plugins/zsh-interactive-cd
+  #zgen oh-my-zsh plugins/zsh-interactive-cd
   zsh oh-my-zsh plugins/fzf
 
   zgen load zsh-users/zsh-syntax-highlighting
   zgen load zsh-users/zsh-history-substring-search
-  #zgen load zsh-users/zsh-autosuggestions
+  zgen load zsh-users/zsh-autosuggestions
 
   zgen save
 fi
