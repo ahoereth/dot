@@ -25,10 +25,10 @@ export PYTHON_VERSION=3.8.9
 os=$(uname)
 case $os in
   Darwin )  echo "System: macOS"
-            . ./install-macos.sh
+            ./install-macos.sh
             ;;
   Linux )   echo "System: ubuntu"
-            . ./install-ubuntu.sh
+            ./install-ubuntu.sh
             ;;
 esac
 
