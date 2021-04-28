@@ -151,5 +151,8 @@
 "[terraform]": {
   "editor.defaultFormatter": "hashicorp.terraform"
 },
-"C_Cpp.clang_format_path": "clang-format"
+"C_Cpp.clang_format_path": "clang-format",
+"[typescript]": {
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
 }

@@ -23,10 +23,11 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/wd
   zgen oh-my-zsh plugins/last-working-dir
   zgen oh-my-zsh plugins/zsh-interactive-cd
+  zsh oh-my-zsh plugins/fzf
 
   zgen load zsh-users/zsh-syntax-highlighting
   zgen load zsh-users/zsh-history-substring-search
-  zgen load zsh-users/zsh-autosuggestions
+  #zgen load zsh-users/zsh-autosuggestions
 
   zgen save
 fi
@@ -193,7 +194,6 @@ case "$OSTYPE" in
 esac
 
 
-
 alias psaux='ps aux | sort -n -r -k 3 | cut -c -$(tput cols)'
 alias lx="la | awk '{k=0;for(i=0;i<=8;i++)k+=((substr(\$1,i+2,1)~/[rwx]/) \
                    *2^(8-i));if(k)printf(\"%0o \",k);print}'"
@@ -220,6 +220,11 @@ export HOMEBREW_INSTALL_CLEANUP=1
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
+# Node version management
+if command -v fnm 1>/dev/null 2>&1; then
+  eval "$(fnm env)"
+fi
+
 # pyenv
 export PYENV_ROOT="$DOT_PATH/tools/pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
@@ -239,7 +244,6 @@ if [ "$(uname)" = "Linux" ]; then
     export PATH=/usr/local/cuda-11.0/bin:$PATH
   fi
 fi
-
 
 # Show only remote hostnames.
 localhosts=(

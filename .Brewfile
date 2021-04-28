@@ -12,7 +12,6 @@ brew 'wget'
 brew 'zsh'
 brew 'coreutils'
 brew 'diff-so-fancy'
-brew 'fzf'
 brew 'jq'
 brew 'tcl-tk'
 

@@ -54,6 +54,9 @@ chmod +x ${DOT}/tools/diff-so-fancy/diff-so-fancy
 ln -s "${DOT}/tools/diff-so-fancy/diff-so-fancy" "${DOT}/bin/diff-so-fancy"
 
 
+# fzf
+$DOT/tools/fzf/install
+
 # Make zsh the default shell
 echo "Need sudo to make zsh the default shell."
 sudo chsh -s /bin/zsh || true
