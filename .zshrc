@@ -11,6 +11,8 @@ source $DOT_PATH/tools/sandboxd
 setopt autocd
 setopt extendedglob
 
+export FZF_BASE=$DOT_PATH/tools/fzf
+
 # zsh plugins
 ZGEN_RESET_ON_CHANGE=(${DOT_PATH}/.zshrc)
 source "${DOT_PATH}/tools/zgen/zgen.zsh"
