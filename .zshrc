@@ -296,6 +296,17 @@ goconda () {
   # <<< conda initialize <<<
 }
 
+# Ensure that tmux sessions have the same environment as the shell one is
+# attaching from.
+function update_environment_from_tmux() {
+  if [ -n "${TMUX}" ]; then
+    echo "hook run"
+    eval "$(tmux show-environment -s)"
+  fi
+}
+
+add-zsh-hook precmd update_environment_from_tmux
+
 
 PS1=$(echo $PS1 | sed 's/(base) //')
 # export PATH="/usr/local/opt/ncurses/bin:$PATH"
