@@ -300,7 +300,6 @@ goconda () {
 # attaching from.
 function update_environment_from_tmux() {
   if [ -n "${TMUX}" ]; then
-    echo "hook run"
     eval "$(tmux show-environment -s)"
   fi
 }
