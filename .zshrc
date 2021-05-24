@@ -64,9 +64,10 @@ bindkey '^[[B' history-substring-search-down
 # eval "$(pandoc --bash-completion)"
 
 autoload -Uz compinit promptinit
-promptinit
 compinit
+promptinit
 prompt pure
+
 
 #PS1='$icon%{$fg_bold[yellow]%}%2~ %{$reset_color%}$ '
 RPS1='%{$fg[red]%}$name%{$fg[magenta]%}%T%{$reset_color%}'
