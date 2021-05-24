@@ -15,3 +15,5 @@ sudo apt-get install -y --no-install-recommends \
 eval "$(pyenv init -)"
 pyenv install $PYTHON_VERSION
 pyenv global $PYTHON_VERSION
+
+curl -sfL git.io/antibody | sh -s - -b /usr/local/bin

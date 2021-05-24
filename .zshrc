@@ -8,34 +8,14 @@ export DOT_PATH=$HOME/repos/dot
 
 source $DOT_PATH/tools/sandboxd
 
+# your default editor
+export EDITOR='vim'
+export VEDITOR='code'
+
 setopt autocd
 setopt extendedglob
 
 export FZF_BASE=$DOT_PATH/tools/fzf
-
-# zsh plugins
-ZGEN_RESET_ON_CHANGE=(${DOT_PATH}/.zshrc)
-source "${DOT_PATH}/tools/zgen/zgen.zsh"
-if ! zgen saved; then
-  zgen oh-my-zsh
-
-  #zgen oh-my-zsh plugins/compleat
-  zgen oh-my-zsh plugins/command-not-found
-  zgen oh-my-zsh plugins/docker
-  zgen oh-my-zsh plugins/wd
-  zgen oh-my-zsh plugins/last-working-dir
-  #zgen oh-my-zsh plugins/zsh-interactive-cd
-  zsh oh-my-zsh plugins/fzf
-
-  zgen load zsh-users/zsh-syntax-highlighting
-  zgen load zsh-users/zsh-history-substring-search
-  zgen load zsh-users/zsh-autosuggestions
-
-  zgen save
-fi
-
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
 
 ### Path
 typeset -U path
@@ -65,10 +45,32 @@ HISTSIZE=100000
 SAVEHIST=100000
 setopt HIST_IGNORE_DUPS
 
+export ZSH_CACHE_DIR="$HOME/.cache"
 
+if [ -f "$DOT_PATH/zsh_plugins.sh" ]; then
+  #antibody bundle < $DOT_PATH/zsh_plugins.txt > $DOT_PATH/zsh_plugins.sh
+  source $DOT_PATH/zsh_plugins.sh
+else
+  source <(antibody init)
+  antibody bundle < $DOT_PATH/zsh_plugins.txt
+fi
+alias antibody_bundle="antibody bundle < $DOT_PATH/zsh_plugins.txt > $DOT_PATH/zsh_plugins.sh"
+
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+#bindkey "$terminfo[kcuu1]" history-substring-search-up
+#bindkey "$terminfo[kcud1]" history-substring-search-down
 
 # eval "$(pandoc --bash-completion)"
 
+autoload -Uz compinit promptinit
+promptinit
+compinit
+prompt pure
+
+# By default, zsh considers many characters part of a word (e.g., _ and -).
+# Narrow that down to allow easier skipping through words via M-f and M-b.
+export WORDCHARS='*?[]~&;!$%^<>'
 
 if [ "$(uname)" = "Darwin" ]; then
   ### MATLAB with OpenJDK
@@ -131,6 +133,7 @@ function venv() {
   fi
 }
 
+
 extract () {
  if [ -f "$1" ] ; then
    case "$1" in
@@ -153,9 +156,11 @@ extract () {
  fi
 }
 
+
 max7z () {
   7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on $1
 }
+
 
 # Convert a video to a reasonable mp4.
 #   Argument 1: Filepath
@@ -173,13 +178,16 @@ reason () {
   fi
 }
 
+
 mfind () {
   find -L $@ 2>/dev/null
 }
 
+
 case "$OSTYPE" in
   darwin*)
     # source ~/.macrc
+    set -o ignoreeof # disable exit with ctrl-d
     ssh-add -K
     alias folders='du -hd1 | sort -hr'
     if ! type pbcopy > /dev/null; then
@@ -266,13 +274,21 @@ else
   icon="⛵ "
 fi
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[red]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[yellow]%} ✗"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%} ✓"
 
-PS1='$icon%{$fg_bold[yellow]%}%2~ %{$reset_color%}$(git_prompt_info) '
-RPS1='%{$fg[red]%}$name%{$fg[magenta]%}%T%{$reset_color%}'
+# autoload -U promptinit; promptinit
+
+# # https://github.com/sindresorhus/pure
+# PURE_PROMPT_SYMBOL="$icon"
+
+#ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[red]%}"
+#ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
+#ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[yellow]%} ✗"
+#ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%} ✓"
+#
+#PS1='$icon%{$fg_bold[yellow]%}%2~ %{$reset_color%}$(git_prompt_info) '
+#RPS1='%{$fg[red]%}$name%{$fg[magenta]%}%T%{$reset_color%}'
+
+# prompt pure
 
 # zprof
 goconda () {
