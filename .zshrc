@@ -43,7 +43,23 @@ JAVA_HOME="/usr/local/opt/openjdk"
 HISTFILE=~/.histfile
 HISTSIZE=100000
 SAVEHIST=100000
+setopt SHARE_HISTORY
+setopt INC_APPEND_HISTORY
+setopt EXTENDED_HISTORY
+setopt PROMPT_SUBST
+setopt CORRECT
+setopt COMPLETE_IN_WORD
+setopt APPEND_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
 setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_VERIFY
+setopt HIST_EXPIRE_DUPS_FIRST
+
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+zle -N edit-command-line
 
 export ZSH_CACHE_DIR="$HOME/.cache"
 
@@ -58,8 +74,10 @@ alias antibody_bundle="antibody bundle < $DOT_PATH/zsh_plugins.txt > $DOT_PATH/z
 
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
-#bindkey "$terminfo[kcuu1]" history-substring-search-up
-#bindkey "$terminfo[kcud1]" history-substring-search-down
+
+# make option - left and option - right skip words
+bindkey "^[[1;3C" forward-word
+bindkey "^[[1;3D" backward-word
 
 # eval "$(pandoc --bash-completion)"
 
@@ -220,10 +238,6 @@ alias cpip="myip | pbcopy"
 
 # . .venv/bin/activate
 eval $(thefuck --alias) || echo "Couldn't find thef***"
-
-# make option - left and option - right skip words
-bindkey "^[[1;3C" forward-word
-bindkey "^[[1;3D" backward-word
 
 # Delete whole string part using alt - del
 backward-kill-dir () {
