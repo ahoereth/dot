@@ -39,6 +39,8 @@ function lnifnotexists() {
 }
 
 for link in \
+  '.profile' \
+  '.zprofile' \
   '.zshrc' \
   '.gitconfig' \
   '.gitignore' \
