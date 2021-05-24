@@ -68,6 +68,9 @@ promptinit
 compinit
 prompt pure
 
+#PS1='$icon%{$fg_bold[yellow]%}%2~ %{$reset_color%}$ '
+RPS1='%{$fg[red]%}$name%{$fg[magenta]%}%T%{$reset_color%}'
+
 # By default, zsh considers many characters part of a word (e.g., _ and -).
 # Narrow that down to allow easier skipping through words via M-f and M-b.
 export WORDCHARS='*?[]~&;!$%^<>'
@@ -256,39 +259,6 @@ if [ "$(uname)" = "Linux" ]; then
   fi
 fi
 
-# Show only remote hostnames.
-localhosts=(
-  padua.local
-  pamir.local
-  passat.local
-  passat
-  passat.fritz.box
-  Alexanders-MBP.localdomain
-  AlexandersMBP2.localdomain
-)
-if (($localhosts[(Ie)$(hostname)])); then
-  name=
-  icon=
-else
-  name="$(hostname) "
-  icon="⛵ "
-fi
-
-
-# autoload -U promptinit; promptinit
-
-# # https://github.com/sindresorhus/pure
-# PURE_PROMPT_SYMBOL="$icon"
-
-#ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[red]%}"
-#ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
-#ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[yellow]%} ✗"
-#ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%} ✓"
-#
-#PS1='$icon%{$fg_bold[yellow]%}%2~ %{$reset_color%}$(git_prompt_info) '
-#RPS1='%{$fg[red]%}$name%{$fg[magenta]%}%T%{$reset_color%}'
-
-# prompt pure
 
 # zprof
 goconda () {
