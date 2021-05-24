@@ -71,6 +71,9 @@ prompt pure
 
 #PS1='$icon%{$fg_bold[yellow]%}%2~ %{$reset_color%}$ '
 RPS1='%{$fg[red]%}$name%{$fg[magenta]%}%T%{$reset_color%}'
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+  RPS1="⛵ $RPS1"
+fi
 
 # By default, zsh considers many characters part of a word (e.g., _ and -).
 # Narrow that down to allow easier skipping through words via M-f and M-b.
