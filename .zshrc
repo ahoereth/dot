@@ -230,6 +230,7 @@ esac
 
 
 alias psaux='ps aux | sort -n -r -k 3 | cut -c -$(tput cols)'
+alias la="ls -lavh"
 alias lx="la | awk '{k=0;for(i=0;i<=8;i++)k+=((substr(\$1,i+2,1)~/[rwx]/) \
                    *2^(8-i));if(k)printf(\"%0o \",k);print}'"
 alias dev='cd $HOME/repos'
