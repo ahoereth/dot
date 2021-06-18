@@ -56,6 +56,7 @@ setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
 setopt HIST_VERIFY
 setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_FIND_NO_DUPS
 
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
@@ -79,12 +80,23 @@ bindkey '^[[B' history-substring-search-down
 bindkey "^[[1;3C" forward-word
 bindkey "^[[1;3D" backward-word
 
-# eval "$(pandoc --bash-completion)"
-
 autoload -Uz compinit promptinit
 compinit
 promptinit
 prompt pure
+
+
+typeset -gA FAST_HIGHLIGHT
+FAST_HIGHLIGHT[chroma-make]=0
+FAST_HIGHLIGHT[make_chroma_type]=0
+FAST_HIGHLIGHT[use_brackets]=1
+HISTORY_SUBSTRING_SEARCH_FUZZY=1
+HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
+
+# eval "$(pandoc --bash-completion)"
+alias k=kubectl
+source <(kubectl completion zsh)
+complete -F __start_kubectl k
 
 
 #PS1='$icon%{$fg_bold[yellow]%}%2~ %{$reset_color%}$ '
