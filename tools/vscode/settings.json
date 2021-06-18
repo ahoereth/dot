@@ -61,7 +61,6 @@
   "extensions.ignoreRecommendations": true,
   "editor.renderWhitespace": "all",
   "editor.useTabStops": false,
-  "python.formatting.blackPath": ".venv/bin/black",
   "python.formatting.autopep8Path": "/Users/ahoereth/miniconda3/bin/autopep8",
   "python.formatting.yapfPath": "/Users/ahoereth/miniconda3/bin/yapf",
   "python.formatting.provider": "black",
@@ -105,8 +104,9 @@
   "telemetry.enableCrashReporter": false,
   "javascript.updateImportsOnFileMove.enabled": "never",
   "clang-tidy.buildPath": "build",
-  "C_Cpp.default.systemIncludePath": ["/usr/local/include"],
-  "python.sortImports.path": ".venv/bin/isort",
+  "C_Cpp.default.systemIncludePath": [
+    "/usr/local/include"
+  ],
   "[yaml]": {
     "editor.insertSpaces": true,
     "editor.tabSize": 2,
@@ -133,12 +133,9 @@
 "jupyter.askForKernelRestart": false,
 "jupyter.disableJupyterAutoStart": true,
 "window.zoomLevel": 1,
-"workbench.editorAssociations": [
-  {
-    "viewType": "jupyter.notebook.ipynb",
-    "filenamePattern": "*.ipynb"
-  }
-],
+"workbench.editorAssociations": {
+  "*.ipynb": "jupyter.notebook.ipynb"
+},
 "terraform.languageServer": {
   "external": true,
   "pathToBinary": "",
@@ -154,5 +151,7 @@
 "C_Cpp.clang_format_path": "clang-format",
 "[typescript]": {
   "editor.defaultFormatter": "esbenp.prettier-vscode"
-}
+},
+"python.sortImports.path": ".venv/bin/isort",
+"python.formatting.blackPath": ".venv/bin/black"
 }
