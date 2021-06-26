@@ -158,8 +158,12 @@ fn - space :      yabai -m window --toggle split
 fn - 0: yabai -m space --balance
 
 # Focus windows
-fn - 0x2F : yabai -m window --focus east  # period .
-fn - 0x2B : yabai -m window --focus west  # comma ,
+# fn - 0x2F : yabai -m window --focus east  # period .
+# fn - 0x2B : yabai -m window --focus west  # comma ,
+fn - w : yabai -m window --focus north
+fn - a : yabai -m window --focus west
+fn - s : yabai -m window --focus south
+fn - d : yabai -m window --focus east
 
 # Flip the tree horizontally
 #yabai -m space --mirror x-axis
@@ -168,8 +172,8 @@ fn - 0x2B : yabai -m window --focus west  # comma ,
 #yabai -m space --mirror y-axis
 
 # Rotate the window tree clock-wise (options: 90, 180, 270 degree)
-fn - e : yabai -m window --swap east
-fn - w : yabai -m window --swap west
+# fn - e : yabai -m window --swap east
+# fn - w : yabai -m window --swap west
 fn - q : yabai -m window --swap recent
 
 # Move focussed window to window under mouse

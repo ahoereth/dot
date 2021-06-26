@@ -153,5 +153,6 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode"
 },
 "python.sortImports.path": ".venv/bin/isort",
-"python.formatting.blackPath": ".venv/bin/black"
+"python.formatting.blackPath": ".venv/bin/black",
+"security.workspace.trust.untrustedFiles": "open"
 }
