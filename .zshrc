@@ -80,8 +80,9 @@ bindkey '^[[B' history-substring-search-down
 bindkey "^[[1;3C" forward-word
 bindkey "^[[1;3D" backward-word
 
-autoload -Uz compinit promptinit
+autoload -Uz compinit promptinit bashcompinit
 compinit
+bashcompinit
 promptinit
 prompt pure
 
@@ -94,10 +95,11 @@ HISTORY_SUBSTRING_SEARCH_FUZZY=1
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 
 # eval "$(pandoc --bash-completion)"
-alias k=kubectl
-source <(kubectl completion zsh)
-complete -F __start_kubectl k
-
+if command -v kubectl 1>/dev/null 2>&1; then
+  alias k=kubectl
+  source <(kubectl completion zsh)
+  complete -F __start_kubectl k
+fi
 
 #PS1='$icon%{$fg_bold[yellow]%}%2~ %{$reset_color%}$ '
 RPS1='%{$fg[red]%}$name%{$fg[magenta]%}%T%{$reset_color%}'
