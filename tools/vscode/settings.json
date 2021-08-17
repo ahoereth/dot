@@ -71,7 +71,6 @@
   "python.linting.flake8Path": ".venv/bin/flake8",
   "latex-workshop.docker.image.latex": "chktex",
   "editor.wordWrap": "on",
-  "workbench.colorTheme": "Default Light+",
   "[cpp]": {
     "editor.defaultFormatter": "xaver.clang-format"
   },
@@ -115,7 +114,8 @@
       "comments": false,
       "strings": true
     },
-    "editor.autoIndent": false
+    "editor.autoIndent": false,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "cmake.configureArgs": [
     "-DCIBUILD=1",
@@ -132,9 +132,8 @@
 "jupyter.alwaysTrustNotebooks": true,
 "jupyter.askForKernelRestart": false,
 "jupyter.disableJupyterAutoStart": true,
-"window.zoomLevel": 1,
 "workbench.editorAssociations": {
-  "*.ipynb": "jupyter.notebook.ipynb"
+  "*.ipynb": "jupyter-notebook"
 },
 "terraform.languageServer": {
   "external": true,
@@ -154,5 +153,10 @@
 },
 "python.sortImports.path": ".venv/bin/isort",
 "python.formatting.blackPath": ".venv/bin/black",
-"security.workspace.trust.untrustedFiles": "open"
+"security.workspace.trust.untrustedFiles": "open",
+"workbench.colorTheme": "Default Light+",
+"notebook.cellToolbarLocation": {
+  "default": "right",
+  "jupyter-notebook": "left"
+}
 }

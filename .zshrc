@@ -122,6 +122,8 @@ if [ "$(uname)" = "Darwin" ]; then
     alias cat=ccat
     alias json='python -m json.tool | ccat'
   fi
+
+  export PATH=/usr/local/opt/ccache/libexec:$PATH
 fi
 
 ### git-checkout-before DATETIME BRANCH
@@ -263,8 +265,22 @@ zle -N backward-kill-dir
 bindkey '^[^?' backward-kill-dir
 
 export HOMEBREW_INSTALL_CLEANUP=1
-export LC_ALL=en_US.UTF-8
+
 export LANG=en_US.UTF-8
+export LANGUAGE=en_US
+export LC_CTYPE="en_US.UTF-8"
+export LC_NUMERIC="en_US.UTF-8"
+export LC_TIME="en_US.UTF-8"
+export LC_COLLATE="en_US.UTF-8"
+export LC_MONETARY="en_US.UTF-8"
+export LC_MESSAGES="en_US.UTF-8"
+export LC_PAPER="en_US.UTF-8"
+export LC_NAME="en_US.UTF-8"
+export LC_ADDRESS="en_US.UTF-8"
+export LC_TELEPHONE="en_US.UTF-8"
+export LC_MEASUREMENT="en_US.UTF-8"
+export LC_IDENTIFICATION="en_US.UTF-8"
+export LC_ALL=
 
 # Node version management
 if command -v fnm 1>/dev/null 2>&1; then
