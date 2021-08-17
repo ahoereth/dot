@@ -61,8 +61,8 @@ $DOT/tools/fzf/install
 
 # Make zsh the default shell
 echo "Need sudo to make zsh the default shell."
-sudo chsh -s /bin/zsh || true
-sudo usermod -s /bin/zsh $(whoami) || true
+chsh -s /bin/zsh || true
+usermod -s /bin/zsh $(whoami) || true
 
 
 # Install .ssh/config
