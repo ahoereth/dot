@@ -203,6 +203,13 @@ max7z () {
 }
 
 
+targz () {
+  local dst=$1
+  local inp=("${@:2}")
+  tar cvf - $inp | gzip --best - > $dst
+}
+
+
 # Convert a video to a reasonable mp4.
 #   Argument 1: Filepath
 #   Argument 2: Fraction of 24fps to retain per second (optional)
@@ -304,7 +311,11 @@ if [ "$(uname)" = "Linux" ]; then
   fi
   if [ -d "/usr/local/cuda-10.2" ]; then
     export PATH=/usr/local/cuda-10.2/bin:$PATH
-    export CPATH=$CPATH:/usr/local/cuda-10.2/targets/aarch64-linux/include export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/cuda-10.2/targets/aarch64-linux/lib
+    export CPATH=$CPATH:/usr/local/cuda-10.2/targets/aarch64-linux/include
+    export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/cuda-10.2/targets/aarch64-linux/lib
+    export C_INCLUDE_PATH=$C_INCLUDE_PATH:/usr/local/cuda-10.2/targets/aarch64-linux/include
+    export CUDA_ROOT=/usr/local/cuda
+    export CUDA_INC_DIR=/usr/local/cuda/include
   fi
   if [ -d "/usr/local/cuda-11.0" ]; then
     export LD_LIBRARY_PATH=/usr/local/cuda-11.0/lib64:$LD_LIBRARY_PATH
