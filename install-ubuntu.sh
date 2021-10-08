@@ -17,3 +17,13 @@ pyenv install $PYTHON_VERSION
 pyenv global $PYTHON_VERSION
 
 curl -sfL git.io/antibody | sh -s - -b /usr/local/bin
+
+function lnifnotexists() {
+  [ -L "${HOME}/$1" ] || (mkdir -p "${HOME}/$(dirname $1)" && ln -s "${DOT}/$1" "${HOME}/$1")
+}
+
+for link in \
+  '.gdbinit' \
+; do
+  lnifnotexists $link
+done

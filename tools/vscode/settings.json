@@ -55,7 +55,8 @@
     "**/node_modules/**": true,
     "**/tmp/**": true,
     "**/bower_components/**": true,
-    "**/dist/**": true
+    "**/dist/**": true,
+    "**/build/**": true
   },
   "python.envFile": "${workspaceFolder}/.venv",
   "extensions.ignoreRecommendations": true,
