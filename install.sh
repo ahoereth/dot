@@ -8,8 +8,8 @@ if [[ $EUID -eq 0 ]]; then
   exit 1
 fi
 
-
-case $key in
+while [ "$1" != "" ]; do
+  case $1 in
     # --keyword)
     #   VALUE="$2"
     #   shift
@@ -23,7 +23,7 @@ case $key in
       POSITIONAL+=("$1")
       shift
       ;;
-esac
+  esac
 done
 set -- "${POSITIONAL[@]}" # restore positional parameters
 
