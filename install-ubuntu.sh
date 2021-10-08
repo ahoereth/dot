@@ -12,9 +12,11 @@ sudo apt-get install -y --no-install-recommends \
     zsh ncdu htop thefuck
 
 # Install default python
-eval "$(pyenv init -)"
-pyenv install $PYTHON_VERSION
-pyenv global $PYTHON_VERSION
+if [ "$PYENV" = "1" ]; then
+    eval "$(pyenv init -)"
+    pyenv install $PYTHON_VERSION
+    pyenv global $PYTHON_VERSION
+fi
 
 curl -sfL git.io/antibody | sh -s - -b /usr/local/bin
 

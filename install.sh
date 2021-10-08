@@ -9,6 +9,24 @@ if [[ $EUID -eq 0 ]]; then
 fi
 
 
+case $key in
+    # --keyword)
+    #   VALUE="$2"
+    #   shift
+    #   shift
+    #   ;;
+    --pyenv)
+      PYENV=1
+      shift
+      ;;
+    *)
+      POSITIONAL+=("$1")
+      shift
+      ;;
+esac
+done
+set -- "${POSITIONAL[@]}" # restore positional parameters
+
 DOT=$HOME/repos/dot
 cd $DOT
 
@@ -28,7 +46,7 @@ case $os in
             ./install-macos.sh
             ;;
   Linux )   echo "System: ubuntu"
-            ./install-ubuntu.sh
+            PYENV=$PYENV ./install-ubuntu.sh
             ;;
 esac
 
