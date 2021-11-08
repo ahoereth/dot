@@ -37,7 +37,7 @@ git submodule update --init --recursive --remote
 export PYENV_ROOT="$DOT/tools/pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 
-export PYTHON_VERSION=3.8.9
+export PYTHON_VERSION=3.10.0
 
 # Maybe run OS specific installations.
 os=$(uname)
