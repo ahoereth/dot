@@ -159,5 +159,8 @@
 "notebook.cellToolbarLocation": {
   "default": "right",
   "jupyter-notebook": "left"
+},
+"[proto3]": {
+  "editor.defaultFormatter": "xaver.clang-format"
 }
 }
