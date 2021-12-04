@@ -18,5 +18,5 @@ rupa/z
 
 # should be last
 sindresorhus/pure
-zdharma/fast-syntax-highlighting
+z-shell/fast-syntax-highlighting
 zsh-users/zsh-history-substring-search
