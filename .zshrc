@@ -26,6 +26,7 @@ path=(
   /Users/ahoereth/.gem/ruby/2.6.0/bin
   /usr/local/sbin
   $DOT_PATH/bin
+  $DOT_PATH/tools/pyenv/bin
   ~/.node_modules/bin
   /Library/TeX/texbin
   $path[@]
@@ -304,22 +305,14 @@ fi
 
 # Cuda exports.
 if [ "$(uname)" = "Linux" ]; then
-  if [ -d "/usr/local/cuda-10.1" ]; then
-    export LD_LIBRARY_PATH=/usr/local/cuda-10.1/extras/CUPTI/lib64:$LD_LIBRARY_PATH
-    export PATH=/usr/local/cuda-10.1/bin:$PATH
+  if [ -d "/usr/local/cuda" ]; then
+    export LD_LIBRARY_PATH=/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
+    export LD_LIBRARY_PATH=${LD_LIBRARY_PATH%:} # strip trailing :
+    export LD_LIBRARY_PATH=${LD_LIBRARY_PATH#:} # strip leading :
+    export PATH=/usr/local/cuda/bin:$PATH
     export CUDA_INC_DIR=/usr/local/cuda/include
-  fi
-  if [ -d "/usr/local/cuda-10.2" ]; then
-    export PATH=/usr/local/cuda-10.2/bin:$PATH
-    export CPATH=$CPATH:/usr/local/cuda-10.2/targets/aarch64-linux/include
-    export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/cuda-10.2/targets/aarch64-linux/lib
-    export C_INCLUDE_PATH=$C_INCLUDE_PATH:/usr/local/cuda-10.2/targets/aarch64-linux/include
-    export CUDA_ROOT=/usr/local/cuda
-    export CUDA_INC_DIR=/usr/local/cuda/include
-  fi
-  if [ -d "/usr/local/cuda-11.0" ]; then
-    export LD_LIBRARY_PATH=/usr/local/cuda-11.0/lib64:$LD_LIBRARY_PATH
-    export PATH=/usr/local/cuda-11.0/bin:$PATH
+    export CPATH=${CPATH%:} # strip trailing :
+    export CPATH=${CPATH#:} # strip leading :
   fi
 fi
 
