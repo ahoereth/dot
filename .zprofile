@@ -1,3 +1,5 @@
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 export DOT_PATH=$HOME/repos/dot
 
 # pyenv

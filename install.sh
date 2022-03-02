@@ -37,7 +37,7 @@ git submodule update --init --recursive --remote
 export PYENV_ROOT="$DOT/tools/pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 
-export PYTHON_VERSION=3.10.0
+export PYTHON_VERSION=3.10.2
 
 # Maybe run OS specific installations.
 os=$(uname)
@@ -68,11 +68,6 @@ done
 
 rm -f "${HOME}/.gitignore_global"
 ln -s "${DOT}/.gitignore" "${HOME}/.gitignore_global"
-
-rm -f "${DOT}/bin/diff-so-fancy"
-chmod +x ${DOT}/tools/diff-so-fancy/diff-so-fancy
-ln -s "${DOT}/tools/diff-so-fancy/diff-so-fancy" "${DOT}/bin/diff-so-fancy"
-
 
 # fzf
 $DOT/tools/fzf/install

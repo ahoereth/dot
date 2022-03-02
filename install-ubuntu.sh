@@ -29,3 +29,7 @@ for link in \
 ; do
   lnifnotexists $link
 done
+
+rm -f "${DOT}/bin/diff-so-fancy"
+chmod +x ${DOT}/tools/diff-so-fancy/diff-so-fancy
+ln -s "${DOT}/tools/diff-so-fancy/diff-so-fancy" "${DOT}/bin/diff-so-fancy"
