@@ -101,7 +101,14 @@ zstyle ':autocomplete:history-search:*' list-lines 8
 zstyle ':autocomplete:*' insert-unambiguous yes
 zstyle ':autocomplete:*' fzf-completion yes
 #zstyle ':autocomplete:*' widget-style menu-select
-zstyle ':autocomplete:*' widget-style menu-complete
+# zstyle ':autocomplete:*' widget-style menu-complete
+
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+  autoload -Uz compinit
+  compinit
+fi
 
 .autocomplete.recent_paths.trim() {:}
 
