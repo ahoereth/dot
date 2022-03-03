@@ -6,6 +6,8 @@
 
 export DOT_PATH=$HOME/repos/dot
 
+source .zprofile
+
 source $DOT_PATH/tools/sandboxd
 
 # your default editor
@@ -27,10 +29,10 @@ path=(
   /usr/local/sbin
   $DOT_PATH/bin
   $DOT_PATH/tools/pyenv/bin
-  ~/.node_modules/bin
+  $HOME/.bin
+  $HOME/.node_modules/bin
   /Library/TeX/texbin
   $path[@]
-  $HOME/repos/flutter/bin
   /usr/local/bin
   /usr/local/opt/vtk@8.2/bin
   /usr/local/opt/qt@5/bin
@@ -66,34 +68,51 @@ zle -N edit-command-line
 export ZSH_CACHE_DIR="$HOME/.cache"
 
 if [ -f "$DOT_PATH/zsh_plugins.sh" ]; then
-  #antibody bundle < $DOT_PATH/zsh_plugins.txt > $DOT_PATH/zsh_plugins.sh
   source $DOT_PATH/zsh_plugins.sh
 else
-  source <(antibody init)
-  antibody bundle < $DOT_PATH/zsh_plugins.txt
+  # zsh_plugins.sh does not yet exist. Create and load it.
+  antibody bundle < $DOT_PATH/zsh_plugins.txt > $DOT_PATH/zsh_plugins.sh
+  source $DOT_PATH/zsh_plugins.sh
+  #source <(antibody init)
+  #antibody bundle < $DOT_PATH/zsh_plugins.txt
 fi
 alias antibody_bundle="antibody bundle < $DOT_PATH/zsh_plugins.txt > $DOT_PATH/zsh_plugins.sh"
+alias antibody_rebundle="rm $DOT_PATH/zsh_plugins.sh"
 
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
+
+# bindkey '^[[A' history-substring-search-up
+# bindkey '^[[B' history-substring-search-down
 
 # make option - left and option - right skip words
 bindkey "^[[1;3C" forward-word
 bindkey "^[[1;3D" backward-word
 
 autoload -Uz compinit promptinit bashcompinit
+#zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+#zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 compinit
 bashcompinit
 promptinit
 prompt pure
 
+zstyle ':autocomplete:*' min-input 1
+zstyle ':autocomplete:*' list-lines 8
+zstyle ':autocomplete:history-search:*' list-lines 8
+zstyle ':autocomplete:*' insert-unambiguous yes
+zstyle ':autocomplete:*' fzf-completion yes
+#zstyle ':autocomplete:*' widget-style menu-select
+zstyle ':autocomplete:*' widget-style menu-complete
+
+.autocomplete.recent_paths.trim() {:}
+
+echo "bat and ripgrep rg"
 
 typeset -gA FAST_HIGHLIGHT
 FAST_HIGHLIGHT[chroma-make]=0
 FAST_HIGHLIGHT[make_chroma_type]=0
 FAST_HIGHLIGHT[use_brackets]=1
-HISTORY_SUBSTRING_SEARCH_FUZZY=1
-HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
+#HISTORY_SUBSTRING_SEARCH_FUZZY=1
+#HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 
 # eval "$(pandoc --bash-completion)"
 if command -v kubectl 1>/dev/null 2>&1; then
@@ -237,7 +256,7 @@ case "$OSTYPE" in
   darwin*)
     # source ~/.macrc
     set -o ignoreeof # disable exit with ctrl-d
-    ssh-add -K
+    ssh-add --apple-use-keychain || ssh-add -K
     alias folders='du -hd1 | sort -hr'
     if ! type pbcopy > /dev/null; then
       alias pbcopy='xclip -selection clipboard'
@@ -262,7 +281,7 @@ alias myip="curl -s https://api.ipify.org/"
 alias cpip="myip | pbcopy"
 
 # . .venv/bin/activate
-eval $(thefuck --alias) || echo "Couldn't find thef***"
+#eval $(thefuck --alias) || echo "Couldn't find thef***"
 
 # Delete whole string part using alt - del
 backward-kill-dir () {

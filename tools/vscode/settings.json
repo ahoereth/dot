@@ -84,7 +84,7 @@
     "--follow-imports=normal",
     "--show-column-numbers"
   ],
-"[azure-pipelines]": {},
+  "[azure-pipelines]": {},
   "vsicons.dontShowNewVersionMessage": true,
   "python.linting.pylintUseMinimalCheckers": false,
   "clang-format.language.javascript.enable": false,
@@ -104,9 +104,7 @@
   "telemetry.enableCrashReporter": false,
   "javascript.updateImportsOnFileMove.enabled": "never",
   "clang-tidy.buildPath": "build",
-  "C_Cpp.default.systemIncludePath": [
-    "/usr/local/include"
-  ],
+  "C_Cpp.default.systemIncludePath": ["/usr/local/include"],
   "[yaml]": {
     "editor.insertSpaces": true,
     "editor.tabSize": 2,
@@ -118,51 +116,47 @@
     "editor.autoIndent": false,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "cmake.configureArgs": [
-    "-DCIBUILD=1",
-    "-DUSEOPENMP=OFF"
-  ],
-  "cmake.buildArgs": [
-    "-j6"
-],
-"jupyter.useNotebookEditor": false,
-"xml.java.home": "/usr/local/opt/openjdk",
-"xml.symbols.maxItemsComputed": 50000,
-"xml.format.emptyElements": "expand",
-"xml.format.splitAttributes": true,
-"jupyter.alwaysTrustNotebooks": true,
-"jupyter.askForKernelRestart": false,
-"jupyter.disableJupyterAutoStart": true,
-"workbench.editorAssociations": {
-  "*.ipynb": "jupyter-notebook"
-},
-"terraform.languageServer": {
-  "external": true,
-  "pathToBinary": "",
-  "args": [
-    "serve"
-  ],
-  "maxNumberOfProblems": 100,
-  "trace.server": "off"
-},
-"[terraform]": {
-  "editor.defaultFormatter": "hashicorp.terraform"
-},
-"C_Cpp.clang_format_path": "clang-format",
-"[typescript]": {
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
-},
-"python.sortImports.path": ".venv/bin/isort",
-"python.formatting.blackPath": ".venv/bin/black",
-"security.workspace.trust.untrustedFiles": "open",
-"workbench.colorTheme": "Default Light+",
-"notebook.cellToolbarLocation": {
-  "default": "right",
-  "jupyter-notebook": "left"
-},
-"[proto3]": {
-  "editor.defaultFormatter": "xaver.clang-format"
-},
-"cmake.configureOnOpen": false,
-"redhat.telemetry.enabled": false
+  "cmake.configureArgs": ["-DCIBUILD=1", "-DUSEOPENMP=OFF"],
+  "cmake.buildArgs": ["-j6"],
+  "jupyter.useNotebookEditor": false,
+  "xml.java.home": "/usr/local/opt/openjdk",
+  "xml.symbols.maxItemsComputed": 50000,
+  "xml.format.emptyElements": "expand",
+  "xml.format.splitAttributes": true,
+  "jupyter.alwaysTrustNotebooks": true,
+  "jupyter.askForKernelRestart": false,
+  "jupyter.disableJupyterAutoStart": true,
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook"
+  },
+  "terraform.languageServer": {
+    "external": true,
+    "pathToBinary": "",
+    "args": ["serve"],
+    "maxNumberOfProblems": 100,
+    "trace.server": "off"
+  },
+  "[terraform]": {
+    "editor.defaultFormatter": "hashicorp.terraform"
+  },
+  "C_Cpp.clang_format_path": "clang-format",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "python.sortImports.path": ".venv/bin/isort",
+  "python.formatting.blackPath": ".venv/bin/black",
+  "security.workspace.trust.untrustedFiles": "open",
+  "workbench.colorTheme": "Default Light+",
+  "notebook.cellToolbarLocation": {
+    "default": "right",
+    "jupyter-notebook": "left"
+  },
+  "[proto3]": {
+    "editor.defaultFormatter": "xaver.clang-format"
+  },
+  "cmake.configureOnOpen": false,
+  "redhat.telemetry.enabled": false,
+  "ycmd.path": "/Users/ahoereth/repos/ycmd",
+  "ycmd.python": "python3",
+  "ycmd.confirm_extra_conf": false
 }

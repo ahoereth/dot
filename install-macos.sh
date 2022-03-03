@@ -23,7 +23,7 @@ function lnifnotexists() {
 
 # Setup git-lfs -- maybe also do this on ubuntu?
 echo "Need sudo to install git lfs on system level."
-sudo git lfs install --system
+sudo git-lfs install --system
 
 # brew software
 checked 'Brew not installed. Installing...' brew --version

@@ -15,6 +15,8 @@ brew 'diff-so-fancy'
 brew 'jq'
 brew 'tcl-tk'
 brew 'antibody'
+brew 'bat'
+brew 'ripgrep'
 
 tap 'koekeishiya/formulae'
 brew 'yabai'
