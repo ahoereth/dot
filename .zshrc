@@ -71,10 +71,11 @@ if [ -f "$DOT_PATH/zsh_plugins.sh" ]; then
   source $DOT_PATH/zsh_plugins.sh
 else
   # zsh_plugins.sh does not yet exist. Create and load it.
+  echo "Rebundling antigen"
   antibody bundle < $DOT_PATH/zsh_plugins.txt > $DOT_PATH/zsh_plugins.sh
   source $DOT_PATH/zsh_plugins.sh
-  #source <(antibody init)
-  #antibody bundle < $DOT_PATH/zsh_plugins.txt
+  # source <(antibody init)
+  # antibody bundle < $DOT_PATH/zsh_plugins.txt
 fi
 alias antibody_bundle="antibody bundle < $DOT_PATH/zsh_plugins.txt > $DOT_PATH/zsh_plugins.sh"
 alias antibody_rebundle="rm $DOT_PATH/zsh_plugins.sh"
