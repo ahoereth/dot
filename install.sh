@@ -43,10 +43,15 @@ export PYTHON_VERSION=3.10.2
 os=$(uname)
 case $os in
   Darwin )  echo "System: macOS"
+            export PYTHON_VERSION=$PYTHON_VERSION
+            export DOT=$DOT
             ./install-macos.sh
             ;;
   Linux )   echo "System: ubuntu"
-            PYENV=$PYENV ./install-ubuntu.sh
+            export PYTHON_VERSION=$PYTHON_VERSION
+            export DOT=$DOT
+            export PYENV=$PYENV
+            ./install-ubuntu.sh
             ;;
 esac
 
