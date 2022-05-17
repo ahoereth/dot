@@ -59,13 +59,13 @@ zle -N edit-command-line
 export ZSH_CACHE_DIR="$HOME/.cache"
 
 source $DOT_PATH/tools/antidote/antidote.zsh
-if [ -f "$DOT_PATH/zsh_plugins.sh" ] && [ -s "$DOT_PATH/zsh_plugins.zsh" ]; then
-  source $DOT_PATH/zsh_plugins.sh
+if [ -f "$DOT_PATH/zsh_plugins.zsh" ] && [ -s "$DOT_PATH/zsh_plugins.zsh" ]; then
+  source $DOT_PATH/zsh_plugins.zsh
 else
-  # zsh_plugins.sh does not yet exist. Create and load it.
+  # zsh_plugins.zsh does not yet exist. Create and load it.
   echo "Rebundling antidote"
   antidote bundle < $DOT_PATH/zsh_plugins.txt > $DOT_PATH/zsh_plugins.zsh
-  source $DOT_PATH/zsh_plugins.sh
+  source $DOT_PATH/zsh_plugins.zsh
   # source <(antidote init)
   # antidote bundle < $DOT_PATH/zsh_plugins.txt
 fi
