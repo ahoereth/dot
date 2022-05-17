@@ -11,7 +11,7 @@ ohmyzsh/ohmyzsh path:plugins/gitfast
 ohmyzsh/ohmyzsh path:plugins/thefuck
 
 mafredri/zsh-async
-#marlonrichert/zsh-autocomplete
+marlonrichert/zsh-autocomplete
 zsh-users/zsh-autosuggestions
 #zsh-users/zsh-completions
 
