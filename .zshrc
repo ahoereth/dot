@@ -58,18 +58,19 @@ zle -N edit-command-line
 
 export ZSH_CACHE_DIR="$HOME/.cache"
 
-if [ -f "$DOT_PATH/zsh_plugins.sh" ] && [ -s "$DOT_PATH/zsh_plugins.sh" ]; then
+source $DOT_PATH/tools/antidote/antidote.zsh
+if [ -f "$DOT_PATH/zsh_plugins.sh" ] && [ -s "$DOT_PATH/zsh_plugins.zsh" ]; then
   source $DOT_PATH/zsh_plugins.sh
 else
   # zsh_plugins.sh does not yet exist. Create and load it.
-  echo "Rebundling antigen"
-  antibody bundle < $DOT_PATH/zsh_plugins.txt > $DOT_PATH/zsh_plugins.sh
+  echo "Rebundling antidote"
+  antidote bundle < $DOT_PATH/zsh_plugins.txt > $DOT_PATH/zsh_plugins.zsh
   source $DOT_PATH/zsh_plugins.sh
-  # source <(antibody init)
-  # antibody bundle < $DOT_PATH/zsh_plugins.txt
+  # source <(antidote init)
+  # antidote bundle < $DOT_PATH/zsh_plugins.txt
 fi
-alias antibody_bundle="antibody bundle < $DOT_PATH/zsh_plugins.txt > $DOT_PATH/zsh_plugins.sh"
-alias antibody_rebundle="rm $DOT_PATH/zsh_plugins.sh"
+alias antidote_bundle="antidote bundle < $DOT_PATH/zsh_plugins.txt > $DOT_PATH/zsh_plugins.zsh"
+alias antidote_rebundle="rm $DOT_PATH/zsh_plugins.zsh"
 
 
 # bindkey '^[[A' history-substring-search-up

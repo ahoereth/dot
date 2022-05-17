@@ -13,3 +13,6 @@
 [submodule "tools/fzf"]
 	path = tools/fzf
 	url = https://github.com/junegunn/fzf.git
+[submodule "tools/antidote"]
+	path = tools/antidote
+	url = https://github.com/mattmc3/antidote.git
