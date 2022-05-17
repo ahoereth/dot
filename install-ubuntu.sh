@@ -18,7 +18,7 @@ if [ "$PYENV" = "1" ]; then
     pyenv global $PYTHON_VERSION
 fi
 
-curl -sfL git.io/antibody | sh -s - -b /usr/local/bin
+curl -sfL git.io/antibody | sh -s - -b $DOT/bin
 
 function lnifnotexists() {
   [ -L "${HOME}/$1" ] || (mkdir -p "${HOME}/$(dirname $1)" && ln -s "${DOT}/$1" "${HOME}/$1")
