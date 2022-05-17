@@ -23,21 +23,12 @@ export FZF_BASE=$DOT_PATH/tools/fzf
 typeset -U path
 export GOPATH=$HOME/go
 path=(
-  /usr/local/opt/ruby@2.6/bin
-  /usr/local/lib/ruby/gems/2.6.0/bin
-  /Users/ahoereth/.gem/ruby/2.6.0/bin
-  /usr/local/sbin
   $DOT_PATH/bin
-  $DOT_PATH/tools/pyenv/bin
   $HOME/.bin
   $HOME/.node_modules/bin
   /Library/TeX/texbin
   $path[@]
   /usr/local/bin
-  /usr/local/opt/vtk@8.2/bin
-  /usr/local/opt/qt@5/bin
-  /usr/local/opt/openjdk/bin
-  /usr/local/opt/tcl-tk/bin
 )
 
 JAVA_HOME="/usr/local/opt/openjdk"
@@ -95,6 +86,7 @@ compinit
 bashcompinit
 promptinit
 prompt pure
+zsh $DOT_PATH/_rclone
 
 zstyle ':autocomplete:*' min-input 1
 zstyle ':autocomplete:*' list-lines 8
@@ -211,6 +203,7 @@ extract () {
      *.bz2)       bunzip2 $1     ;;
      *.rar)       unrar x $1     ;;
      *.gz)        gunzip $1      ;;
+     *.gzip)      gunzip --suffix ".gzip" $1 ;;
      *.tar)       tar xvf $1     ;;
      *.tbz2)      tar xvjf $1    ;;
      *.tgz)       tar xvzf $1    ;;
@@ -249,6 +242,8 @@ reason () {
     fi
     set -x
     ffmpeg -i "$1" -vcodec libx264 -r 24 -crf 28 $filter "${1%.*}-reasonable.mp4"
+    # ffmpeg -i "$1" -vcodec vp9 -filter "scale=1280:-1,fps=30" "${1%.*}-reasonable.webm"
+    # ffmpeg -i "$1" -vcodec libx264 -r 24 -crf 28 -filter:v "crop=out_w:out_h:x:y" "${1%.*}-reasonable.mp4"
   else
     echo "'$1' is not a valid file!"
   fi
@@ -326,9 +321,9 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # pyenv
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
+# if command -v pyenv 1>/dev/null 2>&1; then
+#   eval "$(pyenv init -)"
+# fi
 
 # Cuda exports.
 if [ "$(uname)" = "Linux" ]; then

@@ -8,8 +8,6 @@
   "python.linting.mypyPath": ".venv/bin/mypy",
   "python.linting.pycodestyleEnabled": false,
   "python.linting.pylintEnabled": false,
-  "terminal.integrated.shell.linux": "/bin/zsh",
-  "terminal.integrated.shell.osx": "/bin/zsh",
   "latex-workshop.latex.autoBuild.cleanAndRetry.enabled": false,
   "latex-workshop.latex.autoBuild.onSave.enabled": false,
   "latex-workshop.view.pdf.external.command": {
@@ -60,7 +58,6 @@
   },
   "python.envFile": "${workspaceFolder}/.venv",
   "extensions.ignoreRecommendations": true,
-  "editor.renderWhitespace": "all",
   "editor.useTabStops": false,
   "python.formatting.autopep8Path": "/Users/ahoereth/miniconda3/bin/autopep8",
   "python.formatting.yapfPath": "/Users/ahoereth/miniconda3/bin/yapf",
@@ -100,10 +97,10 @@
   "typescript.validate.enable": false,
   "python.linting.flake8Enabled": true,
   "python.linting.mypyEnabled": true,
-  "telemetry.enableTelemetry": false,
-  "telemetry.enableCrashReporter": false,
   "javascript.updateImportsOnFileMove.enabled": "never",
   "clang-tidy.buildPath": "build",
+  "clang-tidy.checks": ["readability-*", "bugprone-*", "modernize-*"],
+  "clang-tidy.executable": "/opt/homebrew/bin/clang-tidy",
   "C_Cpp.default.systemIncludePath": ["/usr/local/include"],
   "[yaml]": {
     "editor.insertSpaces": true,
@@ -113,7 +110,7 @@
       "comments": false,
       "strings": true
     },
-    "editor.autoIndent": false,
+    "editor.autoIndent": "none",
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "cmake.configureArgs": ["-DCIBUILD=1", "-DUSEOPENMP=OFF"],
@@ -158,5 +155,9 @@
   "redhat.telemetry.enabled": false,
   "ycmd.path": "/Users/ahoereth/repos/ycmd",
   "ycmd.python": "python3",
-  "ycmd.confirm_extra_conf": false
+  "ycmd.confirm_extra_conf": false,
+  "telemetry.telemetryLevel": "off",
+  "git.autofetch": true,
+  "diffEditor.renderSideBySide": false,
+  "python.venvPath": "../miniforge3"
 }

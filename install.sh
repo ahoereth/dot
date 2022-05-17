@@ -82,9 +82,11 @@ usermod -s /bin/zsh $(whoami) || true
 read -p "Install the shared .ssh/config? (Y/N) " confirm &&
 if [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]]; then
   mkdir -p $HOME/.ssh
-  chmod 600 ~/.ssh
+  sudo chmod 700 ~/.ssh
   mv "${HOME}/.ssh/config" "${HOME}/.ssh/config.bak" || true
   ln -s "${DOT}/dot-extras/.ssh/config" "${HOME}/.ssh/config"
+  chmod 600 ~/.ssh/*
+  chmod 644 ~/.ssh/*.pub || true
 fi
 
 

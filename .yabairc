@@ -41,3 +41,7 @@ EOF
 yabai -m signal --add event=space_changed action="${action}"
 
 echo "yabai configuration loaded.."
+
+yabai -m rule --add app="^System Preferences$" manage=off
+yabai -m rule --add app="^Authy Desktop$" manage=off
+# yabai -m rule --add app="^System Preferences$" title="Network" manage=off

@@ -72,15 +72,3 @@ brew services start koekeishiya/formulae/skhd
 brew services start koekeishiya/formulae/yabai
 #skhd
 #yabai
-
-
-# Install default python
-eval "$(pyenv init -)"
-# https://github.com/pyenv/pyenv/issues/1545
-LDFLAGS="-I$(brew --prefix zlib)/include -I$(brew --prefix bzip2)/include -L/usr/local/opt/tcl-tk/lib -L$(brew --prefix openssl)/lib -L$(brew --prefix readline)/lib -L$(brew --prefix ncurses)/lib -L$(xcrun --show-sdk-path)/usr/lib" \
-  CFLAGS="-L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib  -I$(brew --prefix openssl)/include -I$(brew --prefix readline)/include -I$(brew --prefix ncurses)/include -I$(xcrun --show-sdk-path)/usr/include" \
-  CPPFLAGS="-I/usr/local/opt/tcl-tk/include" \
-  PKG_CONFIG_PATH="/usr/local/opt/tcl-tk/lib/pkgconfig" \
-  PYTHON_CONFIGURE_OPTS="--with-tcltk-includes='-I/usr/local/opt/tcl-tk/include' --with-tcltk-libs='-L/usr/local/opt/tcl-tk/lib -ltcl8.6 -ltk8.6' --enable-shared" \
-  pyenv install $PYTHON_VERSION
-pyenv global $PYTHON_VERSION
