@@ -92,13 +92,13 @@ then
   zsh $DOT_PATH/_rclone
 fi
 
-zstyle ':autocomplete:*' min-input 1
-zstyle ':autocomplete:*' list-lines 8
-zstyle ':autocomplete:history-search:*' list-lines 8
-zstyle ':autocomplete:*' insert-unambiguous yes
-zstyle ':autocomplete:*' fzf-completion yes
-#zstyle ':autocomplete:*' widget-style menu-select
-# zstyle ':autocomplete:*' widget-style menu-complete
+# zstyle ':autocomplete:*' min-input 1
+# zstyle ':autocomplete:*' list-lines 8
+# zstyle ':autocomplete:history-search:*' list-lines 8
+# zstyle ':autocomplete:*' insert-unambiguous yes
+# zstyle ':autocomplete:*' fzf-completion yes
+# #zstyle ':autocomplete:*' widget-style menu-select
+# # zstyle ':autocomplete:*' widget-style menu-complete
 
 if type brew &>/dev/null
 then
@@ -107,7 +107,7 @@ then
   compinit
 fi
 
-.autocomplete.recent_paths.trim() {:}
+#.autocomplete.recent_paths.trim() {:}
 
 echo "bat and ripgrep rg"
 
