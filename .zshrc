@@ -58,7 +58,7 @@ zle -N edit-command-line
 
 export ZSH_CACHE_DIR="$HOME/.cache"
 
-if [ -f "$DOT_PATH/zsh_plugins.sh" ] && [ -s diff.txt ]; then
+if [ -f "$DOT_PATH/zsh_plugins.sh" ] && [ -s "$DOT_PATH/zsh_plugins.sh" ]; then
   source $DOT_PATH/zsh_plugins.sh
 else
   # zsh_plugins.sh does not yet exist. Create and load it.
