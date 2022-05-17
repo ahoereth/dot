@@ -5,6 +5,5 @@ __pycache__/
 .venv/
 .vscode/
 /bin/diff-so-fancy
-bin/antibody
 node_modules/
 zsh_plugins.sh
