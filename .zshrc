@@ -86,7 +86,10 @@ compinit
 bashcompinit
 promptinit
 prompt pure
-zsh $DOT_PATH/_rclone
+if type rclone &>/dev/null
+then
+  zsh $DOT_PATH/_rclone
+fi
 
 zstyle ':autocomplete:*' min-input 1
 zstyle ':autocomplete:*' list-lines 8
