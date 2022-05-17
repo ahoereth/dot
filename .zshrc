@@ -291,12 +291,12 @@ alias cpip="myip | pbcopy"
 #eval $(thefuck --alias) || echo "Couldn't find thef***"
 
 # Delete whole string part using alt - del
-backward-kill-dir () {
-  local WORDCHARS=${WORDCHARS/\/}
-  zle backward-kill-word
-}
-zle -N backward-kill-dir
-bindkey '^[^?' backward-kill-dir
+#backward-kill-dir () {
+#  local WORDCHARS=${WORDCHARS/\/}
+#  zle backward-kill-word
+#}
+#zle -N backward-kill-dir
+#bindkey '^[^?' backward-kill-dir
 
 export HOMEBREW_INSTALL_CLEANUP=1
 
