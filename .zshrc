@@ -29,6 +29,7 @@ path=(
   /Library/TeX/texbin
   $path[@]
   /usr/local/bin
+  /opt/homebrew/bin
 )
 
 JAVA_HOME="/usr/local/opt/openjdk"
@@ -92,13 +93,13 @@ then
   zsh $DOT_PATH/_rclone
 fi
 
-zstyle ':autocomplete:*' min-input 1
-zstyle ':autocomplete:*' list-lines 8
-zstyle ':autocomplete:history-search:*' list-lines 8
-zstyle ':autocomplete:*' insert-unambiguous yes
-zstyle ':autocomplete:*' fzf-completion yes
-#zstyle ':autocomplete:*' widget-style menu-select
-# zstyle ':autocomplete:*' widget-style menu-complete
+# zstyle ':autocomplete:*' min-input 1
+# zstyle ':autocomplete:*' list-lines 8
+# zstyle ':autocomplete:history-search:*' list-lines 8
+# zstyle ':autocomplete:*' insert-unambiguous yes
+# zstyle ':autocomplete:*' fzf-completion yes
+# #zstyle ':autocomplete:*' widget-style menu-select
+# # zstyle ':autocomplete:*' widget-style menu-complete
 
 if type brew &>/dev/null
 then
@@ -107,9 +108,9 @@ then
   compinit
 fi
 
-.autocomplete.recent_paths.trim() {:}
+#.autocomplete.recent_paths.trim() {:}
 
-echo "bat and ripgrep rg"
+echo "bat and ripgrep rg, tig and entr"
 
 typeset -gA FAST_HIGHLIGHT
 FAST_HIGHLIGHT[chroma-make]=0
@@ -198,6 +199,9 @@ function venv() {
   fi
 }
 
+function psauxkill() {
+  ps aux | grep sensornode | tr -s " " | cut -d " " -f2 | xargs sudo kill -9
+}
 
 extract () {
  if [ -f "$1" ] ; then
@@ -291,12 +295,12 @@ alias cpip="myip | pbcopy"
 #eval $(thefuck --alias) || echo "Couldn't find thef***"
 
 # Delete whole string part using alt - del
-#backward-kill-dir () {
-#  local WORDCHARS=${WORDCHARS/\/}
-#  zle backward-kill-word
-#}
-#zle -N backward-kill-dir
-#bindkey '^[^?' backward-kill-dir
+backward-kill-dir () {
+  local WORDCHARS=${WORDCHARS/\/}
+  zle backward-kill-word
+}
+zle -N backward-kill-dir
+bindkey '^[^?' backward-kill-dir
 
 export HOMEBREW_INSTALL_CLEANUP=1
 

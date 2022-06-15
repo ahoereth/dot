@@ -141,9 +141,8 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "python.sortImports.path": ".venv/bin/isort",
-  "python.formatting.blackPath": ".venv/bin/black",
   "security.workspace.trust.untrustedFiles": "open",
-  "workbench.colorTheme": "Default Light+",
+  "workbench.colorTheme": "onehalf-dark",
   "notebook.cellToolbarLocation": {
     "default": "right",
     "jupyter-notebook": "left"
@@ -159,5 +158,7 @@
   "telemetry.telemetryLevel": "off",
   "git.autofetch": true,
   "diffEditor.renderSideBySide": false,
-  "python.venvPath": "../miniforge3"
+  "python.venvPath": "../miniforge3",
+  "clang-format.executable": "/opt/homebrew/bin/clang-format",
+  "github.gitProtocol": "ssh"
 }
