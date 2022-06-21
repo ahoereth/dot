@@ -6,4 +6,4 @@ __pycache__/
 .vscode/
 /bin/diff-so-fancy
 node_modules/
-zsh_plugins.sh
+zsh_plugins.zsh

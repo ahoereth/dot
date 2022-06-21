@@ -16,3 +16,6 @@
 [submodule "tools/antidote"]
 	path = tools/antidote
 	url = https://github.com/mattmc3/antidote.git
+[submodule ".vim/bundle/Vundle.vim"]
+	path = .vim/bundle/Vundle.vim
+	url = https://github.com/VundleVim/Vundle.vim.git

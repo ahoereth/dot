@@ -1,15 +1,16 @@
 " Some settings are OS dependant
 let s:uname = system("echo -n \"$(uname)\"")
-
+let dot = '~/repos/dot/'
 " VUNDLE
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/repos/dot/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rhubarb'
 Plugin 'airblade/vim-gitgutter'
 " Plugin 'mhinz/vim-signify' " alternative to gitgutter
 Plugin 'tpope/vim-surround' " cs'<p>
@@ -23,6 +24,13 @@ Plugin 'dense-analysis/ale'
 Plugin 'joshdick/onedark.vim'
 Plugin 'itchyny/lightline.vim'
 Plugin 'sheerun/vim-polyglot' " language support
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
+"automatic vim sessions
+Plugin 'tpope/vim-obsession'
+Plugin 'dhruvasagar/vim-prosession'
+Plugin 'rhysd/vim-clang-format'
+Plugin 'psf/black'
 
 call vundle#end()
 
@@ -196,6 +204,11 @@ nnoremap <C-l> <C-w><C-l>
 nnoremap <C-h> <C-w><C-h>
 " nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 " nmap <silent> <C-j> <Plug>(ale_next_wrap)
+" Next buffer using tab, previous buffer using shift+tab.
+nnoremap <silent>   <tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
+nnoremap <silent> <s-tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
+inoremap <S-Tab> <C-d> " fix shift+tab for unindent
+
 
 " PLUGIN: netrw
 " Thanks @George Ornbo https://shapeshed.com/vim-netrw/
@@ -204,12 +217,14 @@ let g:netrw_banner = 0
 let g:netrw_browse_split = 2
 let g:netrw_winsize = 10
 
+
 " PLUGIN: YCM
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_python_interpreter_path = ''
 let g:ycm_python_sys_path = []
 let g:ycm_extra_conf_vim_data = ['g:ycm_python_interpreter_path', 'g:ycm_python_sys_path']
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+
 
 " PLUGIN: ale
 let g:ale_sign_column_always = 1
@@ -225,8 +240,31 @@ highlight GitGutterChange ctermfg=184
 highlight GitGutterChangeDelete ctermfg=184
 highlight GitGutterDelete ctermfg=124
 
-" PLUGIN: airline
-" let g:airline#extensions#tabline#enabled = 1
+
+" PLUGIN: fzf
+nnoremap <C-p> :Files<Cr>
+nnoremap <Alt-p> :Buffers<Cr>
+nnoremap π :Buffers<Cr>
+
+"<C-t> to open in new tab
+"<C-v> to open in vertical split
+"<C-x> to open in horizontal split
+" Enable calls like << :RG -t yaml PATTERN >>
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case '
+  let initial_command = command_fmt.(a:query)
+  let reload_command = printf(command_fmt.('%s'), '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:eval '.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+
+
+" PLUGIN: clang-format
+"autocmd FileType *.c,*.cpp,*.h,*.hpp ClangFormatAutoEnable
+autocmd FileType c ClangFormatAutoEnable
+autocmd FileType cpp ClangFormatAutoEnable
+
 
 " PLUGIN lightline
 set laststatus=2
@@ -269,7 +307,7 @@ set sessionoptions-=tabpages
 " Don't remember help pages in sessions
 set sessionoptions-=help
 " Do not save hidden buffers, as they are hidden
-set sessionoptions-=buffers
+"set sessionoptions-=buffers
 
 " Show @@@ in the last line if it is truncated.
 set display=truncate
@@ -378,7 +416,7 @@ function! Preserve(command)
 endfunction
 nmap _$ :call Preserve("%s/\\s\\+$//e")<CR>
 nmap _= :call Preserve("normal gg=G")<CR>
-autocmd BufWritePre * :call Preserve("%s/\\s\\+$//e")
+autocmd BufWritePre * :call Preserve("%s/\\s\\+$//e") " remove trailing spaces
 "autocmd BufWritePre *.py,*.cpp,*.hpp,*.h,*.c,*.proto :call Preserve("normal gg=G")<CR>
 
 " Return to last edit position when opening files (You want this!)
@@ -386,4 +424,3 @@ autocmd BufReadPost *
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
      \   exe "normal! g`\"" |
      \ endif
-
