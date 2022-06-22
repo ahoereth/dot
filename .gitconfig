@@ -43,6 +43,8 @@
 	email = a.hoereth@gmail.com
 	name = Alexander Höreth
 	signingkey = 761E70A00788B2B1
+[merge]
+	conflictStyle = diff3
 [commit]
 	gpgsign = False
 [color]

@@ -31,6 +31,8 @@ Plugin 'tpope/vim-obsession'
 Plugin 'dhruvasagar/vim-prosession'
 Plugin 'rhysd/vim-clang-format'
 Plugin 'psf/black'
+Plugin 'prettier/vim-prettier'
+Plugin 'samoshkin/vim-mergetool'
 
 call vundle#end()
 
@@ -75,7 +77,7 @@ set scrolloff=5
 " autoreload files when focus returns
 set autoread
 au FocusGained * :checktime
-" Expand spaces to tabs
+" Expand tabs to spaces
 set expandtab
 set smarttab
 set tabstop=2
@@ -273,20 +275,37 @@ let g:lightline = {
         "\ 'colorscheme': 'Tomorrow',
         "\ 'colorscheme': 'ayu_light',
         \ 'colorscheme': '16color',
+        \ 'active': {
+        \   'left': [ [ 'mode', 'paste' ],
+        \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
+        \   'right': [ [ 'lineinfo' ],
+        \              [ 'percent' ],
+        \              [ 'obsession', 'fileformat', 'fileencoding', 'filetype' ] ]
+        \ },
         \ 'component_function': {
         \     'fileformat': 'LightlineFileformat',
         \     'filetype': 'LightlineFiletype',
+        \     'gitbranch': 'FugitiveHead',
+        \     'obsession': 'ObsessionStatus',
         \   },
         \ }
-
 function! LightlineFileformat()
   return winwidth(0) > 70 ? &fileformat : ''
 endfunction
-
 function! LightlineFiletype()
-  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : '') : ''
 endfunction
 
+" PLUGIN prettier
+let g:prettier#autoformat = 1
+let g:prettier#autoformat_require_pragma = 0
+
+" PLUGIN (ctrl)(p(r))obsession
+let g:prosession_default_session = 1
+
+" PLUGIN mergetool
+let g:mergetool_layout = 'mr'
+let g:mergetool_prefer_revision = 'local'
 
 " Change where we store swap/undo files.
 if !isdirectory($HOME . "/.vim/tmp")
