@@ -228,6 +228,12 @@ function cpush() {
       src=.
     fi
     echo "Continuously pushing from $src to $dsts..."
+    function do_rsync() {
+      for dst in "${dsts[@]}"; do
+        echo "->" $dst
+        rsync -azih $args --include='**.gitignore' --exclude="/.git" --filter=":- .gitignore" $src $dst
+      done
+    }
     function run_rsync() {
       local file=$1
       local events=$2
@@ -237,16 +243,13 @@ function cpush() {
             #*OwnerModified|*AttributeModified|
             *Created|*Updated|*Removed|*Renamed|*MovedFrom|*MovedTo )
               echo $file $event
-              for dst in "${dsts[@]}"; do
-                echo $dst
-                rsync -azih $args --include='**.gitignore' --exclude="/.git" --filter=":- .gitignore" $src $dst
-              done
+              do_rsync
               break
           esac
         done
       fi
     }
-    run_rsync $1 $2;
+    do_rsync
     fswatch -e ".git" --batch-marker=EOF --event-flags $src | while read file events; do run_rsync $file $events; done
   )
 }

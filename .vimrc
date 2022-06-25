@@ -11,6 +11,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rhubarb'
+Plugin 'tpope/vim-unimpaired'
 Plugin 'airblade/vim-gitgutter'
 " Plugin 'mhinz/vim-signify' " alternative to gitgutter
 Plugin 'tpope/vim-surround' " cs'<p>
@@ -32,7 +33,8 @@ Plugin 'dhruvasagar/vim-prosession'
 Plugin 'rhysd/vim-clang-format'
 Plugin 'psf/black'
 Plugin 'prettier/vim-prettier'
-Plugin 'samoshkin/vim-mergetool'
+"Plugin 'samoshkin/vim-mergetool'
+"Plugin 'vim-ctrlspace/vim-ctrlspace'
 
 call vundle#end()
 
@@ -226,13 +228,20 @@ let g:ycm_python_interpreter_path = ''
 let g:ycm_python_sys_path = []
 let g:ycm_extra_conf_vim_data = ['g:ycm_python_interpreter_path', 'g:ycm_python_sys_path']
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+" required on macos
+let g:ycm_clangd_binary_path = trim(system('brew --prefix llvm')).'/bin/clangd'
 
 
 " PLUGIN: ale
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '!!'
 let g:ale_sign_warning = '¡¡'
-
+let g:ale_fix_on_save = 1
+"let g:ale_fixers = {
+"  \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+"  \   'javascript': ['prettier', 'eslint'],
+"  \   'typescript': ['prettier', 'eslint'],
+"  \}
 
 " PLUGIN: GitGutter
 let g:gitgutter_override_sign_column_highlight = 0
@@ -261,6 +270,18 @@ function! RipgrepFzf(query, fullscreen)
 endfunction
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
+" PLUGIN: fugitive
+" auto-clean fugitive buffers when they become hidden
+autocmd BufReadPost fugitive://* set bufhidden=delete
+
+" PLUGIN: unimpaired
+" map <> to []
+nmap < [
+nmap > ]
+omap < [
+omap > ]
+xmap < [
+xmap > ]
 
 " PLUGIN: clang-format
 "autocmd FileType *.c,*.cpp,*.h,*.hpp ClangFormatAutoEnable
@@ -297,11 +318,13 @@ function! LightlineFiletype()
 endfunction
 
 " PLUGIN prettier
-let g:prettier#autoformat = 1
+let g:prettier#autoformat = 0
 let g:prettier#autoformat_require_pragma = 0
 
 " PLUGIN (ctrl)(p(r))obsession
-let g:prosession_default_session = 1
+let g:prosession_default_session = 0
+"let g:prosession_last_session_dir = "~"
+"let g:prosession_ignore_dirs = [ "build" ]
 
 " PLUGIN mergetool
 let g:mergetool_layout = 'mr'
