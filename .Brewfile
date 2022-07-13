@@ -19,6 +19,7 @@ brew 'ripgrep'
 brew 'fswatch'
 brew 'vim'
 brew 'viddy'
+brew 'ctags'
 
 tap 'koekeishiya/formulae'
 brew 'yabai'

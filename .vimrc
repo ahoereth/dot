@@ -25,8 +25,8 @@ Plugin 'dense-analysis/ale'
 Plugin 'joshdick/onedark.vim'
 Plugin 'itchyny/lightline.vim'
 Plugin 'sheerun/vim-polyglot' " language support
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
+"Plugin 'junegunn/fzf'
+"Plugin 'junegunn/fzf.vim'
 "automatic vim sessions
 Plugin 'tpope/vim-obsession'
 Plugin 'dhruvasagar/vim-prosession'
@@ -35,6 +35,22 @@ Plugin 'psf/black'
 Plugin 'prettier/vim-prettier'
 "Plugin 'samoshkin/vim-mergetool'
 "Plugin 'vim-ctrlspace/vim-ctrlspace'
+Plugin 'DoxygenToolkit.vim' " vim-scripts/DoxygenToolkit.vim " :Dox
+"Plugin 'ludovicchabant/vim-gutentags' " automatic tag management
+"Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'bfrg/vim-cpp-modern'
+Plugin 'machakann/vim-highlightedyank'
+Plugin 'itchyny/vim-cursorword'
+" Plugin 'muellan/vim-brace-for-umlauts' " make qwertz more useful
+Plugin 'bounceme/poppy.vim' " highlight matchin braces
+"Plugin 'mg979/vim-visual-multi' " multi cursor support
+Plugin 'rhysd/clever-f.vim' " f{char} and t{char} jumps
+"Plugin 'preservim/vim-pencil' " better prose editing
+" Plugin 'tommcdo/vim-exchange' " exchange text using cx{motion}
+Plugin 'tpope/vim-repeat' " better . for repeating commands
+Plugin 'tpope/vim-commentary' " gcc for commenting lines
+Plugin 'kana/vim-niceblock' " I and A in block-wise mode
+Plugin 'liuchengxu/vim-clap'
 
 call vundle#end()
 
@@ -152,6 +168,48 @@ command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
+" Escape special characters in a string for exact matching.
+" This is useful to copying strings from the file to the search tool
+" Based on this - http://peterodding.com/code/vim/profile/autoload/xolox/escape.vim
+function! EscapeString (string)
+  let string=a:string
+  " Escape regex characters
+  let string = escape(string, '^$.*\/~[]')
+  " Escape the line endings
+  let string = substitute(string, '\n', '\\n', 'g')
+  return string
+endfunction
+
+" Get the current visual block for search and replaces
+" This function passed the visual block through a string escape function
+" Based on this - https://stackoverflow.com/questions/676600/vim-replace-selected-text/677918#677918
+function! GetVisual() range
+  " Save the current register and clipboard
+  let reg_save = getreg('"')
+  let regtype_save = getregtype('"')
+  let cb_save = &clipboard
+  set clipboard&
+
+  " Put the current visual selection in the " register
+  normal! ""gvy
+  let selection = getreg('"')
+
+  " Put the saved registers and clipboards back
+  call setreg('"', reg_save, regtype_save)
+  let &clipboard = cb_save
+
+  "Escape any special characters in the selection
+  let escaped_selection = EscapeString(selection)
+
+  return escaped_selection
+endfunction
+
+vmap <C-r> <Esc>:%s/<c-r>=GetVisual()<cr>//gc<left><left>
+
+" Search/replace after visual selection using ctrl+r
+"vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+
+
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
@@ -192,10 +250,15 @@ au BufRead,BufNewFile Dockerfile* setfiletype Dockerfile
 au BufRead,BufNewFile *.pl setfiletype prolog
 au BufRead,BufNewFile *.beamer,*.cls setfiletype tex
 au BufRead,BufNewFile *.launch setfiletype xml
+au BufEnter,BufRead,BufNewFile,BufFilePost *.md set spell
+
+" cpp development
 au BufRead,BufNewFile *.cpp,*.hpp,*.h set tabstop=2
 au BufRead,BufNewFile *.cpp,*.hpp,*.h set shiftwidth=2
 au BufRead,BufNewFile *.cpp,*.hpp,*.h set expandtab
-au BufEnter,BufRead,BufNewFile,BufFilePost *.md set spell
+au BufRead,BufNewFile *.cpp,*.hpp,*.h set syntax=cpp.doxygen
+command Switch :e %:p:s,.hpp$,.X123X,:s,.cpp$,.hpp,:s,.X123X$,.cpp,
+command Sw :e %:p:s,.hpp$,.X123X,:s,.cpp$,.hpp,:s,.X123X$,.cpp,
 
 " KEYMAP
 " move around on soft wrapped lines as if they were hard wrapped
@@ -213,6 +276,30 @@ nnoremap <silent>   <tab> :if &modifiable && !&readonly && &modified <CR> :write
 nnoremap <silent> <s-tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
 inoremap <S-Tab> <C-d> " fix shift+tab for unindent
 
+
+" PLUGIN: clap
+" left right split
+"let g:clap_preview_direction = 'LR'
+"let g:clap_layout = {'relative': 'editor', 'width': '50%', 'col': '0%', 'height': '99%', 'row': '2%'}
+" top bottom split
+let g:clap_preview_direction = 'TB'
+let g:clap_layout = {'relative': 'editor', 'width': '100%', 'col': '0%', 'height': '80%', 'row': '3%'}
+"let g:clap_theme = { 'search_text': {'guifg': 'red', 'ctermfg': 'red'} }
+let g:clap_theme = {'display': {'guibg': 'black'}, 'preview': {'guibg': 'black'}}
+let g:clap_theme['search_text'] = {'guibg': 'black', 'ctermbg': 'black'}
+let g:clap_theme['input'] = {'guibg': 'black', 'ctermbg': 'black'}
+let g:clap_theme['indicator'] = {'guibg': 'black', 'ctermbg': 'black'}
+let g:clap_theme['spinner'] = {'guibg': 'black', 'ctermbg': 'black'}
+let g:clap_disable_run_rooter = 'v:true'
+let g:clap_popup_input_delay = '40ms'
+let g:clap_provider_grep_delay = '10ms'
+nnoremap <C-p> :Clap buffers<CR>
+" lowercase option p
+nnoremap π :Clap files<CR>
+" uppercase option p
+nnoremap ∏ :Clap git_files<CR>
+map <leader>g :Clap grep2<CR>
+map <leader>r :Clap recent_files<CR>
 
 " PLUGIN: netrw
 " Thanks @George Ornbo https://shapeshed.com/vim-netrw/
@@ -253,9 +340,12 @@ highlight GitGutterDelete ctermfg=124
 
 
 " PLUGIN: fzf
-nnoremap <C-p> :Files<Cr>
-nnoremap <Alt-p> :Buffers<Cr>
-nnoremap π :Buffers<Cr>
+"nnoremap <Alt-p> :Files<Cr>
+"nnoremap <Alt-o> :Buffers<Cr>
+" lowercase option p
+"nnoremap π :Files<Cr>
+" uppercase option p
+"nnoremap ∏ :Buffers<CR>
 
 "<C-t> to open in new tab
 "<C-v> to open in vertical split
@@ -269,6 +359,7 @@ function! RipgrepFzf(query, fullscreen)
   call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
 
 " PLUGIN: fugitive
 " auto-clean fugitive buffers when they become hidden
@@ -289,7 +380,7 @@ autocmd FileType c ClangFormatAutoEnable
 autocmd FileType cpp ClangFormatAutoEnable
 
 
-" PLUGIN lightline
+" PLUGIN: lightline
 set laststatus=2
 set noshowmode " lightline shows status
 let g:lightline = {
@@ -317,18 +408,27 @@ function! LightlineFiletype()
   return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : '') : ''
 endfunction
 
-" PLUGIN prettier
+" PLUGIN: prettier
 let g:prettier#autoformat = 0
 let g:prettier#autoformat_require_pragma = 0
 
-" PLUGIN (ctrl)(p(r))obsession
+" PLUGIN: (ctrl)(p(r))obsession
 let g:prosession_default_session = 0
 "let g:prosession_last_session_dir = "~"
 "let g:prosession_ignore_dirs = [ "build" ]
 
-" PLUGIN mergetool
+" PLUGIN: mergetool
 let g:mergetool_layout = 'mr'
 let g:mergetool_prefer_revision = 'local'
+
+" PLUGIN: doxygen toolkit
+let g:DoxygenToolkit_authorName="Alexander Höreth <alexander@psiori.com>"
+
+" PLUGIN: vim-cpp-modern
+let g:cpp_function_highlight = 1
+let g:cpp_attributes_highlight = 1
+let g:cpp_member_highlight = 1
+let g:cpp_simple_highlight = 0
 
 " Change where we store swap/undo files.
 if !isdirectory($HOME . "/.vim/tmp")

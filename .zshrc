@@ -73,9 +73,12 @@ fi
 alias antidote_bundle="antidote bundle < $DOT_PATH/zsh_plugins.txt > $DOT_PATH/zsh_plugins.zsh"
 alias antidote_rebundle="rm $DOT_PATH/zsh_plugins.zsh"
 
+# Autocompletion
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=white'
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
-# bindkey '^[[A' history-substring-search-up
-# bindkey '^[[B' history-substring-search-down
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 # make option - left and option - right skip words
 bindkey "^[[1;3C" forward-word

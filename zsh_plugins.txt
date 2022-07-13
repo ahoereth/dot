@@ -2,8 +2,8 @@ ohmyzsh/ohmyzsh path:plugins/command-not-found
 ohmyzsh/ohmyzsh path:plugins/docker
 ohmyzsh/ohmyzsh path:plugins/wd
 ohmyzsh/ohmyzsh path:plugins/last-working-dir
-# ohmyzsh/ohmyzsh path:plugins/zsh-interactive-cd
-ohmyzsh/ohmyzsh path:plugins/fzf
+#ohmyzsh/ohmyzsh path:plugins/zsh-interactive-cd
+#ohmyzsh/ohmyzsh path:plugins/fzf
 #ohmyzsh/ohmyzsh path:plugins/compleat
 
 ohmyzsh/ohmyzsh path:plugins/gh
@@ -12,8 +12,11 @@ ohmyzsh/ohmyzsh path:plugins/thefuck
 
 #mafredri/zsh-async
 #marlonrichert/zsh-autocomplete
-#zsh-users/zsh-autosuggestions
-#zsh-users/zsh-completions
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-history-substring-search
+zsh-users/zsh-syntax-highlighting
+#z-shell/fast-syntax-highlighting
+zsh-users/zsh-completions
 
 caarlos0/zsh-mkc
 djui/alias-tips
@@ -21,5 +24,3 @@ rupa/z
 
 # should be last
 sindresorhus/pure
-#z-shell/fast-syntax-highlighting
-#zsh-users/zsh-history-substring-search
