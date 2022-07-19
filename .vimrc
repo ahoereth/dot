@@ -42,7 +42,8 @@ Plugin 'bfrg/vim-cpp-modern'
 Plugin 'machakann/vim-highlightedyank'
 Plugin 'itchyny/vim-cursorword'
 " Plugin 'muellan/vim-brace-for-umlauts' " make qwertz more useful
-Plugin 'bounceme/poppy.vim' " highlight matchin braces
+" Plugin 'bounceme/poppy.vim' " highlight matching braces
+Plugin 'kien/rainbow_parentheses.vim'
 "Plugin 'mg979/vim-visual-multi' " multi cursor support
 Plugin 'rhysd/clever-f.vim' " f{char} and t{char} jumps
 "Plugin 'preservim/vim-pencil' " better prose editing
@@ -276,6 +277,22 @@ nnoremap <silent>   <tab> :if &modifiable && !&readonly && &modified <CR> :write
 nnoremap <silent> <s-tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
 inoremap <S-Tab> <C-d> " fix shift+tab for unindent
 
+" PLUGIN: commentary
+au FileType cpp,c,hpp,h setlocal commentstring=//\ %s
+
+" PLUGIN: black
+augroup black_on_save
+  autocmd!
+  autocmd BufWritePre *.py Black
+augroup end
+
+
+" PLUGIN: poppy / rainbow parentheses
+"au! cursormoved * call PoppyInit()
+au FileType cpp,c,hpp,h RainbowParenthesesActivate
+au FileType cpp,c,hpp,h RainbowParenthesesLoadRound
+au FileType cpp,c,hpp,h RainbowParenthesesLoadSquare
+au FileType cpp,c,hpp,h RainbowParenthesesLoadBraces
 
 " PLUGIN: clap
 " left right split
@@ -283,7 +300,7 @@ inoremap <S-Tab> <C-d> " fix shift+tab for unindent
 "let g:clap_layout = {'relative': 'editor', 'width': '50%', 'col': '0%', 'height': '99%', 'row': '2%'}
 " top bottom split
 let g:clap_preview_direction = 'TB'
-let g:clap_layout = {'relative': 'editor', 'width': '100%', 'col': '0%', 'height': '80%', 'row': '3%'}
+let g:clap_layout = {'relative': 'editor', 'width': '100%', 'col': '0%', 'height': '70%', 'row': '3%'}
 "let g:clap_theme = { 'search_text': {'guifg': 'red', 'ctermfg': 'red'} }
 let g:clap_theme = {'display': {'guibg': 'black'}, 'preview': {'guibg': 'black'}}
 let g:clap_theme['search_text'] = {'guibg': 'black', 'ctermbg': 'black'}
@@ -293,21 +310,13 @@ let g:clap_theme['spinner'] = {'guibg': 'black', 'ctermbg': 'black'}
 let g:clap_disable_run_rooter = 'v:true'
 let g:clap_popup_input_delay = '40ms'
 let g:clap_provider_grep_delay = '10ms'
-nnoremap <C-p> :Clap buffers<CR>
+nnoremap <C-p> :Clap files<CR>
 " lowercase option p
-nnoremap π :Clap files<CR>
+nnoremap π :Clap buffers<CR>
 " uppercase option p
 nnoremap ∏ :Clap git_files<CR>
 map <leader>g :Clap grep2<CR>
 map <leader>r :Clap recent_files<CR>
-
-" PLUGIN: netrw
-" Thanks @George Ornbo https://shapeshed.com/vim-netrw/
-let g:netrw_liststyle = 3
-let g:netrw_banner = 0
-let g:netrw_browse_split = 2
-let g:netrw_winsize = 10
-
 
 " PLUGIN: YCM
 let g:ycm_confirm_extra_conf = 0
