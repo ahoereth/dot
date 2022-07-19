@@ -43,11 +43,13 @@ function do_rsync() {
 function run_rsync() {
   local file=$1
   local events=$2
-  if [ ! -z "$file" ] && [ "$file" != "EOF" ] && [ -z "`git check-ignore $file`" ]; then
+  ignored=`git check-ignore $file`
+  echo "Update: $file $events $ignored"
+  if [ ! -z "$file" ] && [ "$file" != "EOF" ] && [ -z "$ignored" ]; then
     for event in "${events[@]}"; do
       case $event in
         #*OwnerModified|*AttributeModified|
-        *Created|*Updated|*Removed|*Renamed|*MovedFrom|*MovedTo )
+        *Created|*Updated|*Removed|*Renamed|*MovedFrom|*MovedTo|*OwnerModified )
           echo $file $event
           do_rsync
           break

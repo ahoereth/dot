@@ -67,6 +67,7 @@ for link in \
   '.zshrc' \
   '.gitconfig' \
   '.gitignore' \
+  '.gdbinit' \
 ; do
   lnifnotexists $link
 done
