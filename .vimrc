@@ -52,6 +52,7 @@ Plugin 'tpope/vim-repeat' " better . for repeating commands
 Plugin 'tpope/vim-commentary' " gcc for commenting lines
 Plugin 'kana/vim-niceblock' " I and A in block-wise mode
 Plugin 'liuchengxu/vim-clap'
+"Plugin 'neoclide/coc.nvim' " snippet completion
 
 call vundle#end()
 
@@ -101,6 +102,8 @@ set expandtab
 set smarttab
 set tabstop=2
 set shiftwidth=2
+set list " show whitespace
+set softtabstop=0
 "set sts=-1
 "set undofile
 " Backspace through indentation and such
@@ -254,12 +257,20 @@ au BufRead,BufNewFile *.launch setfiletype xml
 au BufEnter,BufRead,BufNewFile,BufFilePost *.md set spell
 
 " cpp development
-au BufRead,BufNewFile *.cpp,*.hpp,*.h set tabstop=2
-au BufRead,BufNewFile *.cpp,*.hpp,*.h set shiftwidth=2
-au BufRead,BufNewFile *.cpp,*.hpp,*.h set expandtab
-au BufRead,BufNewFile *.cpp,*.hpp,*.h set syntax=cpp.doxygen
+au FileType cpp,c,hpp,h set tabstop=2
+au FileType cpp,c,hpp,h set shiftwidth=2
+au FileType cpp,c,hpp,h set expandtab
+au FileType cpp,c,hpp,h set syntax=cpp.doxygen
 command Switch :e %:p:s,.hpp$,.X123X,:s,.cpp$,.hpp,:s,.X123X$,.cpp,
 command Sw :e %:p:s,.hpp$,.X123X,:s,.cpp$,.hpp,:s,.X123X$,.cpp,
+
+" python
+au FileType python set tabstop=4
+au FileType python set shiftwidth=4
+au FileType python set expandtab
+
+" stamp text -- replace word with last yank
+nnoremap S "_diwP
 
 " KEYMAP
 " move around on soft wrapped lines as if they were hard wrapped
@@ -279,12 +290,13 @@ inoremap <S-Tab> <C-d> " fix shift+tab for unindent
 
 " PLUGIN: commentary
 au FileType cpp,c,hpp,h setlocal commentstring=//\ %s
+au FileType proto setlocal commentstring=//\ %s
 
 " PLUGIN: black
-augroup black_on_save
-  autocmd!
-  autocmd BufWritePre *.py Black
-augroup end
+" augroup black_on_save
+"   autocmd!
+"   autocmd BufWritePre *.py Black
+" augroup end
 
 
 " PLUGIN: poppy / rainbow parentheses
@@ -387,6 +399,7 @@ xmap > ]
 "autocmd FileType *.c,*.cpp,*.h,*.hpp ClangFormatAutoEnable
 autocmd FileType c ClangFormatAutoEnable
 autocmd FileType cpp ClangFormatAutoEnable
+autocmd FileType proto ClangFormatAutoEnable
 
 
 " PLUGIN: lightline

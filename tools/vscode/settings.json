@@ -160,5 +160,6 @@
   "diffEditor.renderSideBySide": false,
   "python.venvPath": "../miniforge3",
   "clang-format.executable": "/opt/homebrew/bin/clang-format",
-  "github.gitProtocol": "ssh"
+  "github.gitProtocol": "ssh",
+  "window.zoomLevel": 2
 }

@@ -27,9 +27,9 @@ path=(
   $HOME/.bin
   $HOME/.node_modules/bin
   /Library/TeX/texbin
-  $path[@]
-  /usr/local/bin
   /opt/homebrew/bin
+  /usr/local/bin
+  $path[@]
 )
 
 JAVA_HOME="/usr/local/opt/openjdk"
