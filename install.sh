@@ -32,7 +32,7 @@ cd $DOT
 
 
 # Update all submodules first.
-git submodule update --init --recursive --remote
+git submodule update --init --recursive
 
 export PYENV_ROOT="$DOT/tools/pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
