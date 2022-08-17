@@ -149,13 +149,13 @@ if [ "$(uname)" = "Darwin" ]; then
 fi
 
 # ccat colorized cat
-if ! command -v ccat &> /dev/null; then
+if command -v ccat &> /dev/null; then
   alias cat=ccat
   alias json='python -m json.tool | ccat'
 fi
 
 # viddy colorized cat
-if ! command -v viddy &> /dev/null; then
+if command -v viddy &> /dev/null; then
   alias watch=viddy
 fi
 
