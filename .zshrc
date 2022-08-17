@@ -397,3 +397,7 @@ export GPG_TTY=$(tty)
 # if [[ -d .venv ]]; then
 #   venv .venv
 # fi
+
+if ! infocmp alacritty &> /dev/null; then
+  export TERM=xterm-256color
+fi
