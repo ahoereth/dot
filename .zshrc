@@ -6,7 +6,7 @@
 
 export DOT_PATH=$HOME/repos/dot
 
-source .zprofile
+source $HOME/.zprofile
 
 source $DOT_PATH/tools/sandboxd
 
@@ -59,6 +59,9 @@ zle -N edit-command-line
 
 export ZSH_CACHE_DIR="$HOME/.cache"
 
+# needs to come before antidote
+autoload -Uz compinit && compinit
+
 source $DOT_PATH/tools/antidote/antidote.zsh
 if [ -f "$DOT_PATH/zsh_plugins.zsh" ] && [ -s "$DOT_PATH/zsh_plugins.zsh" ]; then
   source $DOT_PATH/zsh_plugins.zsh
@@ -87,7 +90,6 @@ bindkey "^[[1;3D" backward-word
 autoload -Uz compinit promptinit bashcompinit
 #zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 #zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
-compinit
 bashcompinit
 promptinit
 prompt pure

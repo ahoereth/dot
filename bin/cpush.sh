@@ -44,7 +44,7 @@ function run_rsync() {
   local file=$1
   local events=$2
   ignored=`git check-ignore $file`
-  echo "Update: $file $events $ignored"
+  # echo "Update: $file $events $ignored"
   if [ ! -z "$file" ] && [ "$file" != "EOF" ] && [ -z "$ignored" ]; then
     for event in "${events[@]}"; do
       case $event in
