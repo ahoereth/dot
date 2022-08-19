@@ -68,12 +68,12 @@ if [ -f "$DOT_PATH/zsh_plugins.zsh" ] && [ -s "$DOT_PATH/zsh_plugins.zsh" ]; the
 else
   # zsh_plugins.zsh does not yet exist. Create and load it.
   echo "Rebundling antidote"
-  _antidote bundle < $DOT_PATH/zsh_plugins.txt > $DOT_PATH/zsh_plugins.zsh
+  antidote bundle < $DOT_PATH/zsh_plugins.txt > $DOT_PATH/zsh_plugins.zsh
   source $DOT_PATH/zsh_plugins.zsh
-  # source <(_antidote init)
-  # _antidote bundle < $DOT_PATH/zsh_plugins.txt
+  # source <(antidote init)
+  # antidote bundle < $DOT_PATH/zsh_plugins.txt
 fi
-alias antidote_bundle="_antidote bundle < $DOT_PATH/zsh_plugins.txt > $DOT_PATH/zsh_plugins.zsh"
+alias antidote_bundle="antidote bundle < $DOT_PATH/zsh_plugins.txt > $DOT_PATH/zsh_plugins.zsh"
 alias antidote_rebundle="rm $DOT_PATH/zsh_plugins.zsh"
 
 # Autocompletion
