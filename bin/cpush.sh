@@ -4,6 +4,8 @@
 #
 #
 
+set -x
+
 src=
 dsts=()
 args=
@@ -29,8 +31,15 @@ if [ ${#dsts[@]} -eq 0 ]; then
   src=.
 fi
 
-echo "Continuously pushing from $src to $dsts..."
+# if [ "$src" = "." ]; then
+#   src="$(pwd)"
+# fi
 
+# if [ "$(basename $src)" = "build" ]; then
+#   src="$(dirname $src)"
+# fi
+
+echo "Continuously pushing from $src to $dsts..."
 
 function do_rsync() {
   for dst in "${dsts[@]}"; do

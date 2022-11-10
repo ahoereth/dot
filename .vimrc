@@ -36,7 +36,7 @@ Plugin 'prettier/vim-prettier'
 "Plugin 'samoshkin/vim-mergetool'
 "Plugin 'vim-ctrlspace/vim-ctrlspace'
 Plugin 'DoxygenToolkit.vim' " vim-scripts/DoxygenToolkit.vim " :Dox
-"Plugin 'ludovicchabant/vim-gutentags' " automatic tag management
+Plugin 'ludovicchabant/vim-gutentags' " automatic tag management
 "Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'bfrg/vim-cpp-modern'
 Plugin 'machakann/vim-highlightedyank'
@@ -52,6 +52,7 @@ Plugin 'tpope/vim-repeat' " better . for repeating commands
 Plugin 'tpope/vim-commentary' " gcc for commenting lines
 Plugin 'kana/vim-niceblock' " I and A in block-wise mode
 Plugin 'liuchengxu/vim-clap'
+" Plugin 'umaumax/vim-format'
 "Plugin 'neoclide/coc.nvim' " snippet completion
 
 call vundle#end()
@@ -306,6 +307,11 @@ au FileType cpp,c,hpp,h RainbowParenthesesLoadRound
 au FileType cpp,c,hpp,h RainbowParenthesesLoadSquare
 au FileType cpp,c,hpp,h RainbowParenthesesLoadBraces
 
+
+" PLUGIN: vim-format
+let g:vim_format_fmt_on_save = 1
+
+
 " PLUGIN: clap
 " left right split
 "let g:clap_preview_direction = 'LR'
@@ -359,6 +365,8 @@ highlight GitGutterChange ctermfg=184
 highlight GitGutterChangeDelete ctermfg=184
 highlight GitGutterDelete ctermfg=124
 
+" PLUGIN: gutentags
+let g:gutentags_file_list_command = 'rg --files'
 
 " PLUGIN: fzf
 "nnoremap <Alt-p> :Files<Cr>
@@ -394,6 +402,11 @@ omap < [
 omap > ]
 xmap < [
 xmap > ]
+
+" jump to tags
+" nnoremap t <C-]>
+nnoremap ü <C-]>
+nnoremap Ü <C-O>
 
 " PLUGIN: clang-format
 "autocmd FileType *.c,*.cpp,*.h,*.hpp ClangFormatAutoEnable

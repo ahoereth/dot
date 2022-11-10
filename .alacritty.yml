@@ -1,12 +1,12 @@
 window:
   padding:
-    x: 10
-    y: 10
-  decorations: none
+    x: 5
+    y: 5
+  decorations: buttonless
 shell:
   program: /bin/zsh
-# env:
-#   TERM: xterm-256color
+env:
+  TERM: xterm-256color
 alt_send_esc: false
 # colors:
 #  name: Pastel White
@@ -36,13 +36,71 @@ alt_send_esc: false
 #    cyan: "#95e1d2"
 #    white: "#c9d0c2"
 
+scrolling:
+  # Maximum number of lines in the scrollback buffer.
+  # Specifying '0' will disable scrolling.
+  history: 20000
+
+  # Number of lines the viewport will move for every line scrolled when
+  # scrollback is enabled (history > 0).
+  multiplier: 3
+
+  # Faux Scrolling
+  #
+  # The `faux_multiplier` setting controls the number of lines the terminal
+  # should scroll when the alternate screen buffer is active. This is used
+  # to allow mouse scrolling for applications like `man`.
+  #
+  # Specifying `0` will disable faux scrolling.
+  faux_multiplier: 3
+
+  # Scroll to the bottom when new text is written to the terminal.
+  auto_scroll: false
+
+# Font configuration (changes require restart)
+font:
+  # Normal (roman) font face
+  normal:
+    family: Menlo
+    # style: Regular
+
+  # Italic font face
+  bold:
+    family: Menlo
+    # style: Bold
+
+  # Italic font face
+  italic:
+    family: Menlo
+    # style: Italic
+
+  # Point size
+  size: 14.0
+
+  # Offset is the extra space around each character. `offset.y` can be thought of
+  # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
+  offset:
+    x: 0
+    y: 0
+
+  # Glyph offset determines the locations of the glyphs within their cells with
+  # the default being at the bottom. Increasing `x` moves the glyph to the right,
+  # increasing `y` moves the glyph upwards.
+  glyph_offset:
+    x: 0
+    y: 0
+
+  # Scale the font size based on the monitor's DPI. This will lead to bigger text on HiDPI
+  # screens and make reading text a little easier.
+  scale_with_dpi: true
+
 # onedark
 # https://gist.github.com/r-darwish/f8bb21a6c89a02c4bef76cc38bddad39
 colors:
   # Default colors
   primary:
-    background: '0x000000' # '0x1e2127'
-    foreground: '0xabb2bf'
+    background: "0x000000" # '0x1e2127'
+    foreground: "0xabb2bf"
 
     # Bright and dim foreground colors
     #
@@ -50,7 +108,7 @@ colors:
     # If the bright foreground color is not set, or `draw_bold_text_with_bright_colors`
     # is `false`, the normal foreground color will be used.
     #dim_foreground: '0x9a9a9a'
-    bright_foreground: '0xe6efff'
+    bright_foreground: "0xe6efff"
 
   # Cursor colors
   #
@@ -62,39 +120,39 @@ colors:
 
   # Normal colors
   normal:
-    black:   '0x000000' # '0x1e2127'
-    red:     '0xe06c75'
-    green:   '0x98c379'
-    yellow:  '0xd19a66'
-    blue:    '0x61afef'
-    magenta: '0xc678dd'
-    cyan:    '0x56b6c2'
-    white:   '0x828791'
+    black: "0x000000" # '0x1e2127'
+    red: "0xe06c75"
+    green: "0x98c379"
+    yellow: "0xd19a66"
+    blue: "0x61afef"
+    magenta: "0xc678dd"
+    cyan: "0x56b6c2"
+    white: "0x828791"
 
   # Bright colors
   bright:
-    black:   '0x5c6370'
-    red:     '0xe06c75'
-    green:   '0x98c379'
-    yellow:  '0xd19a66'
-    blue:    '0x61afef'
-    magenta: '0xc678dd'
-    cyan:    '0x56b6c2'
-    white:   '0xe6efff'
+    black: "0x5c6370"
+    red: "0xe06c75"
+    green: "0x98c379"
+    yellow: "0xd19a66"
+    blue: "0x61afef"
+    magenta: "0xc678dd"
+    cyan: "0x56b6c2"
+    white: "0xe6efff"
 
   # Dim colors
   #
   # If the dim colors are not set, they will be calculated automatically based
   # on the `normal` colors.
   dim:
-    black:   '0x1e2127'
-    red:     '0xe06c75'
-    green:   '0x98c379'
-    yellow:  '0xd19a66'
-    blue:    '0x61afef'
-    magenta: '0xc678dd'
-    cyan:    '0x56b6c2'
-    white:   '0x828791'
+    black: "0x1e2127"
+    red: "0xe06c75"
+    green: "0x98c379"
+    yellow: "0xd19a66"
+    blue: "0x61afef"
+    magenta: "0xc678dd"
+    cyan: "0x56b6c2"
+    white: "0x828791"
 
   # Indexed Colors
   #

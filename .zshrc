@@ -25,6 +25,7 @@ export GOPATH=$HOME/go
 path=(
   $DOT_PATH/bin
   $HOME/.bin
+  $HOME/.gem/bin
   $HOME/.node_modules/bin
   /Library/TeX/texbin
   /opt/homebrew/bin
@@ -80,12 +81,15 @@ alias antidote_rebundle="rm $DOT_PATH/zsh_plugins.zsh"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=white'
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
+bindkey -e
+
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
 # make option - left and option - right skip words
 bindkey "^[[1;3C" forward-word
 bindkey "^[[1;3D" backward-word
+
 
 autoload -Uz compinit promptinit bashcompinit
 #zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
@@ -403,3 +407,6 @@ export GPG_TTY=$(tty)
 if ! infocmp alacritty &> /dev/null; then
   export TERM=xterm-256color
 fi
+export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1
+export GEM_HOME=~/.gem
+export GEM_PATH=~/.gem

@@ -126,13 +126,6 @@
   "workbench.editorAssociations": {
     "*.ipynb": "jupyter-notebook"
   },
-  "terraform.languageServer": {
-    "external": true,
-    "pathToBinary": "",
-    "args": ["serve"],
-    "maxNumberOfProblems": 100,
-    "trace.server": "off"
-  },
   "[terraform]": {
     "editor.defaultFormatter": "hashicorp.terraform"
   },
@@ -161,5 +154,8 @@
   "python.venvPath": "../miniforge3",
   "clang-format.executable": "/opt/homebrew/bin/clang-format",
   "github.gitProtocol": "ssh",
-  "window.zoomLevel": 2
+  "window.zoomLevel": 2,
+  "terraform.languageServer.enable": true,
+  "terraform.languageServer.path": "",
+  "diffEditor.ignoreTrimWhitespace": false
 }
