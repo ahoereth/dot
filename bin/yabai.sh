@@ -53,6 +53,20 @@ function move_to_space() {
   yabai -m space --focus "$target_space"
 }
 
+function destroy_empty_spaces() {
+  # echo
+  yabai -m query --spaces --display | \
+       jq -re 'map(select(."is-native-fullscreen" == false)) | length > 1' \
+       && yabai -m query --spaces | \
+            jq -re 'map(select(."windows" == [] and ."has-focus" == false).index) | reverse | .[] '
+  # destroy
+  yabai -m query --spaces --display | \
+       jq -re 'map(select(."is-native-fullscreen" == false)) | length > 1' \
+       && yabai -m query --spaces | \
+            jq -re 'map(select(."windows" == [] and ."has-focus" == false).index) | reverse | .[] ' | \
+            xargs -I % sh -c 'yabai -m space % --destroy'
+}
+
 if [ -n "$1" ]; then
   echo $1 $2 $3
   $1 $2 $3
