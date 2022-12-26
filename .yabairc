@@ -1,11 +1,14 @@
 #!/usr/bin/env sh
 
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+
 # global settings
 yabai -m config mouse_follows_focus          off
 yabai -m config focus_follows_mouse          off
 yabai -m config window_placement             second_child
 yabai -m config window_topmost               off
-yabai -m config window_shadow                off
+yabai -m config window_shadow                float
 yabai -m config window_opacity               off
 yabai -m config window_opacity_duration      0.0
 yabai -m config active_window_opacity        1.0
@@ -32,18 +35,31 @@ yabai -m config left_padding                 0
 yabai -m config right_padding                0
 yabai -m config window_gap                   0
 
-read -r -d '' action <<- 'EOF'
-    yabai -m query --spaces --display | \
-        jq -re 'map(select(."native-fullscreen" == 0)) | length > 1' \
-    && yabai -m query --spaces | \
-        jq -re 'map(select(."windows" == [] and ."focused" == 0).index) | reverse | .[] ' | \
-        xargs -I % sh -c 'yabai -m space % --destroy'
-EOF
+# read -r -d '' action <<- 'EOF'
+#     yabai -m query --spaces --display | \
+#         jq -re 'map(select(."native-fullscreen" == 0)) | length > 1' \
+#     && yabai -m query --spaces | \
+#         jq -re 'map(select(."windows" == [] and ."focused" == 0).index) | reverse | .[] ' | \
+#         xargs -I % sh -c 'yabai -m space % --destroy'
+# EOF
 
+read -r -d '' action <<- 'EOF'
+yabai -m query --spaces --display | \
+     jq -re 'map(select(."is-native-fullscreen" == false)) | length > 1' \
+     && yabai -m query --spaces | \
+          jq -re 'map(select(."windows" == [] and ."has-focus" == false).index) | reverse | .[] '
+yabai -m query --spaces --display | \
+     jq -re 'map(select(."is-native-fullscreen" == false)) | length > 1' \
+     && yabai -m query --spaces | \
+          jq -re 'map(select(."windows" == [] and ."has-focus" == false).index) | reverse | .[] ' | \
+          xargs -I % sh -c 'yabai -m space % --destroy'
+EOF
 yabai -m signal --add event=space_changed action="${action}"
 
-echo "yabai configuration loaded.."
-
+yabai -m signal --add event=window_created action='yabai -m query --windows --window $YABAI_WINDOW_ID | jq -er ".\"can-resize\" or .\"is-floating\"" || yabai -m window $YABAI_WINDOW_ID --toggle float'
 yabai -m rule --add app="^System Preferences$" manage=off
+yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Authy Desktop$" manage=off
-# yabai -m rule --add app="^System Preferences$" title="Network" manage=off
+yabai -m rule --add app="^PrinterProxy$" manage=off
+
+echo "yabai configuration loaded.."

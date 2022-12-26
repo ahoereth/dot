@@ -1,6 +1,10 @@
 {
   "editor.renderWhitespace": "boundary",
-  "editor.rulers": [80, 88, 100],
+  "editor.rulers": [
+    80,
+    88,
+    100
+  ],
   "editor.wordWrapColumn": 80,
   "files.trimTrailingWhitespace": true,
   "python.linting.pylintPath": "/Users/ahoereth/miniconda3/bin/pylint",
@@ -12,11 +16,19 @@
   "latex-workshop.latex.autoBuild.onSave.enabled": false,
   "latex-workshop.view.pdf.external.command": {
     "command": "displayfile",
-    "args": ["-r", "%PDF%"]
+    "args": [
+      "-r",
+      "%PDF%"
+    ]
   },
   "latex-workshop.view.pdf.external.synctex": {
     "command": "displayline",
-    "args": ["-r", "%LINE%", "%PDF%", "%TEX%"]
+    "args": [
+      "-r",
+      "%LINE%",
+      "%PDF%",
+      "%TEX%"
+    ]
   },
   "latex-workshop.message.update.show": false,
   "editor.minimap.enabled": false,
@@ -90,7 +102,6 @@
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "editor.formatOnSave": true,
   "javascript.format.enable": false,
   "javascript.validate.enable": false,
   "javascript.format.insertSpaceAfterSemicolonInForStatements": false,
@@ -99,9 +110,15 @@
   "python.linting.mypyEnabled": true,
   "javascript.updateImportsOnFileMove.enabled": "never",
   "clang-tidy.buildPath": "build",
-  "clang-tidy.checks": ["readability-*", "bugprone-*", "modernize-*"],
+  "clang-tidy.checks": [
+    "readability-*",
+    "bugprone-*",
+    "modernize-*"
+  ],
   "clang-tidy.executable": "/opt/homebrew/bin/clang-tidy",
-  "C_Cpp.default.systemIncludePath": ["/usr/local/include"],
+  "C_Cpp.default.systemIncludePath": [
+    "/usr/local/include"
+  ],
   "[yaml]": {
     "editor.insertSpaces": true,
     "editor.tabSize": 2,
@@ -113,8 +130,13 @@
     "editor.autoIndent": "none",
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "cmake.configureArgs": ["-DCIBUILD=1", "-DUSEOPENMP=OFF"],
-  "cmake.buildArgs": ["-j6"],
+  "cmake.configureArgs": [
+    "-DCIBUILD=1",
+    "-DUSEOPENMP=OFF"
+  ],
+  "cmake.buildArgs": [
+    "-j6"
+  ],
   "jupyter.useNotebookEditor": false,
   "xml.java.home": "/usr/local/opt/openjdk",
   "xml.symbols.maxItemsComputed": 50000,
@@ -154,8 +176,11 @@
   "python.venvPath": "../miniforge3",
   "clang-format.executable": "/opt/homebrew/bin/clang-format",
   "github.gitProtocol": "ssh",
-  "window.zoomLevel": 2,
   "terraform.languageServer.enable": true,
   "terraform.languageServer.path": "",
-  "diffEditor.ignoreTrimWhitespace": false
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.formatOnSave": true,
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  }
 }

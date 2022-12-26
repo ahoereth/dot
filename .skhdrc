@@ -132,10 +132,10 @@
 #           yabai -m window --grid 4:4:1:1:2:2
 
 # toggle sticky(+float), topmost, picture-in-picture
-# alt - p : yabai -m window --toggle sticky;\
-#           yabai -m window --toggle topmost;\
-#           yabai -m window --toggle pip
-
+# alt - p : yabai -m window --toggle sticky --toggle topmost --toggle float
+          # --layer above
+          # yabai -m window --toggle topmost
+          # yabai -m window --toggle pip
 
 ## Resize windows
 # left
@@ -150,20 +150,42 @@ fn - k :          yabai -m window --resize top:0:-20; \
 # down
 fn - j :          yabai -m window --resize top:0:20; \
                   yabai -m window --resize bottom:0:20
+# left
+ctrl + alt - left : yabai -m window --resize left:-20:0; \
+                    yabai -m window --resize right:-20:0
+# right
+ctrl + alt - right : yabai -m window --resize left:20:0; \
+                     yabai -m window --resize right:20:0
+# up
+ctrl + alt - up : yabai -m window --resize top:0:-20; \
+                  yabai -m window --resize bottom:0:-20
+# down
+ctrl + alt - down : yabai -m window --resize top:0:20; \
+                    yabai -m window --resize bottom:0:20
 
 # Toggle window split type
 fn - space :      yabai -m window --toggle split
+ctrl + alt - space : yabai -m window --toggle split
 
 # Balance splits
 fn - 0: yabai -m space --balance
+fn - b: yabai -m space --balance
+ctrl + alt - b : yabai -m space --balance
 
 # Focus windows
 # fn - 0x2F : yabai -m window --focus east  # period .
 # fn - 0x2B : yabai -m window --focus west  # comma ,
 fn - w : yabai -m window --focus north
-fn - a : yabai -m window --focus west
-fn - s : yabai -m window --focus south
 fn - d : yabai -m window --focus east
+fn - s : yabai -m window --focus south
+fn - a : yabai -m window --focus west
+ctrl + alt - i : yabai -m window --focus north
+ctrl + alt - o : yabai -m window --focus east
+ctrl + alt - e : yabai -m window --focus south
+ctrl + alt - n : yabai -m window --focus west
+ctrl + alt - m : yabai -m window --focus recent
+ctrl + alt - p : yabai -m window --focus prev
+cmd + ctrl + alt - p : yabai -m window --focus next
 
 # Flip the tree horizontally
 #yabai -m space --mirror x-axis
@@ -183,60 +205,42 @@ fn - tab : yabai -m window --warp mouse
 fn - r :    launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"; \
             skhd --reload
 
-# Float/unfload focussed window
+shift + ctrl + alt - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"; \
+                         skhd --reload
+
+# Float/unfloat focussed window
 fn - f : yabai -m window --toggle float;\
-         yabai -m window --grid 4:4:1:1:2:2
+         yabai -m window --grid 4:4:1:1:2:2;\
+         yabai -m window --enable topmost
+# fn - f : yabai -m window --toggle sticky --toggle topmost --toggle pip
 
 ## Manage spaces
 # Move focus to new empty space
-fn - n :        yabai -m space --create && \
-                index="$(yabai -m query --spaces --display \
-                  | jq 'map(select(."native-fullscreen" == 0))[-1].index')" && \
-                yabai -m space --focus "${index}"
+ctrl - n : yabai.sh move_to_space new
 
-# Move focussed window to new space
-fn + cmd - n :  yabai -m space --create && \
-                index="$(yabai -m query --spaces --display \
-                  | jq 'map(select(."native-fullscreen" == 0))[-1].index')" && \
-                yabai -m window --space "${index}" && \
-                yabai -m space --focus "${index}"
+# Move to the space on the left, maybe creating a new one
+ctrl - left : yabai.sh move_to_space left
+# Move to the space on the right, maybe creating a new one
+ctrl - right : yabai.sh move_to_space right
+# Move to most recently used space
+ctrl - p : yabai -m space --focus recent
 
-# # Move to the space on the left, maybe creating a new one
-# ctrl - left :   yabai -m space --create && \
-#                 let index=$(yabai -m query --spaces --display | jq length) && \
-#                 yabai -m space $index --move 1 && \
-#                 yabai -m space --focus prev
+# Move focused window to new space
+ctrl + cmd - n : yabai.sh move_to_space new with_window
+# Move focused window to left space, maybe creating a new one
+ctrl + cmd - left : yabai.sh move_to_space left with_window
+# Move focused window to right space, maybe creating a new one
+ctrl + cmd - right : yabai.sh move_to_space right with_window
 
-# # Move to the space on the right, maybe creating a new one
-# ctrl - right : yabai -m space --create && yabai -m space --focus next
-
-# Move focussed window to left space, maybe creating a new one
-ctrl + cmd - left :  yabai -m space --create && \
-                     let index=$(yabai -m query --spaces --display | jq length) && \
-                     yabai -m space $index --move 1 && \
-                     let index=$(yabai -m query --spaces --display \
-                       | jq 'map(select(.focused == 1))[-1].index') && \
-                     let index-- && \
-                     yabai -m window --space "${index}" && \
-                     yabai -m space --focus "${index}"
-
-# Move focussed window to right space, maybe creating a new one
-ctrl + cmd - right :  yabai -m space --create && \
-                      let index=$(yabai -m query --spaces --display \
-                        | jq 'map(select(.focused == 1))[-1].index') && \
-                      let index++ && \
-                      yabai -m window --space $index && \
-                      yabai -m space --focus $index
-
-# Move focussed space to left
+# Move focused space to left
 ctrl + alt - left :   let index=$(yabai -m query --spaces --display \
-                        | jq 'map(select(.focused == 1))[-1].index') && \
+                        | jq 'map(select(."has-focus" == true))[-1].index') && \
                       let index-- && \
                       yabai -m space --move $index
 
-# Move focussed space to right
+# Move focused space to right
 ctrl + alt - right :  let index=$(yabai -m query --spaces --display \
-                        | jq 'map(select(.focused == 1))[-1].index') && \
+                        | jq 'map(select(."has-focus" == true))[-1].index') && \
                       let index++ && \
                       yabai -m space --move $index
 
