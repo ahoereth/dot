@@ -8,6 +8,11 @@ tmux kill-session -t skhd
 tmux new-session -d -s skhd
 tmux send-keys -t skhd 'while true; do skhd; sleep 1; done' C-m
 
+# start auto keyboard layout switcher in its own tmux session
+tmux kill-session -t autokbisw
+tmux new-session -d -s autokbisw
+tmux send-keys -t autokbisw 'autokbisw' C-m
+
 # global settings
 yabai -m config mouse_follows_focus          off
 yabai -m config focus_follows_mouse          off

@@ -328,13 +328,15 @@ let g:clap_theme['spinner'] = {'guibg': 'black', 'ctermbg': 'black'}
 let g:clap_disable_run_rooter = 'v:true'
 let g:clap_popup_input_delay = '40ms'
 let g:clap_provider_grep_delay = '10ms'
-nnoremap <C-p> :Clap files<CR>
+" nnoremap <C-p> :Clap files<CR>
 " lowercase option p
-nnoremap π :Clap buffers<CR>
+nnoremap π :Clap files<CR>
 " uppercase option p
-nnoremap ∏ :Clap git_files<CR>
+nnoremap ∏ :Clap buffers<CR>
+map <leader>p :Clap git_files<CR>
 map <leader>g :Clap grep2<CR>
 map <leader>r :Clap recent_files<CR>
+map <leader>P :b#<CR>
 
 " PLUGIN: YCM
 let g:ycm_confirm_extra_conf = 0
@@ -494,13 +496,13 @@ set autoread
 au FocusGained,BufEnter * checktime
 
 " Allow mouse use
-if has('mouse')
-  if &term =~ 'xterm'
-    set mouse=a
-  else
-    set mouse=nvi
-  endif
-endif
+" if has('mouse')
+"   if &term =~ 'xterm'
+"     set mouse=a
+"   else
+"     set mouse=nvi
+"   endif
+" endif
 
 
 " Viminfo saves/restores editing metadata in ~/.viminfo.

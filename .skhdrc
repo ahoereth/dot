@@ -138,18 +138,18 @@
           # yabai -m window --toggle pip
 
 ## Resize windows
-# left
-fn - h :          yabai -m window --resize left:-20:0; \
-                  yabai -m window --resize right:-20:0
-# right
-fn - l :          yabai -m window --resize left:20:0; \
-                  yabai -m window --resize right:20:0
-# up
-fn - k :          yabai -m window --resize top:0:-20; \
-                  yabai -m window --resize bottom:0:-20
-# down
-fn - j :          yabai -m window --resize top:0:20; \
-                  yabai -m window --resize bottom:0:20
+# # left
+# fn - h :          yabai -m window --resize left:-20:0; \
+#                   yabai -m window --resize right:-20:0
+# # right
+# fn - l :          yabai -m window --resize left:20:0; \
+#                   yabai -m window --resize right:20:0
+# # up
+# fn - k :          yabai -m window --resize top:0:-20; \
+#                   yabai -m window --resize bottom:0:-20
+# # down
+# fn - j :          yabai -m window --resize top:0:20; \
+#                   yabai -m window --resize bottom:0:20
 # left
 ctrl + alt - left : yabai -m window --resize left:-20:0; \
                     yabai -m window --resize right:-20:0
@@ -175,10 +175,13 @@ ctrl + alt - b : yabai -m space --balance
 # Focus windows
 # fn - 0x2F : yabai -m window --focus east  # period .
 # fn - 0x2B : yabai -m window --focus west  # comma ,
-fn - w : yabai -m window --focus north
-fn - d : yabai -m window --focus east
-fn - s : yabai -m window --focus south
-fn - a : yabai -m window --focus west
+fn - k : yabai -m window --focus north
+fn - l : yabai -m window --focus east
+fn - j : yabai -m window --focus south
+fn - h : yabai -m window --focus west
+fn - p : yabai -m window --focus recent
+fn - n : yabai -m window --focus prev
+fn - m : yabai -m window --focus next
 ctrl + alt - i : yabai -m window --focus north
 ctrl + alt - o : yabai -m window --focus east
 ctrl + alt - e : yabai -m window --focus south
@@ -200,6 +203,7 @@ fn - q : yabai -m window --swap recent
 
 # Move focussed window to window under mouse
 fn - tab : yabai -m window --warp mouse
+fn - tab : yabai -m window --warp mouse
 
 # reload yabai and skhd config
 fn - r :    launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"; \
@@ -217,16 +221,17 @@ fn - f : yabai -m window --toggle float;\
 ## Manage spaces
 # Move focus to new empty space
 ctrl - n : yabai.sh move_to_space new
-
+# Move to most recently used space
+ctrl - p : yabai -m space --focus recent
 # Move to the space on the left, maybe creating a new one
 ctrl - left : yabai.sh move_to_space left
 # Move to the space on the right, maybe creating a new one
 ctrl - right : yabai.sh move_to_space right
-# Move to most recently used space
-ctrl - p : yabai -m space --focus recent
 
 # Move focused window to new space
 ctrl + cmd - n : yabai.sh move_to_space new with_window
+# Move focused window to most recently used space
+ctrl + cmd - p : yabai.sh move_to_space recent with_window
 # Move focused window to left space, maybe creating a new one
 ctrl + cmd - left : yabai.sh move_to_space left with_window
 # Move focused window to right space, maybe creating a new one

@@ -9,22 +9,22 @@ function index() {
   if [ "$1" = "last" ]; then
     yabai -m query --spaces --display | \
       jq "map(select(.\"is-native-fullscreen\" == false))[-1].index"
-    return
-  fi
-  if [ "$1" = "current" ]; then
+  elif [ "$1" = "current" ]; then
     yabai -m query --spaces --display \
       | jq 'map(select(."has-focus" == true))[-1].index'
-    return
+  elif [ "$1" = "recent" ]; then
+    yabai -m query --spaces --space recent | jq '.index'
+  else  # right & left
+    let ix=$(yabai -m query --spaces --display | \
+      jq "map(.\"is-native-fullscreen\" == false and .index == $(index current)) | index(true)")
+    if [ "$1" = "right" ]; then
+      let ix++
+    elif [ "$1" = "left" ]; then
+      let ix--
+    fi
+    yabai -m query --spaces --display | \
+      jq "map(select(.\"is-native-fullscreen\" == false))[$ix].index"
   fi
-  let ix=$(yabai -m query --spaces --display | \
-    jq "map(.\"is-native-fullscreen\" == false and .index == $(index current)) | index(true)")
-  if [ "$1" = "right" ]; then
-    let ix++
-  elif [ "$1" = "left" ]; then
-    let ix--
-  fi
-  yabai -m query --spaces --display | \
-    jq "map(select(.\"is-native-fullscreen\" == false))[$ix].index"
 }
 
 function move_to_space() {
@@ -46,6 +46,8 @@ function move_to_space() {
   elif [ "$1" = "new" ]; then
     yabai -m space --create
     let target_space=$(index last)
+  elif [ "$1" = "recent" ]; then
+    let target_space=$(index recent)
   fi
   if [ "$2" = "with_window" ]; then
     yabai -m window --space "$target_space"
