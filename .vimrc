@@ -8,7 +8,7 @@ set rtp+=~/repos/dot/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rhubarb'
 Plugin 'tpope/vim-unimpaired'
@@ -21,7 +21,7 @@ Plugin 'rafi/awesome-vim-colorschemes'
 "Plugin 'cespare/vim-toml'
 "Plugin 'vim-airline/vim-airline'
 "Plugin 'vim-airline/vim-airline-themes'
-Plugin 'dense-analysis/ale'
+" Plugin 'dense-analysis/ale'
 Plugin 'joshdick/onedark.vim'
 Plugin 'itchyny/lightline.vim'
 Plugin 'sheerun/vim-polyglot' " language support
@@ -38,12 +38,15 @@ Plugin 'prettier/vim-prettier'
 Plugin 'DoxygenToolkit.vim' " vim-scripts/DoxygenToolkit.vim " :Dox
 Plugin 'ludovicchabant/vim-gutentags' " automatic tag management
 "Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'bfrg/vim-cpp-modern'
+" Plugin 'bfrg/vim-cpp-modern'
 Plugin 'machakann/vim-highlightedyank'
 Plugin 'itchyny/vim-cursorword'
 " Plugin 'muellan/vim-brace-for-umlauts' " make qwertz more useful
 " Plugin 'bounceme/poppy.vim' " highlight matching braces
-Plugin 'kien/rainbow_parentheses.vim'
+" Plugin 'kien/rainbow_parentheses.vim'
+" Plugin 'luochen1990/rainbow' " highlight braces
+" Plugin 'krischik/vim-rainbow'
+Plugin 'andymass/vim-matchup' " highlight matching words and such
 "Plugin 'mg979/vim-visual-multi' " multi cursor support
 Plugin 'rhysd/clever-f.vim' " f{char} and t{char} jumps
 "Plugin 'preservim/vim-pencil' " better prose editing
@@ -52,6 +55,7 @@ Plugin 'tpope/vim-repeat' " better . for repeating commands
 Plugin 'tpope/vim-commentary' " gcc for commenting lines
 Plugin 'kana/vim-niceblock' " I and A in block-wise mode
 Plugin 'liuchengxu/vim-clap'
+Plugin 'Yggdroot/indentLine' " vertical lines on indents
 " Plugin 'umaumax/vim-format'
 "Plugin 'neoclide/coc.nvim' " snippet completion
 
@@ -302,10 +306,17 @@ au FileType proto setlocal commentstring=//\ %s
 
 " PLUGIN: poppy / rainbow parentheses
 "au! cursormoved * call PoppyInit()
-au FileType cpp,c,hpp,h RainbowParenthesesActivate
-au FileType cpp,c,hpp,h RainbowParenthesesLoadRound
-au FileType cpp,c,hpp,h RainbowParenthesesLoadSquare
-au FileType cpp,c,hpp,h RainbowParenthesesLoadBraces
+" au FileType cpp,c,hpp,h RainbowParenthesesActivate
+" au FileType cpp,c,hpp,h RainbowParenthesesLoadRound
+" au FileType cpp,c,hpp,h RainbowParenthesesLoadSquare
+" au FileType cpp,c,hpp,h RainbowParenthesesLoadBraces
+" if exists("g:btm_rainbow_color") && g:btom_rainbow_color
+let g:rainbow_parenthesis_color = 'slve'
+" call rainbow_paranthesis#LoadSquare()
+" autocmd FileType cpp call rainbow_parenthesis#LoadBraces()
+" autocmd FileType cpp call rainbow_parenthesis#Activate()
+" endif
+
 
 
 " PLUGIN: vim-format
@@ -314,18 +325,18 @@ let g:vim_format_fmt_on_save = 1
 
 " PLUGIN: clap
 " left right split
-"let g:clap_preview_direction = 'LR'
-"let g:clap_layout = {'relative': 'editor', 'width': '50%', 'col': '0%', 'height': '99%', 'row': '2%'}
+" let g:clap_preview_direction = 'LR'
+" let g:clap_layout = {'relative': 'editor', 'width': '50%', 'col': '0%', 'height': '99%', 'row': '2%'}
 " top bottom split
-let g:clap_preview_direction = 'TB'
-let g:clap_layout = {'relative': 'editor', 'width': '100%', 'col': '0%', 'height': '70%', 'row': '3%'}
+let g:clap_preview_direction = 'UD'
+" let g:clap_layout = {'relative': 'editor', 'width': '100%', 'col': '0%', 'height': '70%', 'row': '10%'}
 "let g:clap_theme = { 'search_text': {'guifg': 'red', 'ctermfg': 'red'} }
-let g:clap_theme = {'display': {'guibg': 'black'}, 'preview': {'guibg': 'black'}}
-let g:clap_theme['search_text'] = {'guibg': 'black', 'ctermbg': 'black'}
-let g:clap_theme['input'] = {'guibg': 'black', 'ctermbg': 'black'}
-let g:clap_theme['indicator'] = {'guibg': 'black', 'ctermbg': 'black'}
-let g:clap_theme['spinner'] = {'guibg': 'black', 'ctermbg': 'black'}
-let g:clap_disable_run_rooter = 'v:true'
+" let g:clap_theme = {'display': {'guibg': 'black'}, 'preview': {'guibg': 'black'}}
+" let g:clap_theme['search_text'] = {'guibg': 'black', 'ctermbg': 'black'}
+" let g:clap_theme['input'] = {'guibg': 'black', 'ctermbg': 'black'}
+" let g:clap_theme['indicator'] = {'guibg': 'black', 'ctermbg': 'black'}
+" let g:clap_theme['spinner'] = {'guibg': 'black', 'ctermbg': 'black'}
+" let g:clap_disable_run_rooter = 'v:true'
 let g:clap_popup_input_delay = '40ms'
 let g:clap_provider_grep_delay = '10ms'
 " nnoremap <C-p> :Clap files<CR>
@@ -334,16 +345,16 @@ nnoremap π :Clap files<CR>
 " uppercase option p
 nnoremap ∏ :Clap buffers<CR>
 map <leader>p :Clap git_files<CR>
-map <leader>g :Clap grep2<CR>
+map <leader>g :Clap grep<CR>
 map <leader>r :Clap recent_files<CR>
-map <leader>P :b#<CR>
+map <leader>P :b#<CR> # previous buffer
 
 " PLUGIN: YCM
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_python_interpreter_path = ''
-let g:ycm_python_sys_path = []
-let g:ycm_extra_conf_vim_data = ['g:ycm_python_interpreter_path', 'g:ycm_python_sys_path']
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+" let g:ycm_confirm_extra_conf = 0
+" let g:ycm_python_interpreter_path = ''
+" let g:ycm_python_sys_path = []
+" let g:ycm_extra_conf_vim_data = ['g:ycm_python_interpreter_path', 'g:ycm_python_sys_path']
+" let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 " required on macos
 let g:ycm_clangd_binary_path = trim(system('brew --prefix llvm')).'/bin/clangd'
 
@@ -467,6 +478,10 @@ let g:cpp_attributes_highlight = 1
 let g:cpp_member_highlight = 1
 let g:cpp_simple_highlight = 0
 
+" PLUGIN: indentLine
+au FileType markdown let g:indentLine_setConceal = 0
+au FileType json let g:indentLine_setConceal = 0
+
 " Change where we store swap/undo files.
 if !isdirectory($HOME . "/.vim/tmp")
   " Ensure the temp dirs exist
@@ -518,11 +533,10 @@ set viminfo='1000,f1,<500,:100,/100,h
 " --------------------------- Colorscheme Settings -------------------------
 call plug#begin('~/.vim/plugged')
 "Plug 'sonph/onehalf', { 'rtp': 'vim' }
+let g:is_bash = 1
 syntax on
 set t_Co=256
 set cursorline
-"colorscheme onehalfdark
-"colorscheme molokai
 "colorscheme deus
 "let g:airline_theme='onehalfdark'
 " lightline
@@ -559,12 +573,17 @@ if (empty($TMUX))
   endif
 endif
 
-let g:onedark_termcolors=256
-set background=dark
-let g:onedark_color_overrides = {
-  \ "background": {"gui": "#000000", "cterm": "255", "cterm16": "0" },
-  \}
-colorscheme onedark
+" let g:onedark_termcolors=256
+" let g:onedark_color_overrides = {
+"   \ "background": {"gui": "#000000", "cterm": "255", "cterm16": "0" },
+" \}
+" colorscheme onedark
+" colorscheme one
+" set background=light
+" let ayucolor="light"
+let ayucolor="dark"
+colorscheme ayu
+" colorscheme pink-moon
 
 " Show extra whitespace
 hi ExtraWhitespace guibg=#CCCCCC

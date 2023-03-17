@@ -5,6 +5,8 @@
 	sha = rev-parse HEAD
 	ssha = rev-parse --short HEAD
 	pushfwl = push --force-with-lease
+	remove-orphans = "!git fetch -p && for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do git branch -D $branch; done"
+	changes = log --follow -p --
 [core]
 	excludesfile = ~/.gitignore
 	attributesfile = ~/.gitattributes
@@ -43,8 +45,8 @@
 	email = a.hoereth@gmail.com
 	name = Alexander Höreth
 	signingkey = 761E70A00788B2B1
-[merge]
-	conflictStyle = diff3
+; [merge]
+; 	conflictStyle = diff3
 [commit]
 	gpgsign = False
 [color]

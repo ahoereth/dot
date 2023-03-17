@@ -187,8 +187,10 @@ ctrl + alt - o : yabai -m window --focus east
 ctrl + alt - e : yabai -m window --focus south
 ctrl + alt - n : yabai -m window --focus west
 ctrl + alt - m : yabai -m window --focus recent
-ctrl + alt - p : yabai -m window --focus prev
-cmd + ctrl + alt - p : yabai -m window --focus next
+ctrl + alt - p : yabai -m window --focus next
+cmd + ctrl + alt - p : yabai -m window --focus prev
+ctrl + alt - t : yabai -m window --focus next
+cmd + ctrl + alt - t : yabai -m window --focus prev
 
 # Flip the tree horizontally
 #yabai -m space --mirror x-axis
@@ -203,7 +205,7 @@ fn - q : yabai -m window --swap recent
 
 # Move focussed window to window under mouse
 fn - tab : yabai -m window --warp mouse
-fn - tab : yabai -m window --warp mouse
+ctrl + alt - tab : yabai -m window --warp mouse
 
 # reload yabai and skhd config
 fn - r :    launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"; \
