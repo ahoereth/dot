@@ -341,13 +341,11 @@ fi
 
 # fuzzy matching fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  # On macOS alt-c prints ç, bind that to the fzf-cd-widget which on other
-  # systems is triggered by alt-c.
-  # https://github.com/junegunn/fzf/issues/1531
-  # https://github.com/junegunn/fzf/issues/164#issuecomment-1324505215
-  bindkey 'ç' fzf-cd-widget
-fi
+# On macOS alt-c prints ç, bind that to the fzf-cd-widget which on other
+# systems is triggered by alt-c.
+# https://github.com/junegunn/fzf/issues/1531
+# https://github.com/junegunn/fzf/issues/164#issuecomment-1324505215
+bindkey 'ç' fzf-cd-widget
 
 # pyenv
 # if command -v pyenv 1>/dev/null 2>&1; then
