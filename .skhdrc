@@ -137,31 +137,38 @@
           # yabai -m window --toggle topmost
           # yabai -m window --toggle pip
 
+###############################################################################
 ## Resize windows
-# # left
-# fn - h :          yabai -m window --resize left:-20:0; \
-#                   yabai -m window --resize right:-20:0
-# # right
-# fn - l :          yabai -m window --resize left:20:0; \
-#                   yabai -m window --resize right:20:0
-# # up
-# fn - k :          yabai -m window --resize top:0:-20; \
-#                   yabai -m window --resize bottom:0:-20
-# # down
-# fn - j :          yabai -m window --resize top:0:20; \
-#                   yabai -m window --resize bottom:0:20
 # left
-ctrl + alt - left : yabai -m window --resize left:-20:0; \
-                    yabai -m window --resize right:-20:0
+fn - h :          yabai -m window --resize left:-20:0; \
+                  yabai -m window --resize right:-20:0
 # right
-ctrl + alt - right : yabai -m window --resize left:20:0; \
-                     yabai -m window --resize right:20:0
+fn - l :          yabai -m window --resize left:20:0; \
+                  yabai -m window --resize right:20:0
 # up
-ctrl + alt - up : yabai -m window --resize top:0:-20; \
+fn - k :          yabai -m window --resize top:0:-20; \
                   yabai -m window --resize bottom:0:-20
 # down
-ctrl + alt - down : yabai -m window --resize top:0:20; \
-                    yabai -m window --resize bottom:0:20
+fn - j :          yabai -m window --resize top:0:20; \
+                  yabai -m window --resize bottom:0:20
+
+# colemak dh
+# left
+ctrl + alt - h : yabai -m window --resize left:-20:0; \
+                 yabai -m window --resize right:-20:0
+# right, slash /
+ctrl + alt - 0x2C : yabai -m window --resize left:20:0; \
+                 yabai -m window --resize right:20:0
+# up, period .
+ctrl + alt - 0x2F : yabai -m window --resize top:0:-20; \
+                    yabai -m window --resize bottom:0:-20
+# down, comma ,
+ctrl + alt - 0x2B : yabai -m window --resize top:0:20; \
+                   yabai -m window --resize bottom:0:20
+
+
+###############################################################################
+## Splits / layout
 
 # Toggle window split type
 fn - space :      yabai -m window --toggle split
@@ -172,6 +179,9 @@ fn - 0: yabai -m space --balance
 fn - b: yabai -m space --balance
 ctrl + alt - b : yabai -m space --balance
 
+###############################################################################
+## Window focus
+
 # Focus windows
 # fn - 0x2F : yabai -m window --focus east  # period .
 # fn - 0x2B : yabai -m window --focus west  # comma ,
@@ -179,18 +189,26 @@ fn - k : yabai -m window --focus north
 fn - l : yabai -m window --focus east
 fn - j : yabai -m window --focus south
 fn - h : yabai -m window --focus west
+
 fn - p : yabai -m window --focus recent
-fn - n : yabai -m window --focus prev
+
+fn - n : yabai -m window --focus next
+fn + shift - n : yabai -m window --focus prev
 fn - m : yabai -m window --focus next
+
 ctrl + alt - i : yabai -m window --focus north
 ctrl + alt - o : yabai -m window --focus east
 ctrl + alt - e : yabai -m window --focus south
 ctrl + alt - n : yabai -m window --focus west
+
 ctrl + alt - m : yabai -m window --focus recent
+ctrl + alt - w : yabai -m window --focus recent
 ctrl + alt - p : yabai -m window --focus next
-cmd + ctrl + alt - p : yabai -m window --focus prev
-ctrl + alt - t : yabai -m window --focus next
-cmd + ctrl + alt - t : yabai -m window --focus prev
+ctrl + alt - f : yabai -m window --focus prev
+# cmd + ctrl + alt - p : yabai -m window --focus prev
+
+# ctrl + alt - t : yabai -m window --focus next
+# cmd + ctrl + alt - t : yabai -m window --focus prev
 
 # Flip the tree horizontally
 #yabai -m space --mirror x-axis
@@ -208,17 +226,16 @@ fn - tab : yabai -m window --warp mouse
 ctrl + alt - tab : yabai -m window --warp mouse
 
 # reload yabai and skhd config
-fn - r :    launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"; \
-            skhd --reload
-
-shift + ctrl + alt - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"; \
+fn - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"; \
+         skhd --reload
+cmd + ctrl + alt - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"; \
                          skhd --reload
 
 # Float/unfloat focussed window
-fn - f : yabai -m window --toggle float;\
-         yabai -m window --grid 4:4:1:1:2:2;\
-         yabai -m window --enable topmost
-# fn - f : yabai -m window --toggle sticky --toggle topmost --toggle pip
+# fn - f : yabai -m window --toggle float;\
+#          yabai -m window --grid 4:4:1:1:2:2;\
+#          yabai -m window --enable topmost
+fn - f : yabai -m window --toggle sticky --toggle topmost --toggle pip
 
 ## Manage spaces
 # Move focus to new empty space
@@ -253,3 +270,5 @@ ctrl + alt - right :  let index=$(yabai -m query --spaces --display \
 
 # Open programms
 alt - space : open -a Alacritty --new
+# alt - space : alacritty msg create-window || alacritty
+

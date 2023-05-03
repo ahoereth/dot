@@ -3,21 +3,49 @@ let s:uname = system("echo -n \"$(uname)\"")
 let dot = '~/repos/dot/'
 
 
-" VUNDLE
-set nocompatible
-filetype off
+" PLUG
+" filetype off
 
-" Setup vim-plug
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+let s:plugin_manager=expand('~/.vim/autoload/plug.vim')
+let s:plugin_url='https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+if empty(glob(s:plugin_manager))
+  echom 'vim-plug not found. Installing...'
+  if executable('curl')
+    silent exec '!curl -fLo ' . s:plugin_manager . ' --create-dirs ' .
+          \ s:plugin_url
+  elseif executable('wget')
+    call mkdir(fnamemodify(s:plugin_manager, ':h'), 'p')
+    silent exec '!wget --force-directories --no-check-certificate -O ' .
+          \ expand(s:plugin_manager) . ' ' . s:plugin_url
+  else
+    echom 'Could not download plugin manager. No plugins were installed.'
+    finish
+  endif
+  augroup vimplug
+    autocmd!
+    autocmd VimEnter * PlugInstall
+  augroup END
 endif
-
-" call plug#begin()
-" Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
-" call plug#end()
-
+" Create a horizontal split at the bottom when installing plugins
+let g:plug_window = 'botright new'
+let g:plug_dir = expand('~/.vim/plugged')
+call plug#begin(g:plug_dir)
+Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
+Plug 'itchyny/lightline.vim' " statusline
+Plug 'preservim/tagbar' " show current tag in statusline
+Plug 'ludovicchabant/vim-gutentags' " automatic tag management
+Plug 'Yggdroot/indentLine' " vertical lines on indents
+Plug 'andymass/vim-matchup' " highlight matching words and such
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-surround' " cs'<p>
+Plug 'tpope/vim-repeat' " better . for repeating commands
+Plug 'tpope/vim-commentary' " gcc for commenting lines
+Plug 'wellle/context.vim'
+Plug 'rust-lang/rust.vim'
+call plug#end()
+let g:loaded_matchit = 1
 
 " VUNDLE
 set rtp+=~/repos/dot/.vim/bundle/Vundle.vim
@@ -25,34 +53,29 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 " Plugin 'Valloric/YouCompleteMe'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rhubarb'
-Plugin 'tpope/vim-unimpaired'
 Plugin 'airblade/vim-gitgutter'
 " Plugin 'mhinz/vim-signify' " alternative to gitgutter
-Plugin 'tpope/vim-surround' " cs'<p>
 "Plugin 'python-mode/python-mode'
 Plugin 'rafi/awesome-vim-colorschemes'
 "Plugin 'MaxMEllon/vim-jsx-pretty'
 "Plugin 'cespare/vim-toml'
-"Plugin 'vim-airline/vim-airline'
-"Plugin 'vim-airline/vim-airline-themes'
 " Plugin 'dense-analysis/ale'
 Plugin 'joshdick/onedark.vim'
-Plugin 'itchyny/lightline.vim'
 Plugin 'sheerun/vim-polyglot' " language support
 "Plugin 'junegunn/fzf'
 "Plugin 'junegunn/fzf.vim'
 "automatic vim sessions
 Plugin 'tpope/vim-obsession'
 Plugin 'dhruvasagar/vim-prosession'
+
 Plugin 'rhysd/vim-clang-format'
 Plugin 'psf/black'
 Plugin 'prettier/vim-prettier'
+"
 "Plugin 'samoshkin/vim-mergetool'
 "Plugin 'vim-ctrlspace/vim-ctrlspace'
+
 Plugin 'DoxygenToolkit.vim' " vim-scripts/DoxygenToolkit.vim " :Dox
-Plugin 'ludovicchabant/vim-gutentags' " automatic tag management
 "Plugin 'ctrlpvim/ctrlp.vim'
 " Plugin 'bfrg/vim-cpp-modern'
 Plugin 'machakann/vim-highlightedyank'
@@ -62,16 +85,11 @@ Plugin 'itchyny/vim-cursorword'
 " Plugin 'kien/rainbow_parentheses.vim'
 " Plugin 'luochen1990/rainbow' " highlight braces
 " Plugin 'krischik/vim-rainbow'
-Plugin 'andymass/vim-matchup' " highlight matching words and such
 "Plugin 'mg979/vim-visual-multi' " multi cursor support
 Plugin 'rhysd/clever-f.vim' " f{char} and t{char} jumps
 "Plugin 'preservim/vim-pencil' " better prose editing
 " Plugin 'tommcdo/vim-exchange' " exchange text using cx{motion}
-Plugin 'tpope/vim-repeat' " better . for repeating commands
-Plugin 'tpope/vim-commentary' " gcc for commenting lines
 Plugin 'kana/vim-niceblock' " I and A in block-wise mode
-Plugin 'liuchengxu/vim-clap'
-Plugin 'Yggdroot/indentLine' " vertical lines on indents
 " Plugin 'umaumax/vim-format'
 "Plugin 'neoclide/coc.nvim' " snippet completion
 
@@ -309,6 +327,14 @@ nnoremap <silent>   <tab> :if &modifiable && !&readonly && &modified <CR> :write
 nnoremap <silent> <s-tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
 inoremap <S-Tab> <C-d> " fix shift+tab for unindent
 
+" PLUGIN: rust
+let g:rustfmt_autosave = 1
+
+" PLUGIN: context
+let g:context_enabled = 1
+let g:context_max_height = 3
+let g:context_highlight_tag = '<hide>'
+
 " PLUGIN: commentary
 au FileType cpp,c,hpp,h setlocal commentstring=//\ %s
 au FileType proto setlocal commentstring=//\ %s
@@ -345,7 +371,7 @@ let g:vim_format_fmt_on_save = 1
 " let g:clap_layout = {'relative': 'editor', 'width': '50%', 'col': '0%', 'height': '99%', 'row': '2%'}
 " top bottom split
 let g:clap_preview_direction = 'UD'
-" let g:clap_layout = {'relative': 'editor', 'width': '100%', 'col': '0%', 'height': '70%', 'row': '10%'}
+let g:clap_layout = {'relative': 'editor', 'width': '100%', 'col': '0%', 'height': '70%', 'row': '5%'}
 "let g:clap_theme = { 'search_text': {'guifg': 'red', 'ctermfg': 'red'} }
 " let g:clap_theme = {'display': {'guibg': 'black'}, 'preview': {'guibg': 'black'}}
 " let g:clap_theme['search_text'] = {'guibg': 'black', 'ctermbg': 'black'}
@@ -395,6 +421,8 @@ highlight GitGutterChangeDelete ctermfg=184
 highlight GitGutterDelete ctermfg=124
 
 " PLUGIN: gutentags
+" let g:gutentags_trace = 1
+let g:gutentags_ctags_exclude = ['--*']
 let g:gutentags_file_list_command = 'rg --files'
 
 " PLUGIN: fzf
@@ -444,27 +472,58 @@ autocmd FileType cpp ClangFormatAutoEnable
 autocmd FileType proto ClangFormatAutoEnable
 
 
+" PLUGIN: matchup
+" let g:matchup_matchparen_offscreen = {'method': 'status_manual'}
+let g:matchup_matchparen_offscreen = {'method': 'popup', 'highlight': 'OffscreenPopup', 'fullwidth': 1, 'syntax_hl': 1}
+let g:matchup_delim_stopline      = 1500 " generally
+let g:matchup_matchparen_stopline = 1500  " for match highlighting only
+
 " PLUGIN: lightline
 set laststatus=2
 set noshowmode " lightline shows status
 let g:lightline = {
-        "\ 'colorscheme': 'Tomorrow',
-        "\ 'colorscheme': 'ayu_light',
-        \ 'colorscheme': '16color',
-        \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ],
-        \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
-        \   'right': [ [ 'lineinfo' ],
-        \              [ 'percent' ],
-        \              [ 'obsession', 'fileformat', 'fileencoding', 'filetype' ] ]
-        \ },
-        \ 'component_function': {
+        "\   'colorscheme': 'Tomorrow',
+        "\   'colorscheme': 'ayu_light',
+        "\   'enable': { 'statusline': 0 },
+        \   'colorscheme': '16color',
+        \   'active': {
+        \     'left': [ [ 'mode', 'paste' ],
+        \               [ 'filename' ] ],
+        \     'right': [ [ 'percent', 'lineinfo' ],
+        \                [ 'gitbranch', 'readonly'],
+        \                [ 'fileformat', 'fileencoding', 'filetype' ] ]
+        \   },
+        \   'component': {
+        \       'tagbar': '%{tagbar#currenttag("%s", "")}',
+        \   },
+        \   'component_function': {
         \     'fileformat': 'LightlineFileformat',
         \     'filetype': 'LightlineFiletype',
+        \     'filename': 'LightlineFilename',
         \     'gitbranch': 'FugitiveHead',
         \     'obsession': 'ObsessionStatus',
         \   },
         \ }
+        " \   'mode_map': {
+        " \     'n' : 'N',
+        " \     'i' : 'I',
+        " \     'R' : 'R',
+        " \     'v' : 'V',
+        " \     'V' : 'VL',
+        " \     "\<C-v>": 'VB',
+        " \     'c' : 'C',
+        " \     's' : 'S',
+        " \     'S' : 'SL',
+        " \     "\<C-s>": 'SB',
+        " \     't': 'T',
+        " \   },
+function! LightlineFilename()
+  let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
+  let tagname = tagbar#currenttag("%s", "", "", "scoped-stl")
+  let tagname = len(tagname) > 0 ? "::" . tagname : ""
+  let modified = &modified ? '+' : ''
+  return filename . tagname . modified
+endfunction
 function! LightlineFileformat()
   return winwidth(0) > 70 ? &fileformat : ''
 endfunction
@@ -497,6 +556,8 @@ let g:cpp_simple_highlight = 0
 " PLUGIN: indentLine
 au FileType markdown let g:indentLine_setConceal = 0
 au FileType json let g:indentLine_setConceal = 0
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_conceal_code_blocks = 0
 
 " Change where we store swap/undo files.
 if !isdirectory($HOME . "/.vim/tmp")
@@ -547,8 +608,6 @@ set viminfo='1000,f1,<500,:100,/100,h
 
 
 " --------------------------- Colorscheme Settings -------------------------
-call plug#begin('~/.vim/plugged')
-"Plug 'sonph/onehalf', { 'rtp': 'vim' }
 let g:is_bash = 1
 syntax on
 set t_Co=256
@@ -638,3 +697,7 @@ autocmd BufReadPost *
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
      \   exe "normal! g`\"" |
      \ endif
+
+function! Corne()
+  :set langmap=dh,hj,tk,nl
+endfunction

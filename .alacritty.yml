@@ -3,11 +3,13 @@ window:
     x: 5
     y: 5
   decorations: buttonless
+  # OnlyLeft, OnlyRight, Both, None
+  option_as_alt: None
 shell:
   program: /bin/zsh
 env:
   TERM: xterm-256color
-alt_send_esc: false
+# alt_send_esc: false
 # colors:
 #  name: Pastel White
 #  author: Muzieca

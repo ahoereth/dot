@@ -45,13 +45,13 @@ case $os in
   Darwin )  echo "System: macOS"
             export PYTHON_VERSION=$PYTHON_VERSION
             export DOT=$DOT
-            ./install-macos.sh
+            . ./install-macos.sh
             ;;
   Linux )   echo "System: ubuntu"
             export PYTHON_VERSION=$PYTHON_VERSION
             export DOT=$DOT
             export PYENV=$PYENV
-            ./install-ubuntu.sh
+            . ./install-ubuntu.sh
             ;;
 esac
 
