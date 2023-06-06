@@ -185,10 +185,10 @@ ctrl + alt - b : yabai -m space --balance
 # Focus windows
 # fn - 0x2F : yabai -m window --focus east  # period .
 # fn - 0x2B : yabai -m window --focus west  # comma ,
-fn - k : yabai -m window --focus north
-fn - l : yabai -m window --focus east
-fn - j : yabai -m window --focus south
-fn - h : yabai -m window --focus west
+alt - h : yabai -m window --focus west
+alt - j : yabai -m window --focus south
+alt - k : yabai -m window --focus north
+lalt - l : yabai -m window --focus east
 
 fn - p : yabai -m window --focus recent
 
@@ -232,10 +232,10 @@ cmd + ctrl + alt - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"; 
                          skhd --reload
 
 # Float/unfloat focussed window
-# fn - f : yabai -m window --toggle float;\
-#          yabai -m window --grid 4:4:1:1:2:2;\
-#          yabai -m window --enable topmost
-fn - f : yabai -m window --toggle sticky --toggle topmost --toggle pip
+fn - f : yabai -m window --toggle float;\
+         yabai -m window --grid 4:4:1:1:2:2;\
+         yabai -m window --enable topmost
+# fn - f : yabai -m window --toggle sticky --toggle topmost --toggle pip
 
 ## Manage spaces
 # Move focus to new empty space

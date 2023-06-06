@@ -135,15 +135,18 @@ if command -v kubectl 1>/dev/null 2>&1; then
   complete -F __start_kubectl k
 fi
 
+
 #PS1='$icon%{$fg_bold[yellow]%}%2~ %{$reset_color%}$ '
 RPS1='%{$fg[red]%}$name%{$fg[magenta]%}%T%{$reset_color%}'
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
   RPS1="⛵ $RPS1"
 fi
 
+
 # By default, zsh considers many characters part of a word (e.g., _ and -).
 # Narrow that down to allow easier skipping through words via M-f and M-b.
 export WORDCHARS='*?[]~&;!$%^<>'
+
 
 if [ "$(uname)" = "Darwin" ]; then
   ### MATLAB with OpenJDK
@@ -154,16 +157,20 @@ if [ "$(uname)" = "Darwin" ]; then
   export PATH=/usr/local/opt/ccache/libexec:$PATH
 fi
 
+
 # ccat colorized cat
 if command -v ccat &> /dev/null; then
   alias cat=ccat
   alias json='python -m json.tool | ccat'
 fi
 
-# viddy colorized cat
+
+# viddy watch
+alias wwatch=watch
 if command -v viddy &> /dev/null; then
   alias watch=viddy
 fi
+
 
 ### git-checkout-before DATETIME BRANCH
 # Checkout specified git branch at the latest commit before DATETIME
@@ -213,9 +220,11 @@ function venv() {
   fi
 }
 
+
 function psauxkill() {
-  ps aux | grep sensornode | tr -s " " | cut -d " " -f2 | xargs sudo kill -9
+  ps aux | grep $1 | tr -s " " | cut -d " " -f2 | xargs sudo kill -9
 }
+
 
 extract () {
  if [ -f "$1" ] ; then
@@ -280,7 +289,9 @@ mfind () {
 case "$OSTYPE" in
   darwin*)
     # source ~/.macrc
-    set -o ignoreeof # disable exit with ctrl-d
+    if [ -z "${TMUX}" ]; then
+      set -o ignoreeof # disable exit with ctrl-d
+    fi
     ssh-add --apple-use-keychain || ssh-add -K
     alias folders='du -hd1 | sort -hr'
     if ! type pbcopy > /dev/null; then
@@ -304,6 +315,7 @@ alias lx="la | awk '{k=0;for(i=0;i<=8;i++)k+=((substr(\$1,i+2,1)~/[rwx]/) \
 alias dev='cd $HOME/repos'
 alias myip="curl -s https://api.ipify.org/"
 alias cpip="myip | pbcopy"
+alias gh-commit="echo $(gh repo view --json url  --jq .url)/commit/$(git rev-parse HEAD)"
 
 # . .venv/bin/activate
 #eval $(thefuck --alias) || echo "Couldn't find thef***"
