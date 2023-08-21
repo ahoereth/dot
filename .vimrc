@@ -34,7 +34,7 @@ Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
 Plug 'itchyny/lightline.vim' " statusline
 Plug 'preservim/tagbar' " show current tag in statusline
 Plug 'ludovicchabant/vim-gutentags' " automatic tag management
-Plug 'Yggdroot/indentLine' " vertical lines on indents
+" Plug 'Yggdroot/indentLine' " vertical lines on indents
 Plug 'andymass/vim-matchup' " highlight matching words and such
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
@@ -42,8 +42,10 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround' " cs'<p>
 Plug 'tpope/vim-repeat' " better . for repeating commands
 Plug 'tpope/vim-commentary' " gcc for commenting lines
+Plug 'tpope/vim-abolish' " abolish misspellings
 Plug 'wellle/context.vim'
 Plug 'rust-lang/rust.vim'
+Plug 'chrisbra/csv.vim'
 call plug#end()
 let g:loaded_matchit = 1
 
@@ -95,6 +97,7 @@ Plugin 'kana/vim-niceblock' " I and A in block-wise mode
 
 call vundle#end()
 
+filetype plugin on
 filetype plugin indent on
 syntax on
 
@@ -151,6 +154,9 @@ set whichwrap+=<,>,h,l
 
 " only single space after sentences
 set nojoinspaces
+
+set iskeyword-=.
+set iskeyword-=-
 
 set synmaxcol=1024
 set ttyfast
@@ -277,7 +283,16 @@ if has("mac") || has("macunix")
   vmap <D-k> <M-k>
 endif
 
+" Insert line below/above without entering insert mode, oo OO
+nmap oo o<Esc>k
+nmap OO O<Esc>j
 
+" Apply macro to all visually selected lines
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+function! ExecuteMacroOverVisualRange()
+  echo "@".getcmdline()
+  execute ":'<,'>normal @".nr2char(getchar())
+endfunction
 
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
@@ -326,6 +341,24 @@ nnoremap <C-h> <C-w><C-h>
 nnoremap <silent>   <tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
 nnoremap <silent> <s-tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
 inoremap <S-Tab> <C-d> " fix shift+tab for unindent
+
+" PLUGIN: abolish
+" Abolish cal{a,e}nder{,s}                      cal{e}ndar{}
+" Abolish {,in}consistan{cy,cies,t,tly}         {}consisten{}
+" Abolish delimeter{,s}                         delimiter{}
+" Abolish {,non}existan{ce,t}                   {}existen{}
+" Abolish despara{te,tely,tion}                 despera{}
+" Abolish d{e,i}screp{e,a}nc{y,ies}             d{i}screp{a}nc{}
+" Abolish hense                                 hence
+" Abolish inherant{,ly}                         inherent{}
+" Abolish persistan{ce,t,tly}                   persisten{}
+" Abolish {,ir}releven{ce,cy,t,tly}             {}relevan{}
+" Abolish rec{co,com,o}mend{,s,ed,ing,ation}    rec{om}mend{}
+" Abolish reproducable                          reproducible
+" Abolish resouce{,s}                           resource{}
+" Abolish restraunt{,s}                         restaurant{}
+" Abolish seperat{e,es,ed,ing,ely,ion,ions,or}  separat{}
+
 
 " PLUGIN: rust
 let g:rustfmt_autosave = 1
@@ -556,6 +589,7 @@ let g:cpp_simple_highlight = 0
 " PLUGIN: indentLine
 au FileType markdown let g:indentLine_setConceal = 0
 au FileType json let g:indentLine_setConceal = 0
+au FileType csv let g:indentLine_setConceal = 0
 let g:vim_markdown_conceal = 0
 let g:vim_markdown_conceal_code_blocks = 0
 

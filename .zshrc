@@ -204,7 +204,19 @@ toggleservice() {
 function venv() {
   local py="python3"
   local vd=${1:-.venv}
-  if [ ! -d ./$vd ]; then
+  local bases=("." ".." "../.." "../../..")
+  local sourced=0
+  for base in "${bases[@]}"; do
+    file=`readlink -f "$base/$vd/bin/activate"`
+    if [ -f "$file" ]; then
+      echo "Sourcing $file"
+      source "$file"
+      python --version
+      sourced=1
+      break
+    fi
+  done
+  if [ $sourced -eq 0 ]; then
     echo "creating virtual environment in ./$vd ..."
     if ! $py -m venv $vd --prompt=$(basename $PWD) --without-pip; then
       echo "ERROR: Failed creating venv" >&2
@@ -215,8 +227,6 @@ function venv() {
       $vd/bin/python $whl/pip install --upgrade pip setuptools wheel
       source $vd/bin/activate
     fi
-  else
-    source $vd/bin/activate
   fi
 }
 
