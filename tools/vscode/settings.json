@@ -160,5 +160,5 @@
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
-  "window.zoomLevel": 1
+  "window.zoomLevel": 2
 }

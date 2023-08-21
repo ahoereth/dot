@@ -78,11 +78,12 @@ ln -s "${DOT}/.gitignore" "${HOME}/.gitignore_global"
 # fzf
 $DOT/tools/fzf/install
 
-# Make zsh the default shell
-echo "Need sudo to make zsh the default shell."
-chsh -s /bin/zsh || true
-usermod -s /bin/zsh $(whoami) || true
-
+# Make zsh the default shell on linux
+if [ "$os" = "Linux" ]; then
+  echo "Need sudo to make zsh the default shell."
+  chsh -s /bin/zsh || true
+  usermod -s /bin/zsh $(whoami) || true
+fi
 
 # Install .ssh/config
 read -p "Install the shared .ssh/config? (Y/N) " confirm &&

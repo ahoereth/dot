@@ -457,3 +457,4 @@ fi
 export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1
 export GEM_HOME=~/.gem
 export GEM_PATH=~/.gem
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"

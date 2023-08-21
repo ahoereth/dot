@@ -44,6 +44,7 @@ echo "Continuously pushing from $src to $dsts..."
 function do_rsync() {
   for dst in "${dsts[@]}"; do
     echo "->" $dst
+    # rsync -azih --no-owner --no-perms --no-group --no-times $args --include='**.gitignore' --exclude="/.git" --filter=":- .gitignore" $src $dst
     rsync -azih $args --include='**.gitignore' --exclude="/.git" --filter=":- .gitignore" $src $dst
   done
 }

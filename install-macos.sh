@@ -68,7 +68,5 @@ done
 
 
 # window management
-brew services start koekeishiya/formulae/skhd
-brew services start koekeishiya/formulae/yabai
-#skhd
-#yabai
+skhd --start-service
+yabai --start-service
