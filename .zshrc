@@ -104,10 +104,10 @@ autoload -Uz compinit promptinit bashcompinit
 bashcompinit
 promptinit
 zsh-defer prompt pure
-if type rclone &>/dev/null
-then
-  zsh $DOT_PATH/_rclone
-fi
+# if type rclone &>/dev/null
+# then
+#   zsh $DOT_PATH/_rclone
+# fi
 
 # zstyle ':autocomplete:*' min-input 1
 # zstyle ':autocomplete:*' list-lines 8
