@@ -60,17 +60,24 @@ zle -N edit-command-line
 
 export ZSH_CACHE_DIR="$HOME/.cache"
 
+source $DOT_PATH/tools/zsh-defer/zsh-defer.plugin.zsh
+
+zstyle ':autocomplete:key-bindings' enabled no
+
 # needs to come before antidote
 autoload -Uz compinit && compinit
 
 source $DOT_PATH/tools/antidote/antidote.zsh
-if [ -f "$DOT_PATH/zsh_plugins.zsh" ] && [ -s "$DOT_PATH/zsh_plugins.zsh" ]; then
-  source $DOT_PATH/zsh_plugins.zsh
+md5sum --check $DOT_PATH/zsh_plugins_md5.txt --quiet
+match=$?
+if [ -f "$DOT_PATH/zsh_plugins.zsh" ] && [ -s "$DOT_PATH/zsh_plugins.zsh" ] && [ $match -eq 0 ]; then
+  zsh-defer source $DOT_PATH/zsh_plugins.zsh
 else
   # zsh_plugins.zsh does not yet exist. Create and load it.
   echo "Rebundling antidote"
   antidote bundle < $DOT_PATH/zsh_plugins.txt > $DOT_PATH/zsh_plugins.zsh
-  source $DOT_PATH/zsh_plugins.zsh
+  zsh-defer source $DOT_PATH/zsh_plugins.zsh
+  md5sum $DOT_PATH/zsh_plugins.txt > $DOT_PATH/zsh_plugins_md5.txt
   # source <(antidote init)
   # antidote bundle < $DOT_PATH/zsh_plugins.txt
 fi
@@ -96,7 +103,7 @@ autoload -Uz compinit promptinit bashcompinit
 #zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 bashcompinit
 promptinit
-prompt pure
+zsh-defer prompt pure
 if type rclone &>/dev/null
 then
   zsh $DOT_PATH/_rclone
@@ -105,10 +112,17 @@ fi
 # zstyle ':autocomplete:*' min-input 1
 # zstyle ':autocomplete:*' list-lines 8
 # zstyle ':autocomplete:history-search:*' list-lines 8
-# zstyle ':autocomplete:*' insert-unambiguous yes
-# zstyle ':autocomplete:*' fzf-completion yes
-# #zstyle ':autocomplete:*' widget-style menu-select
+zstyle ':autocomplete:*' insert-unambiguous yes
+zstyle ':autocomplete:*' fzf-completion yes
+zstyle ':autocomplete:*' widget-style menu-select
 # # zstyle ':autocomplete:*' widget-style menu-complete
+zsh-defer -c "bindkey '^I' menu-select"
+zsh-defer -c "bindkey '^I' menu-select"
+zsh-defer -c "bindkey '\e^I' reverse-menu-select"
+zsh-defer -c "zstyle ':autocomplete:*' insert-unambiguous yes"
+zsh-defer -c "zstyle ':autocomplete:*' fzf-completion yes"
+zsh-defer -c "bindkey '\t' menu-select "$terminfo[kcbt]" menu-select"
+zsh-defer -c "bindkey -M menuselect '\t' menu-complete '$terminfo[kcbt]' reverse-menu-complete"
 
 if type brew &>/dev/null
 then
@@ -174,10 +188,10 @@ fi
 
 ### git-checkout-before DATETIME BRANCH
 # Checkout specified git branch at the latest commit before DATETIME
-git-checkout-before() {
-  echo 'git checkout `git rev-list -n 1 --before="'$1'" '$2'`\n'
-  git checkout `git rev-list -n 1 --before="$1" $2`
-}
+# git-checkout-before() {
+#   echo 'git checkout `git rev-list -n 1 --before="'$1'" '$2'`\n'
+#   git checkout `git rev-list -n 1 --before="$1" $2`
+# }
 
 
 ## bg COMMAND
@@ -302,7 +316,7 @@ case "$OSTYPE" in
     if [ -z "${TMUX}" ]; then
       set -o ignoreeof # disable exit with ctrl-d
     fi
-    ssh-add --apple-use-keychain || ssh-add -K
+    zsh-defer ssh-add --apple-use-keychain || ssh-add -K
     alias folders='du -hd1 | sort -hr'
     if ! type pbcopy > /dev/null; then
       alias pbcopy='xclip -selection clipboard'
@@ -325,7 +339,7 @@ alias lx="la | awk '{k=0;for(i=0;i<=8;i++)k+=((substr(\$1,i+2,1)~/[rwx]/) \
 alias dev='cd $HOME/repos'
 alias myip="curl -s https://api.ipify.org/"
 alias cpip="myip | pbcopy"
-alias gh-commit="echo $(gh repo view --json url  --jq .url)/commit/$(git rev-parse HEAD)"
+# alias gh-commit="echo $(gh repo view --json url  --jq .url)/commit/$(git rev-parse HEAD)"
 
 # . .venv/bin/activate
 #eval $(thefuck --alias) || echo "Couldn't find thef***"
@@ -468,3 +482,6 @@ export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1
 export GEM_HOME=~/.gem
 export GEM_PATH=~/.gem
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+
+
+zsh-defer -c lwd

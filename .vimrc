@@ -30,7 +30,7 @@ endif
 let g:plug_window = 'botright new'
 let g:plug_dir = expand('~/.vim/plugged')
 call plug#begin(g:plug_dir)
-Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
+Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
 Plug 'itchyny/lightline.vim' " statusline
 Plug 'preservim/tagbar' " show current tag in statusline
 Plug 'ludovicchabant/vim-gutentags' " automatic tag management
@@ -44,8 +44,17 @@ Plug 'tpope/vim-repeat' " better . for repeating commands
 Plug 'tpope/vim-commentary' " gcc for commenting lines
 Plug 'tpope/vim-abolish' " abolish misspellings
 Plug 'wellle/context.vim'
+Plug 'ayu-theme/ayu-vim'
 Plug 'rust-lang/rust.vim'
 Plug 'chrisbra/csv.vim'
+Plug 'fladson/vim-kitty'
+Plug 'rhysd/vim-clang-format'
+Plug 'psf/black'
+Plug 'prettier/vim-prettier'
+Plug 'tpope/vim-obsession'
+Plug 'dhruvasagar/vim-prosession'
+Plug 'machakann/vim-highlightedyank'
+Plug 'itchyny/vim-cursorword'
 call plug#end()
 let g:loaded_matchit = 1
 
@@ -58,7 +67,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
 " Plugin 'mhinz/vim-signify' " alternative to gitgutter
 "Plugin 'python-mode/python-mode'
-Plugin 'rafi/awesome-vim-colorschemes'
+" Plugin 'rafi/awesome-vim-colorschemes'
 "Plugin 'MaxMEllon/vim-jsx-pretty'
 "Plugin 'cespare/vim-toml'
 " Plugin 'dense-analysis/ale'
@@ -67,12 +76,7 @@ Plugin 'sheerun/vim-polyglot' " language support
 "Plugin 'junegunn/fzf'
 "Plugin 'junegunn/fzf.vim'
 "automatic vim sessions
-Plugin 'tpope/vim-obsession'
-Plugin 'dhruvasagar/vim-prosession'
 
-Plugin 'rhysd/vim-clang-format'
-Plugin 'psf/black'
-Plugin 'prettier/vim-prettier'
 "
 "Plugin 'samoshkin/vim-mergetool'
 "Plugin 'vim-ctrlspace/vim-ctrlspace'
@@ -80,8 +84,6 @@ Plugin 'prettier/vim-prettier'
 Plugin 'DoxygenToolkit.vim' " vim-scripts/DoxygenToolkit.vim " :Dox
 "Plugin 'ctrlpvim/ctrlp.vim'
 " Plugin 'bfrg/vim-cpp-modern'
-Plugin 'machakann/vim-highlightedyank'
-Plugin 'itchyny/vim-cursorword'
 " Plugin 'muellan/vim-brace-for-umlauts' " make qwertz more useful
 " Plugin 'bounceme/poppy.vim' " highlight matching braces
 " Plugin 'kien/rainbow_parentheses.vim'
@@ -735,3 +737,5 @@ autocmd BufReadPost *
 function! Corne()
   :set langmap=dh,hj,tk,nl
 endfunction
+
+set nolist " hide newline $ at end of every line

@@ -226,7 +226,7 @@ fn - tab : yabai -m window --warp mouse
 ctrl + alt - tab : yabai -m window --warp mouse
 
 # reload yabai and skhd config
-fn - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"; \
+fn - r : yabai --restart-service; \
          skhd --reload
 cmd + ctrl + alt - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"; \
                          skhd --reload
@@ -269,6 +269,7 @@ ctrl + alt - right :  let index=$(yabai -m query --spaces --display \
                       yabai -m space --move $index
 
 # Open programms
-alt - space : open -a Alacritty --new
+# alt - space : open -a Alacritty --new
+alt - space : kitty -1
 # alt - space : alacritty msg create-window || alacritty
 
