@@ -7,3 +7,5 @@ __pycache__/
 /bin/diff-so-fancy
 node_modules/
 zsh_plugins.zsh
+tags
+zsh_plugins_md5.txt
