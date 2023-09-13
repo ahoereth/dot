@@ -76,7 +76,7 @@ rm -f "${HOME}/.gitignore_global"
 ln -s "${DOT}/.gitignore" "${HOME}/.gitignore_global"
 
 # fzf
-$DOT/tools/fzf/install
+bash $DOT/tools/fzf/install
 
 # Make zsh the default shell on linux
 if [ "$os" = "Linux" ]; then
