@@ -50,11 +50,13 @@ Plug 'chrisbra/csv.vim'
 Plug 'fladson/vim-kitty'
 Plug 'rhysd/vim-clang-format'
 Plug 'psf/black'
-Plug 'prettier/vim-prettier'
+Plug 'prettier/vim-prettier', {'do': 'npm install --frozen-lockfile --production'}
 Plug 'tpope/vim-obsession'
 Plug 'dhruvasagar/vim-prosession'
 Plug 'machakann/vim-highlightedyank'
 Plug 'itchyny/vim-cursorword'
+Plug 'sheerun/vim-polyglot' " language support
+Plug 'evanleck/vim-svelte', {'branch': 'main'}
 call plug#end()
 let g:loaded_matchit = 1
 
@@ -72,7 +74,6 @@ Plugin 'airblade/vim-gitgutter'
 "Plugin 'cespare/vim-toml'
 " Plugin 'dense-analysis/ale'
 Plugin 'joshdick/onedark.vim'
-Plugin 'sheerun/vim-polyglot' " language support
 "Plugin 'junegunn/fzf'
 "Plugin 'junegunn/fzf.vim'
 "automatic vim sessions
@@ -278,6 +279,11 @@ nmap <M-k> mz:m-2<cr>`z
 vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
+" Move to beginning of command using Ctrl-a
+cnoremap <C-A> <Home>
+cnoremap <C-F> <Right>
+cnoremap <C-B> <Left>
+
 if has("mac") || has("macunix")
   nmap <D-j> <M-j>
   nmap <D-k> <M-k>
@@ -324,6 +330,13 @@ command Sw :e %:p:s,.hpp$,.X123X,:s,.cpp$,.hpp,:s,.X123X$,.cpp,
 au FileType python set tabstop=4
 au FileType python set shiftwidth=4
 au FileType python set expandtab
+
+" javascript
+" autocmd BufNewFile,BufRead *.svelte set filetype=javascript
+" autocmd BufNewFile,BufRead *.ts set filetype=javascript
+au FileType javascript set tabstop=2
+au FileType javascript set shiftwidth=2
+au FileType javascript set expandtab
 
 " stamp text -- replace word with last yank
 nnoremap S "_diwP
@@ -373,6 +386,7 @@ let g:context_highlight_tag = '<hide>'
 " PLUGIN: commentary
 au FileType cpp,c,hpp,h setlocal commentstring=//\ %s
 au FileType proto setlocal commentstring=//\ %s
+au FileType svelte,js,ts setlocal commentstring=//\ %s
 
 " PLUGIN: black
 " augroup black_on_save
@@ -569,6 +583,8 @@ endfunction
 " PLUGIN: prettier
 let g:prettier#autoformat = 0
 let g:prettier#autoformat_require_pragma = 0
+" flow|babylon|typescript|css|less|scss|json|graphql|markdown
+let g:prettier#config#parser = 'flow|babylon|typescript|css|less|scss|json|graphql'
 
 " PLUGIN: (ctrl)(p(r))obsession
 let g:prosession_default_session = 0

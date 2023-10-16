@@ -94,9 +94,11 @@ bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
 # make option - left and option - right skip words
-bindkey "^[[1;3C" forward-word
-bindkey "^[[1;3D" backward-word
-
+# bindkey "^[[1;3C" forward-word
+# bindkey "^[[1;3D" backward-word
+# make shift - left and option - right skip words, matches vim
+bindkey "^[[1;2C" forward-word
+bindkey "^[[1;2D" backward-word
 
 autoload -Uz compinit promptinit bashcompinit
 #zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'

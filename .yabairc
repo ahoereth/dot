@@ -56,6 +56,7 @@ yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Authy Desktop$" manage=off
 yabai -m rule --add app="^PrinterProxy$" manage=off
 yabai -m rule --add app="^Stats$" manage=off
+yabai -m rule --add app="^CleanShot X$" manage=off
 
 
 echo "yabai configuration loaded.."
