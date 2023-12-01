@@ -41,16 +41,21 @@ Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround' " cs'<p>
 Plug 'tpope/vim-repeat' " better . for repeating commands
-Plug 'tpope/vim-commentary' " gcc for commenting lines
+" Plug 'tpope/vim-commentary' " gcc for commenting lines
+Plug 'tomtom/tcomment_vim' " gcc for commenting lines
+Plug 'posva/vim-vue'
 Plug 'tpope/vim-abolish' " abolish misspellings
 Plug 'wellle/context.vim'
 Plug 'ayu-theme/ayu-vim'
+" Plug 'joshdick/onedark'
 Plug 'rust-lang/rust.vim'
 Plug 'chrisbra/csv.vim'
 Plug 'fladson/vim-kitty'
 Plug 'rhysd/vim-clang-format'
-Plug 'psf/black'
-Plug 'prettier/vim-prettier', {'do': 'npm install --frozen-lockfile --production'}
+Plug 'psf/black', { 'branch': 'stable' }
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'npm install --frozen-lockfile --production',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'vue'] }
 Plug 'tpope/vim-obsession'
 Plug 'dhruvasagar/vim-prosession'
 Plug 'machakann/vim-highlightedyank'
@@ -303,7 +308,7 @@ function! ExecuteMacroOverVisualRange()
 endfunction
 
 " Toggle paste mode on and off
-map <leader>pp :setlocal paste!<cr>
+" map <leader>pp :setlocal paste!<cr>
 
 " Pressing ,ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<cr>
@@ -357,24 +362,6 @@ nnoremap <silent>   <tab> :if &modifiable && !&readonly && &modified <CR> :write
 nnoremap <silent> <s-tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
 inoremap <S-Tab> <C-d> " fix shift+tab for unindent
 
-" PLUGIN: abolish
-" Abolish cal{a,e}nder{,s}                      cal{e}ndar{}
-" Abolish {,in}consistan{cy,cies,t,tly}         {}consisten{}
-" Abolish delimeter{,s}                         delimiter{}
-" Abolish {,non}existan{ce,t}                   {}existen{}
-" Abolish despara{te,tely,tion}                 despera{}
-" Abolish d{e,i}screp{e,a}nc{y,ies}             d{i}screp{a}nc{}
-" Abolish hense                                 hence
-" Abolish inherant{,ly}                         inherent{}
-" Abolish persistan{ce,t,tly}                   persisten{}
-" Abolish {,ir}releven{ce,cy,t,tly}             {}relevan{}
-" Abolish rec{co,com,o}mend{,s,ed,ing,ation}    rec{om}mend{}
-" Abolish reproducable                          reproducible
-" Abolish resouce{,s}                           resource{}
-" Abolish restraunt{,s}                         restaurant{}
-" Abolish seperat{e,es,ed,ing,ely,ion,ions,or}  separat{}
-
-
 " PLUGIN: rust
 let g:rustfmt_autosave = 1
 
@@ -383,10 +370,10 @@ let g:context_enabled = 1
 let g:context_max_height = 3
 let g:context_highlight_tag = '<hide>'
 
-" PLUGIN: commentary
-au FileType cpp,c,hpp,h setlocal commentstring=//\ %s
-au FileType proto setlocal commentstring=//\ %s
-au FileType svelte,js,ts setlocal commentstring=//\ %s
+" " PLUGIN: commentary
+" au FileType cpp,c,hpp,h setlocal commentstring=//\ %s
+" au FileType proto setlocal commentstring=//\ %s
+" au FileType svelte,js,ts setlocal commentstring=//\ %s
 
 " PLUGIN: black
 " augroup black_on_save
@@ -421,12 +408,24 @@ let g:vim_format_fmt_on_save = 1
 " top bottom split
 let g:clap_preview_direction = 'UD'
 let g:clap_layout = {'relative': 'editor', 'width': '100%', 'col': '0%', 'height': '70%', 'row': '5%'}
-"let g:clap_theme = { 'search_text': {'guifg': 'red', 'ctermfg': 'red'} }
+let g:clap_theme = 'onehalfdark'
+hi ClapDir guifg=red
+hi ClapDir ctermfg=red
+" let g:clap_theme = { 'search_text': {'guifg': 'red', 'ctermfg': 'red'} }
 " let g:clap_theme = {'display': {'guibg': 'black'}, 'preview': {'guibg': 'black'}}
-" let g:clap_theme['search_text'] = {'guibg': 'black', 'ctermbg': 'black'}
+" let g:clap_theme = {
+"       \ 'search_text': {'guibg': 'black', 'ctermbg': 'black', 'ctermfg': 'red', 'guifg': 'red'},
+"       \ 'spinner': {'guibg': 'black', 'ctermbg': 'black', 'ctermfg': 'red', 'guifg': 'red'},
+"       \ 'display': {'guibg': 'black', 'ctermbg': 'black', 'ctermfg': 'red', 'guifg': 'red'},
+"       \ 'current_selection': {'guibg': 'black', 'ctermbg': 'black', 'ctermfg': 'red', 'guifg': 'red'},
+"       \ 'selected': {'guibg': 'black', 'ctermbg': 'black', 'ctermfg': 'red', 'guifg': 'red'},
+"       \ 'indicator': {'guibg': 'black', 'ctermbg': 'black', 'ctermfg': 'red', 'guifg': 'red'},
+"       \ 'preview': {'guibg': 'black', 'ctermbg': 'black', 'ctermfg': 'red', 'guifg': 'red'},
+" \ }
 " let g:clap_theme['input'] = {'guibg': 'black', 'ctermbg': 'black'}
 " let g:clap_theme['indicator'] = {'guibg': 'black', 'ctermbg': 'black'}
 " let g:clap_theme['spinner'] = {'guibg': 'black', 'ctermbg': 'black'}
+" let g:clap_theme['spinner'] = {'guibg': 'black', 'ctermbg': 'black', 'ctermfg': 'red', 'guifg': 'red'}
 " let g:clap_disable_run_rooter = 'v:true'
 let g:clap_popup_input_delay = '40ms'
 let g:clap_provider_grep_delay = '10ms'
@@ -436,6 +435,7 @@ nnoremap π :Clap files<CR>
 " uppercase option p
 nnoremap ∏ :Clap buffers<CR>
 map <leader>p :Clap git_files<CR>
+map <leader>, :Clap filer %:p:h<CR>
 map <leader>g :Clap grep<CR>
 map <leader>r :Clap recent_files<CR>
 map <leader>P :b#<CR> # previous buffer
@@ -581,10 +581,10 @@ function! LightlineFiletype()
 endfunction
 
 " PLUGIN: prettier
-let g:prettier#autoformat = 0
+let g:prettier#autoformat = 1
 let g:prettier#autoformat_require_pragma = 0
 " flow|babylon|typescript|css|less|scss|json|graphql|markdown
-let g:prettier#config#parser = 'flow|babylon|typescript|css|less|scss|json|graphql'
+" let g:prettier#config#parser = 'flow|babylon|typescript|css|less|scss|json|graphql|vue'
 
 " PLUGIN: (ctrl)(p(r))obsession
 let g:prosession_default_session = 0
@@ -700,16 +700,16 @@ if (empty($TMUX))
   endif
 endif
 
-" let g:onedark_termcolors=256
-" let g:onedark_color_overrides = {
-"   \ "background": {"gui": "#000000", "cterm": "255", "cterm16": "0" },
-" \}
-" colorscheme onedark
+let g:onedark_termcolors=256
+let g:onedark_color_overrides = {
+  \ "background": {"gui": "#000000", "cterm": "255", "cterm16": "0" },
+\}
+colorscheme onedark
 " colorscheme one
 " set background=light
 " let ayucolor="light"
-let ayucolor="dark"
-colorscheme ayu
+" let ayucolor="dark"
+" colorscheme ayu
 " colorscheme pink-moon
 
 " Show extra whitespace

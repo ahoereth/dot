@@ -25,6 +25,7 @@ export GOPATH=$HOME/go
 path=(
   $DOT_PATH/bin
   $HOME/.bin
+  $HOME/.docker/bin
   $HOME/.gem/bin
   $HOME/.node_modules/bin
   /Library/TeX/texbin
@@ -487,3 +488,7 @@ export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 
 
 zsh-defer -c lwd
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)

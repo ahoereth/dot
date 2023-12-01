@@ -156,9 +156,12 @@
   "terraform.languageServer.enable": true,
   "terraform.languageServer.path": "",
   "diffEditor.ignoreTrimWhitespace": false,
-  "editor.formatOnSave": true,
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
-  "window.zoomLevel": 2
+  "window.zoomLevel": 2,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "prettier.vueIndentScriptAndStyle": true,
+  "volar.autoCompleteRefs": true
 }
