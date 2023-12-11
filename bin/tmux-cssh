@@ -4,6 +4,8 @@ hosts=""
 ssh_options=""
 tmux_name="cssh"
 tmux_attach_current_session="false"
+detach="false"
+execute=""
 
 usage() {
   echo "Usage: $0 [options] host [host ...]" >&2
@@ -26,11 +28,16 @@ while [ $# -ne 0 ]; do
         exit 2
       fi
       tmux_name="$1"
-      shift
       ;;
     -c)
       tmux_attach_current_session="true"
+      ;;
+    -d)
+      detach="true"
+      ;;
+    -e)
       shift
+      execute="$1"
       ;;
     -o)
       shift
@@ -39,7 +46,6 @@ while [ $# -ne 0 ]; do
         exit 2
       fi
       ssh_options="$1"
-      shift
       ;;
     -h)
       usage
@@ -51,9 +57,9 @@ while [ $# -ne 0 ]; do
       ;;
     *)
       hosts="${hosts}${hosts:+ }$1"
-      shift
       ;;
   esac
+  shift
 done
 
 if [ -z "${hosts}" ]; then
@@ -119,11 +125,19 @@ else
   tmux set-window-option -t "${tmux_session}" synchronize-panes on
 fi
 
+# Execute command in all panes of the new session
+if [ -n "${execute}" ]; then
+  tmux send-keys -t ${tmux_session} "$execute" Enter
+fi
+
+# Attach or detach the new session, as requested
 if [ -n "${TMUX}" ]; then
-  # We are in a tmux, just switch to the new session
-  tmux switch-client -t "${tmux_session}"
-else
-  # We are NOT in a tmux, attach to the new session
+  if [ "${detach}" = "true" ]; then
+    tmux detach-client
+  else
+    tmux switch-client -t "${tmux_session}"
+  fi
+elif [ "${detach}" != "true" ]; then
   tmux attach-session -t "${tmux_session}"
 fi
 
