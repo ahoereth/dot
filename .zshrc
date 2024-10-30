@@ -492,3 +492,4 @@ zsh-defer -c lwd
 
 # Load Angular CLI autocompletion.
 source <(ng completion script)
+export PIPENV_VENV_IN_PROJECT=1

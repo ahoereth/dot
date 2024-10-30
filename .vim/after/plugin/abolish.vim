@@ -12,9 +12,9 @@ Abolish rec{co,com,o}mend{,s,ed,ing,ation}            rec{om}mend{}
 Abolish reproducable                                  reproducible
 Abolish resouce{,s}                                   resource{}
 Abolish restraunt{,s}                                 restaurant{}
-Abolish suc{,c}es{,s}f{,u}l{,l}y                      successfully
-Abolish suc{,c}es{,s}f{,u}l{,l}                       successful
-Abolish suc{,c}es{,s}                                 success
+Abolish {un}suc{,c}es{,s}f{,u}l{,l}y                  {}successfully
+Abolish {un}suc{,c}es{,s}f{,u}l{,l}                   {}successful
+Abolish {un}suc{,c}es{,s}                             {}success
 Abolish {,un}nec{ce,ces,e}sar{y,ily}                  {}nec{es}sar{}
 Abolish unk{,n}own                                    unknown
 Abolish unk{,n}ow{,n}{ing,ingly}                      unk{n}ow{,}{}
@@ -22,4 +22,8 @@ Abolish oc{,c}ur{,r}{ed,ence}                         oc{c}ur{r}{}
 Abolish oc{,c}ur{r}                                   occur
 Abolish su{r}p{,p}res{,s}{,ed}                        su{,}p{p}res{s}{}
 Abolish therefor{,e}                                  therefore
-
+Abolish alternativ{l}e{y}                             alternative{}{}
+Abolish definit{l}ey                                  definitely
+Abolish regular{i}ly                                  regularly
+Abolish limit{t}ing                                   limiting
+Abolish recursiv{le}y                                 recursively

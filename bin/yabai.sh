@@ -32,27 +32,30 @@ function move_to_space() {
     echo "move_window_to_space did not receive any arguments"
     return
   fi
+  let target_space=0
+  window_id=$(yabai -m query --windows | jq '.[] | select(."has-focus" == true) | .id')
   if [ "$1" = "left" ]; then
     if [ $(index current) -eq 1 ]; then
       yabai -m space --create
       yabai -m space $(index last) --move 1
     fi
-    let target_space=$(index left)
+    target_space=$(index left)
   elif [ "$1" = "right" ]; then
     if [ $(index current) -eq $(index last) ]; then
       yabai -m space --create
     fi
-    let target_space=$(index right)
+    target_space=$(index right)
   elif [ "$1" = "new" ]; then
     yabai -m space --create
-    let target_space=$(index last)
+    target_space=$(index last)
   elif [ "$1" = "recent" ]; then
-    let target_space=$(index recent)
+    target_space=$(index recent)
   fi
   if [ "$2" = "with_window" ]; then
     yabai -m window --space "$target_space"
   fi
   yabai -m space --focus "$target_space"
+  yabai -m window $window_id --focus
 }
 
 function destroy_empty_spaces() {

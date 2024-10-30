@@ -41,10 +41,11 @@ Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround' " cs'<p>
 Plug 'tpope/vim-repeat' " better . for repeating commands
+" See .vim/after/plugin/abolish.vim
+Plug 'tpope/vim-abolish' " abolish misspellings
 " Plug 'tpope/vim-commentary' " gcc for commenting lines
 Plug 'tomtom/tcomment_vim' " gcc for commenting lines
 Plug 'posva/vim-vue'
-Plug 'tpope/vim-abolish' " abolish misspellings
 Plug 'wellle/context.vim'
 Plug 'ayu-theme/ayu-vim'
 " Plug 'joshdick/onedark'
@@ -62,6 +63,7 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'itchyny/vim-cursorword'
 Plug 'sheerun/vim-polyglot' " language support
 Plug 'evanleck/vim-svelte', {'branch': 'main'}
+Plug 'CoderCookE/vim-chatgpt'
 call plug#end()
 let g:loaded_matchit = 1
 
@@ -370,10 +372,13 @@ let g:context_enabled = 1
 let g:context_max_height = 3
 let g:context_highlight_tag = '<hide>'
 
-" " PLUGIN: commentary
+" " PLUGIN: commentary tcomment
 " au FileType cpp,c,hpp,h setlocal commentstring=//\ %s
 " au FileType proto setlocal commentstring=//\ %s
 " au FileType svelte,js,ts setlocal commentstring=//\ %s
+au BufRead,BufNewFile *.container		    set filetype=conf
+au BufRead,BufNewFile *.conf.template		set filetype=conf
+
 
 " PLUGIN: black
 " augroup black_on_save
@@ -395,10 +400,20 @@ let g:rainbow_parenthesis_color = 'slve'
 " autocmd FileType cpp call rainbow_parenthesis#Activate()
 " endif
 
-
+" PLUGIN: chatgpt
+" let g:openai_api_key=''
+" let g:chat_gpt_max_tokens=2000
+" let g:chat_gpt_model='gpt-4o'
+" let g:chat_gpt_session_mode=0
+" let g:chat_gpt_temperature = 0.7
+" let g:chat_gpt_lang = 'Chinese'
+" let g:chat_gpt_split_direction = 'vertical'
+" let g:split_ratio=4
+" let g:chat_gpt_stop = ' '
+vmap <silent> <leader>0 <Plug>(chatgpt-menu)
 
 " PLUGIN: vim-format
-let g:vim_format_fmt_on_save = 1
+let g:vim_format_fmt_on_save = 0
 
 
 " PLUGIN: clap
@@ -437,6 +452,7 @@ nnoremap ∏ :Clap buffers<CR>
 map <leader>p :Clap git_files<CR>
 map <leader>, :Clap filer %:p:h<CR>
 map <leader>g :Clap grep<CR>
+map <leader>G :Clap igrep %:p:h<CR>
 map <leader>r :Clap recent_files<CR>
 map <leader>P :b#<CR> # previous buffer
 
@@ -516,9 +532,9 @@ nnoremap Ü <C-O>
 
 " PLUGIN: clang-format
 "autocmd FileType *.c,*.cpp,*.h,*.hpp ClangFormatAutoEnable
-autocmd FileType c ClangFormatAutoEnable
-autocmd FileType cpp ClangFormatAutoEnable
-autocmd FileType proto ClangFormatAutoEnable
+" autocmd FileType c ClangFormatAutoEnable
+" autocmd FileType cpp ClangFormatAutoEnable
+" autocmd FileType proto ClangFormatAutoEnable
 
 
 " PLUGIN: matchup

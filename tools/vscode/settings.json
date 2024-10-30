@@ -161,7 +161,12 @@
   },
   "window.zoomLevel": 2,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true,
   "prettier.vueIndentScriptAndStyle": true,
-  "volar.autoCompleteRefs": true
+  "volar.autoCompleteRefs": true,
+  "continue.enableQuickActions": true,
+  "continue.telemetryEnabled": false,
+  "diffEditor.codeLens": true,
+  "editor.formatOnSave": true,
+  "continue.enableTabAutocomplete": true,
+  "editor.stickyScroll.enabled": false
 }
