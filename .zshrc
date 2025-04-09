@@ -25,6 +25,7 @@ export GOPATH=$HOME/go
 path=(
   $DOT_PATH/bin
   $HOME/.bin
+  $HOME/.local/bin
   $HOME/.docker/bin
   $HOME/.gem/bin
   $HOME/.node_modules/bin
