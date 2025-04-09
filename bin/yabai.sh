@@ -53,9 +53,11 @@ function move_to_space() {
   fi
   if [ "$2" = "with_window" ]; then
     yabai -m window --space "$target_space"
+    yabai -m space --focus "$target_space"
+    yabai -m window $window_id --focus
+  else
+    yabai -m space --focus "$target_space"
   fi
-  yabai -m space --focus "$target_space"
-  yabai -m window $window_id --focus
 }
 
 function destroy_empty_spaces() {

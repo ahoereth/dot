@@ -134,6 +134,8 @@ then
   compinit
 fi
 
+eval "$(zoxide init zsh)"
+
 #.autocomplete.recent_paths.trim() {:}
 
 echo "bat and ripgrep rg, tig and entr"
@@ -379,7 +381,7 @@ if command -v fnm 1>/dev/null 2>&1; then
 fi
 
 # fuzzy matching fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # On macOS alt-c prints ç, bind that to the fzf-cd-widget which on other
 # systems is triggered by alt-c.
 # https://github.com/junegunn/fzf/issues/1531
@@ -415,6 +417,14 @@ fzf-git-checkout() {
   fi
 }
 alias gcb=fzf-git-checkout
+
+# ctrl r, has to come after fzf
+export MCFLY_FUZZY=2
+export MCFLY_DISABLE_MENU=TRUE
+eval "$(mcfly init zsh)"
+zle -N mcfly-history-widget
+bindkey '^R' mcfly-history-widget
+bindkey '®' mcfly-history-widget
 
 # pyenv
 # if command -v pyenv 1>/dev/null 2>&1; then
@@ -493,3 +503,13 @@ zsh-defer -c lwd
 # Load Angular CLI autocompletion.
 source <(ng completion script)
 export PIPENV_VENV_IN_PROJECT=1
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /Users/ahoereth/.dart-cli-completion/zsh-config.zsh ]] && . /Users/ahoereth/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+
+function ci() {
+  watch "gh workflow view container.yml | grep \"$(git branch --show-current)\" | awk -F'\t' '{print \$1, \$2, \$3, \$7}'"
+}
+

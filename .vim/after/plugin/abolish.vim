@@ -9,7 +9,7 @@ Abolish inherant{,ly}                                 inherent{}
 Abolish persistan{ce,t,tly}                           persisten{}
 Abolish {,ir}releven{ce,cy,t,tly}                     {}relevan{}
 Abolish rec{co,com,o}mend{,s,ed,ing,ation}            rec{om}mend{}
-Abolish reproducable                                  reproducible
+Abolish reproducabl{e,y}                              reproducibl{}
 Abolish resouce{,s}                                   resource{}
 Abolish restraunt{,s}                                 restaurant{}
 Abolish {un}suc{,c}es{,s}f{,u}l{,l}y                  {}successfully
@@ -27,3 +27,4 @@ Abolish definit{l}ey                                  definitely
 Abolish regular{i}ly                                  regularly
 Abolish limit{t}ing                                   limiting
 Abolish recursiv{le}y                                 recursively
+Abolish performant{e}{l}y                             performantly
