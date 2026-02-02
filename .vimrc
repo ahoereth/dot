@@ -9,22 +9,22 @@ let dot = '~/repos/dot/'
 let s:plugin_manager=expand('~/.vim/autoload/plug.vim')
 let s:plugin_url='https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 if empty(glob(s:plugin_manager))
-  echom 'vim-plug not found. Installing...'
-  if executable('curl')
-    silent exec '!curl -fLo ' . s:plugin_manager . ' --create-dirs ' .
-          \ s:plugin_url
-  elseif executable('wget')
-    call mkdir(fnamemodify(s:plugin_manager, ':h'), 'p')
-    silent exec '!wget --force-directories --no-check-certificate -O ' .
-          \ expand(s:plugin_manager) . ' ' . s:plugin_url
-  else
-    echom 'Could not download plugin manager. No plugins were installed.'
-    finish
-  endif
-  augroup vimplug
-    autocmd!
-    autocmd VimEnter * PlugInstall
-  augroup END
+    echom 'vim-plug not found. Installing...'
+    if executable('curl')
+        silent exec '!curl -fLo ' . s:plugin_manager . ' --create-dirs ' .
+                    \ s:plugin_url
+    elseif executable('wget')
+        call mkdir(fnamemodify(s:plugin_manager, ':h'), 'p')
+        silent exec '!wget --force-directories --no-check-certificate -O ' .
+                    \ expand(s:plugin_manager) . ' ' . s:plugin_url
+    else
+        echom 'Could not download plugin manager. No plugins were installed.'
+        finish
+    endif
+    augroup vimplug
+        autocmd!
+        autocmd VimEnter * PlugInstall
+    augroup END
 endif
 " Create a horizontal split at the bottom when installing plugins
 let g:plug_window = 'botright new'
@@ -52,18 +52,21 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'rust-lang/rust.vim'
 Plug 'chrisbra/csv.vim'
 Plug 'fladson/vim-kitty'
-Plug 'rhysd/vim-clang-format'
-Plug 'psf/black', { 'branch': 'stable' }
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'npm install --frozen-lockfile --production',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'vue'] }
+Plug 'vim-autoformat/vim-autoformat'
+" Plug 'rhysd/vim-clang-format'
+" Plug 'psf/black', { 'branch': 'stable' }
+" Plug 'prettier/vim-prettier', {
+"   \ 'do': 'npm install --frozen-lockfile --production',
+"   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'vue'] }
 Plug 'tpope/vim-obsession'
 Plug 'dhruvasagar/vim-prosession'
 Plug 'machakann/vim-highlightedyank'
 Plug 'itchyny/vim-cursorword'
 Plug 'sheerun/vim-polyglot' " language support
 Plug 'evanleck/vim-svelte', {'branch': 'main'}
-Plug 'CoderCookE/vim-chatgpt'
+" Plug 'CoderCookE/vim-chatgpt'
+" Plug 'madox2/vim-ai'
+Plug 'dstein64/vim-startuptime'
 call plug#end()
 let g:loaded_matchit = 1
 
@@ -211,7 +214,7 @@ set completeopt=menu
 " Unify vim's default register and the system clipboard
 set clipboard=unnamed
 if s:uname == "Linux"
-  set clipboard=unnamedplus
+    set clipboard=unnamedplus
 endif
 
 
@@ -231,36 +234,36 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 " This is useful to copying strings from the file to the search tool
 " Based on this - http://peterodding.com/code/vim/profile/autoload/xolox/escape.vim
 function! EscapeString (string)
-  let string=a:string
-  " Escape regex characters
-  let string = escape(string, '^$.*\/~[]')
-  " Escape the line endings
-  let string = substitute(string, '\n', '\\n', 'g')
-  return string
+    let string=a:string
+    " Escape regex characters
+    let string = escape(string, '^$.*\/~[]')
+    " Escape the line endings
+    let string = substitute(string, '\n', '\\n', 'g')
+    return string
 endfunction
 
 " Get the current visual block for search and replaces
 " This function passed the visual block through a string escape function
 " Based on this - https://stackoverflow.com/questions/676600/vim-replace-selected-text/677918#677918
 function! GetVisual() range
-  " Save the current register and clipboard
-  let reg_save = getreg('"')
-  let regtype_save = getregtype('"')
-  let cb_save = &clipboard
-  set clipboard&
+    " Save the current register and clipboard
+    let reg_save = getreg('"')
+    let regtype_save = getregtype('"')
+    let cb_save = &clipboard
+    set clipboard&
 
-  " Put the current visual selection in the " register
-  normal! ""gvy
-  let selection = getreg('"')
+    " Put the current visual selection in the " register
+    normal! ""gvy
+    let selection = getreg('"')
 
-  " Put the saved registers and clipboards back
-  call setreg('"', reg_save, regtype_save)
-  let &clipboard = cb_save
+    " Put the saved registers and clipboards back
+    call setreg('"', reg_save, regtype_save)
+    let &clipboard = cb_save
 
-  "Escape any special characters in the selection
-  let escaped_selection = EscapeString(selection)
+    "Escape any special characters in the selection
+    let escaped_selection = EscapeString(selection)
 
-  return escaped_selection
+    return escaped_selection
 endfunction
 
 vmap <C-r> <Esc>:%s/<c-r>=GetVisual()<cr>//gc<left><left>
@@ -275,10 +278,10 @@ map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
 map <space> /
-map <C-space> ?
+    map <C-space> ?
 
-" Disable highlight when <leader><cr> is pressed
-map <silent> <leader><cr> :noh<cr>
+    " Disable highlight when <leader><cr> is pressed
+    map <silent> <leader><cr> :noh<cr>
 
 " Move a line of text using ALT+[jk] or Command+[jk] on mac
 nmap <M-j> mz:m+<cr>`z
@@ -292,10 +295,10 @@ cnoremap <C-F> <Right>
 cnoremap <C-B> <Left>
 
 if has("mac") || has("macunix")
-  nmap <D-j> <M-j>
-  nmap <D-k> <M-k>
-  vmap <D-j> <M-j>
-  vmap <D-k> <M-k>
+    nmap <D-j> <M-j>
+    nmap <D-k> <M-k>
+    vmap <D-j> <M-j>
+    vmap <D-k> <M-k>
 endif
 
 " Insert line below/above without entering insert mode, oo OO
@@ -305,8 +308,8 @@ nmap OO O<Esc>j
 " Apply macro to all visually selected lines
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 function! ExecuteMacroOverVisualRange()
-  echo "@".getcmdline()
-  execute ":'<,'>normal @".nr2char(getchar())
+    echo "@".getcmdline()
+    execute ":'<,'>normal @".nr2char(getchar())
 endfunction
 
 " Toggle paste mode on and off
@@ -331,10 +334,10 @@ au FileType cpp,c,hpp,h set shiftwidth=2
 au FileType cpp,c,hpp,h set expandtab
 au FileType cpp,c,hpp,h set syntax=cpp.doxygen
 command Switch :e %:p:s,.hpp$,.X123X,:s,.cpp$,.hpp,:s,.X123X$,.cpp,
-command Sw :e %:p:s,.hpp$,.X123X,:s,.cpp$,.hpp,:s,.X123X$,.cpp,
+    command Sw :e %:p:s,.hpp$,.X123X,:s,.cpp$,.hpp,:s,.X123X$,.cpp,
 
-" python
-au FileType python set tabstop=4
+    " python
+    au FileType python set tabstop=4
 au FileType python set shiftwidth=4
 au FileType python set expandtab
 
@@ -376,11 +379,18 @@ let g:context_highlight_tag = '<hide>'
 " au FileType cpp,c,hpp,h setlocal commentstring=//\ %s
 " au FileType proto setlocal commentstring=//\ %s
 " au FileType svelte,js,ts setlocal commentstring=//\ %s
-au BufRead,BufNewFile *.container		    set filetype=conf
-au BufRead,BufNewFile *.conf.template		set filetype=conf
+au BufRead,BufNewFile *.container           set filetype=conf
+au BufRead,BufNewFile *.conf.template       set filetype=conf
+au BufRead,BufNewFile *.tpp                 set filetype=cpp
 
+" PLUGIN: vim-autoformat
+" au BufWrite * :Autoformat
+" let g:formatterpath = ['ruff']
+" let g:formatdef_ruff = 'ruff format'
+" let g:formatters_py = ['ruff']
 
 " PLUGIN: black
+let g:black_use_virtualenv = 0
 " augroup black_on_save
 "   autocmd!
 "   autocmd BufWritePre *.py Black
@@ -399,6 +409,10 @@ let g:rainbow_parenthesis_color = 'slve'
 " autocmd FileType cpp call rainbow_parenthesis#LoadBraces()
 " autocmd FileType cpp call rainbow_parenthesis#Activate()
 " endif
+
+" PLUGIN: vim-ai
+xnoremap <leader>c :AIEdit complete and fix this code, consider the method header, comments (specifically the docstring) and existing code as instructions for what it should do.<CR>
+" let g:vim_ai_edit['options']['max_tokens'] = 4096
 
 " PLUGIN: chatgpt
 " let g:openai_api_key=''
@@ -503,11 +517,11 @@ let g:gutentags_file_list_command = 'rg --files'
 "<C-x> to open in horizontal split
 " Enable calls like << :RG -t yaml PATTERN >>
 function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case '
-  let initial_command = command_fmt.(a:query)
-  let reload_command = printf(command_fmt.('%s'), '{q}')
-  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:eval '.reload_command]}
-  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+    let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case '
+    let initial_command = command_fmt.(a:query)
+    let reload_command = printf(command_fmt.('%s'), '{q}')
+    let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:eval '.reload_command]}
+    call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
@@ -519,11 +533,11 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 " PLUGIN: unimpaired
 " map <> to []
 nmap < [
-nmap > ]
+    nmap > ]
 omap < [
-omap > ]
+    omap > ]
 xmap < [
-xmap > ]
+    xmap > ]
 
 " jump to tags
 " nnoremap t <C-]>
@@ -547,53 +561,53 @@ let g:matchup_matchparen_stopline = 1500  " for match highlighting only
 set laststatus=2
 set noshowmode " lightline shows status
 let g:lightline = {
-        "\   'colorscheme': 'Tomorrow',
-        "\   'colorscheme': 'ayu_light',
-        "\   'enable': { 'statusline': 0 },
-        \   'colorscheme': '16color',
-        \   'active': {
-        \     'left': [ [ 'mode', 'paste' ],
-        \               [ 'filename' ] ],
-        \     'right': [ [ 'percent', 'lineinfo' ],
-        \                [ 'gitbranch', 'readonly'],
-        \                [ 'fileformat', 'fileencoding', 'filetype' ] ]
-        \   },
-        \   'component': {
-        \       'tagbar': '%{tagbar#currenttag("%s", "")}',
-        \   },
-        \   'component_function': {
-        \     'fileformat': 'LightlineFileformat',
-        \     'filetype': 'LightlineFiletype',
-        \     'filename': 'LightlineFilename',
-        \     'gitbranch': 'FugitiveHead',
-        \     'obsession': 'ObsessionStatus',
-        \   },
-        \ }
-        " \   'mode_map': {
-        " \     'n' : 'N',
-        " \     'i' : 'I',
-        " \     'R' : 'R',
-        " \     'v' : 'V',
-        " \     'V' : 'VL',
-        " \     "\<C-v>": 'VB',
-        " \     'c' : 'C',
-        " \     's' : 'S',
-        " \     'S' : 'SL',
-        " \     "\<C-s>": 'SB',
-        " \     't': 'T',
-        " \   },
+            "\   'colorscheme': 'Tomorrow',
+            "\   'colorscheme': 'ayu_light',
+            "\   'enable': { 'statusline': 0 },
+            \   'colorscheme': '16color',
+            \   'active': {
+            \     'left': [ [ 'mode', 'paste' ],
+            \               [ 'filename' ] ],
+            \     'right': [ [ 'percent', 'lineinfo' ],
+            \                [ 'gitbranch', 'readonly'],
+            \                [ 'fileformat', 'fileencoding', 'filetype' ] ]
+            \   },
+            \   'component': {
+            \       'tagbar': '%{tagbar#currenttag("%s", "")}',
+            \   },
+            \   'component_function': {
+            \     'fileformat': 'LightlineFileformat',
+            \     'filetype': 'LightlineFiletype',
+            \     'filename': 'LightlineFilename',
+            \     'gitbranch': 'FugitiveHead',
+            \     'obsession': 'ObsessionStatus',
+            \   },
+            \ }
+" \   'mode_map': {
+" \     'n' : 'N',
+" \     'i' : 'I',
+" \     'R' : 'R',
+" \     'v' : 'V',
+" \     'V' : 'VL',
+" \     "\<C-v>": 'VB',
+" \     'c' : 'C',
+" \     's' : 'S',
+" \     'S' : 'SL',
+" \     "\<C-s>": 'SB',
+" \     't': 'T',
+" \   },
 function! LightlineFilename()
-  let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
-  let tagname = tagbar#currenttag("%s", "", "", "scoped-stl")
-  let tagname = len(tagname) > 0 ? "::" . tagname : ""
-  let modified = &modified ? '+' : ''
-  return filename . tagname . modified
+    let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
+    let tagname = tagbar#currenttag("%s", "", "", "scoped-stl")
+    let tagname = len(tagname) > 0 ? "::" . tagname : ""
+    let modified = &modified ? '+' : ''
+    return filename . tagname . modified
 endfunction
 function! LightlineFileformat()
-  return winwidth(0) > 70 ? &fileformat : ''
+    return winwidth(0) > 70 ? &fileformat : ''
 endfunction
 function! LightlineFiletype()
-  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : '') : ''
+    return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : '') : ''
 endfunction
 
 " PLUGIN: prettier
@@ -629,9 +643,9 @@ let g:vim_markdown_conceal_code_blocks = 0
 
 " Change where we store swap/undo files.
 if !isdirectory($HOME . "/.vim/tmp")
-  " Ensure the temp dirs exist
-  call system("mkdir -p ~/.vim/tmp/swap")
-  call system("mkdir -p ~/.vim/tmp/undo")
+    " Ensure the temp dirs exist
+    call system("mkdir -p ~/.vim/tmp/swap")
+    call system("mkdir -p ~/.vim/tmp/undo")
 endif
 set dir=~/.vim/tmp/swap/
 set undodir=~/.vim/tmp/undo/
@@ -687,39 +701,39 @@ set cursorline
 " colorscheme molokai
 
 if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    set termguicolors
 endif
 
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
 "(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
 if (empty($TMUX))
-  if (has("nvim"))
-    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  endif
-  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-  if (has("termguicolors"))
-    " Turns on true terminal colors
-    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    if (has("nvim"))
+        "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+        let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+    endif
+    "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+    "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+    " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+    if (has("termguicolors"))
+        " Turns on true terminal colors
+        let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+        let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
-    " Turns on 24-bit RGB color support
-    set termguicolors
+        " Turns on 24-bit RGB color support
+        set termguicolors
 
-    " Defines how many colors should be used. (maximum: 256, minimum: 0)
-    set t_Co=256
-  endif
+        " Defines how many colors should be used. (maximum: 256, minimum: 0)
+        set t_Co=256
+    endif
 endif
 
 let g:onedark_termcolors=256
 let g:onedark_color_overrides = {
-  \ "background": {"gui": "#000000", "cterm": "255", "cterm16": "0" },
-\}
+            \ "background": {"gui": "#000000", "cterm": "255", "cterm16": "0" },
+            \}
 colorscheme onedark
 " colorscheme one
 " set background=light
@@ -733,11 +747,11 @@ hi ExtraWhitespace guibg=#CCCCCC
 hi ExtraWhitespace ctermbg=7
 match ExtraWhitespace /\s\+$/
 augroup highlight_whitespace
-  au!
-  au BufWinEnter * match ExtraWhitespace /\s\+$/
-  au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-  au InsertLeave * match ExtraWhitespace /\s\+$/
-  au BufWinLeave * call clearmatches()
+    au!
+    au BufWinEnter * match ExtraWhitespace /\s\+$/
+    au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+    au InsertLeave * match ExtraWhitespace /\s\+$/
+    au BufWinLeave * call clearmatches()
 augroup END
 
 " ---------------------- Custom Commands and Functions ---------------------
@@ -745,15 +759,15 @@ augroup END
 " A function to delete all trailing whitespace from a file. (From
 " http://vimcasts.org/episodes/tidying-whitespace/)
 function! Preserve(command)
-  " Preparation: save last search, and cursor position.
-  let _s=@/
-  let l = line(".")
-  let c = col(".")
-  " Do the business:
-  execute a:command
-  " Clean up: restore previous search history, and cursor position
-  let @/=_s
-  call cursor(l, c)
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    execute a:command
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
 endfunction
 nmap _$ :call Preserve("%s/\\s\\+$//e")<CR>
 nmap _= :call Preserve("normal gg=G")<CR>
@@ -762,12 +776,12 @@ autocmd BufWritePre * :call Preserve("%s/\\s\\+$//e") " remove trailing spaces
 
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
-     \ if line("'\"") > 0 && line("'\"") <= line("$") |
-     \   exe "normal! g`\"" |
-     \ endif
+            \ if line("'\"") > 0 && line("'\"") <= line("$") |
+            \   exe "normal! g`\"" |
+            \ endif
 
 function! Corne()
-  :set langmap=dh,hj,tk,nl
+    :set langmap=dh,hj,tk,nl
 endfunction
 
 set nolist " hide newline $ at end of every line

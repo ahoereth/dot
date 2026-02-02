@@ -167,6 +167,5 @@
   "continue.telemetryEnabled": false,
   "diffEditor.codeLens": true,
   "editor.formatOnSave": true,
-  "continue.enableTabAutocomplete": true,
-  "editor.stickyScroll.enabled": false
+  "continue.enableTabAutocomplete": true
 }

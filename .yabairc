@@ -57,6 +57,8 @@ yabai -m rule --add app="^Authy Desktop$" manage=off
 yabai -m rule --add app="^PrinterProxy$" manage=off
 yabai -m rule --add app="^Stats$" manage=off
 yabai -m rule --add app="^CleanShot X$" manage=off
+yabai -m rule --add app="^Finder$" manage=off
+yabai -m rule --add app="^CraneLink$" manage=off
 
 
 echo "yabai configuration loaded.."

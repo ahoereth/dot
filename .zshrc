@@ -33,6 +33,7 @@ path=(
   /opt/homebrew/bin
   /usr/local/bin
   $path[@]
+  /Applications/What\ The\ Fork.app/Contents/Resources
 )
 
 JAVA_HOME="/usr/local/opt/openjdk"
@@ -514,3 +515,6 @@ function ci() {
   watch "gh workflow view container.yml | grep \"$(git branch --show-current)\" | awk -F'\t' '{print \$1, \$2, \$3, \$7}'"
 }
 
+
+# Added by Antigravity
+export PATH="/Users/ahoereth/.antigravity/antigravity/bin:$PATH"
